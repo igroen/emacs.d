@@ -107,5 +107,5 @@
 (setq epa-armor t)  ;; Prefer armored ASCII
 
 ;; Move lines added by the customize system to seperate file
-(setq custom-file "~/.emacs.d/lisp/custom.el")
+(setq custom-file "~/.emacs.d/custom.el")
 (load custom-file)
