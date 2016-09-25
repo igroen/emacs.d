@@ -1,3 +1,4 @@
+
 ;; Delete current file and buffer
 (defun xah-delete-current-file-copy-to-kill-ring ()
   "Delete current buffer/file and close the buffer, push content to `kill-ring'.
@@ -17,6 +18,7 @@ Version 2016-07-20"
       (kill-buffer (current-buffer)))))
 (global-set-key (kbd "C-c k")  'xah-delete-current-file-copy-to-kill-ring)
 
+
 ;; Comment/Uncomment line or region
 (defun comment-or-uncomment-region-or-line ()
   "Comments or uncomments the region or the current line if there's no active region."
