@@ -31,6 +31,9 @@
 (setq ido-enable-flex-matching 1)
 (setq ido-use-faces nil)
 
+;; Hide dot files in dired omit-mode (C-x M-o)
+(setq dired-omit-files "^\\...+$")
+
 ;; Enable helm for M-x
 (global-set-key (kbd "M-x") 'helm-M-x)
 
