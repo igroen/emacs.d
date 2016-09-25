@@ -4,6 +4,9 @@
 (setq inhibit-splash-screen t)
 (switch-to-buffer "**")
 
+;; Disable bell completely
+(setq ring-bell-function 'ignore)
+
 ;; Install and initialize packages
 ;; (package-initialize)
 (load-library "packages")
@@ -26,16 +29,8 @@
 ;; https://github.com/technomancy/better-defaults/issues/15
 (save-place-mode t)
 
-;; Enable elpy (Run M-x elpy-config to configure)
-(elpy-enable)
-
-;; Disable flymake and enable flycheck for realtime syntax checking
-(when (require 'flycheck nil t)
-  (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
-  (add-hook 'elpy-mode-hook 'flycheck-mode))
-
-;; Enable autopep8 on save
-(add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save)
+;; Setup python
+(load-library "python_setup")
 
 ;; Org-mode
 (setq org-log-done 'time)  ;; Show time when done
@@ -74,9 +69,6 @@
 (global-set-key (kbd "C-x C-m C-p") 'mc/mark-previous-like-this)
 (global-set-key (kbd "C-x C-m C-a") 'mc/mark-all-like-this)
 
-;; Disable bell completely
-(setq ring-bell-function 'ignore)
-
 ;; Erc
 (setq erc-server "irc.freenode.org")
 (setq erc-port 6667)
@@ -89,11 +81,6 @@
 
 ;; Expand region
 (global-set-key (kbd "C-x w") 'er/expand-region)
-
-;; virtualenvwrapper
-(venv-initialize-interactive-shells)  ;; if you want interactive shell support
-(venv-initialize-eshell)  ;; if you want eshell support
-(setq venv-location "~/.virtualenvs/")
 
 ;; drag-stuff
 (drag-stuff-global-mode 1)
