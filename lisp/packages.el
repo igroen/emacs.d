@@ -5,6 +5,7 @@
     projectile
     neotree
     helm
+    flx-ido
     elpy
     multiple-cursors
     expand-region

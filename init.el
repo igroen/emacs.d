@@ -12,10 +12,12 @@
 ;; Backups are placed in backups folder by better-defaults plugin
 (setq auto-save-list-file-prefix nil)
 
-;; Enable ido mode
-(setq ido-enable-flex-matching t)
-(setq ido-everywhere t)
+;; Enable ido mode and fix-ido
 (ido-mode 1)
+(setq ido-everywhere 1)
+(flx-ido-mode 1)
+(setq ido-enable-flex-matching 1)
+(setq ido-use-faces nil)
 
 ;; Enable helm for M-x
 (global-set-key (kbd "M-x") 'helm-M-x)
