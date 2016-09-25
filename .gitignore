@@ -1,7 +1,7 @@
-/ido.last
-/places
-/projectile-bookmarks.eld
-/elpa
-/eshell
-/backups
-/tramp
+backups
+elpa
+eshell
+ido.last
+places
+projectile-bookmarks.eld
+tramp
