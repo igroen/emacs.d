@@ -137,7 +137,7 @@ Version 2016-07-20"
 (setq erc-server "irc.freenode.org")
 (setq erc-port 6667)
 (setq erc-nick "gumol")
-(setq erc-password "*********")
+(setq erc-password "***")
 (setq erc-hide-list '("JOIN" "PART" "QUIT"))
 
 ;; Magit rules!
@@ -174,4 +174,5 @@ Version 2016-07-20"
 (epa-file-name-regexp-update)
 (setq epa-armor t)  ;; Prefer armored ASCII
 
+;; Move lines added by the customize system to seperate config file
 (load "~/.emacs.d/custom.el")
