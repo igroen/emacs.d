@@ -1,3 +1,4 @@
+;; Set load-path for libraries
 (add-to-list 'load-path "~/.emacs.d/lisp/")
 
 ;; Start with empty buffer
@@ -11,6 +12,13 @@
 ;; (package-initialize)
 (load-library "packages")
 
+;; Snippets
+;; * Comment/Uncomment line or region
+;; * Delete current file and buffer
+(load-library "snippets")
+
+;; Setup python
+(load-library "python-setup")
 ;; Dont't create auto-save-list folder in .emacs.d
 ;; Backups are placed in backups folder by better-defaults plugin
 (setq auto-save-list-file-prefix nil)
@@ -29,9 +37,6 @@
 ;; https://github.com/technomancy/better-defaults/issues/15
 (save-place-mode t)
 
-;; Setup python
-(load-library "python_setup")
-
 ;; Org-mode
 (setq org-log-done 'time)  ;; Show time when done
 
@@ -43,11 +48,6 @@
 
 ;; Remove trailing whitespace on save
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
-
-;; Snippets
-;; * Comment/Uncomment line or region
-;; * Delete current file and buffer
-(load-library "snippets")
 
 ;; Enable projectile globally
 (projectile-global-mode)
