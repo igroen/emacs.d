@@ -24,7 +24,7 @@
 ;; Backups are placed in backups folder by better-defaults plugin
 (setq auto-save-list-file-prefix nil)
 
-;; Enable ido mode and fix-ido
+;; Enable ido mode and flx-ido
 (ido-mode 1)
 (setq ido-everywhere 1)
 (flx-ido-mode 1)
