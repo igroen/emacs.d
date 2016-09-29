@@ -45,9 +45,10 @@
       helm-imenu-fuzzy-match                t
       helm-mode-fuzzy-match                 t
       helm-locate-fuzzy-match               t
-      helm-quick-update                     t
       helm-recentf-fuzzy-match              t
-      helm-semantic-fuzzy-match             t)
+      helm-semantic-fuzzy-match             t
+      helm-quick-update                     t
+      helm-split-window-in-side-p           t)
 
 ;; Fix for better-defaults `save-place' which was removed in emacs 25.1
 ;; https://github.com/technomancy/better-defaults/issues/15
