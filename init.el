@@ -36,6 +36,18 @@
 
 ;; Enable helm for M-x
 (global-set-key (kbd "M-x") 'helm-M-x)
+;; Helm fuzzy matching
+(setq helm-M-x-fuzzy-match                  t
+      helm-bookmark-show-location           t
+      helm-buffers-fuzzy-matching           t
+      helm-completion-in-region-fuzzy-match t
+      helm-file-cache-fuzzy-match           t
+      helm-imenu-fuzzy-match                t
+      helm-mode-fuzzy-match                 t
+      helm-locate-fuzzy-match               t
+      helm-quick-update                     t
+      helm-recentf-fuzzy-match              t
+      helm-semantic-fuzzy-match             t)
 
 ;; Fix for better-defaults `save-place' which was removed in emacs 25.1
 ;; https://github.com/technomancy/better-defaults/issues/15
