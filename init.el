@@ -35,7 +35,10 @@
 (setq dired-omit-files "^\\...+$")
 
 ;; Enable helm for M-x
-(global-set-key (kbd "M-x") 'helm-M-x)
+(global-set-key (kbd "M-x")     'helm-M-x)
+(global-set-key (kbd "C-x b")   'helm-mini)
+(global-set-key (kbd "C-x C-b") 'helm-buffers-list)
+
 ;; Helm fuzzy matching
 (setq helm-M-x-fuzzy-match                  t
       helm-bookmark-show-location           t
