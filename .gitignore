@@ -1,8 +1,8 @@
-backups
-elpa
-eshell
-ido.last
-places
-projectile-bookmarks.eld
-tramp
 /network-security.data
+/recentf
+/places
+/ido.last
+/projectile-bookmarks.eld
+/tramp
+/elpa
+/eshell
