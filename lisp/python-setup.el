@@ -1,5 +1,6 @@
 ;; Enable elpy (Run M-x elpy-config to configure)
 (elpy-enable)
+(global-set-key (kbd "M-*") 'pop-tag-mark)
 
 ;; Disable flymake and enable flycheck for realtime syntax checking
 (when (require 'flycheck nil t)
