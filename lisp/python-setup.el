@@ -11,8 +11,8 @@
 ;; (add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save)
 
 ;; Enable isort on save
-(require 'py-isort)
-(add-hook 'before-save-hook 'py-isort-before-save)
+;; (require 'py-isort)
+;; (add-hook 'before-save-hook 'py-isort-before-save)
 
 ;; virtualenvwrapper
 (venv-initialize-interactive-shells)  ;; if you want interactive shell support
