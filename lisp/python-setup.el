@@ -10,7 +10,7 @@
 ;; Enable autopep8 on save
 ;; (add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save)
 
-;; Enable isort on save
+;; Enable py-isort on save
 ;; (require 'py-isort)
 ;; (add-hook 'before-save-hook 'py-isort-before-save)
 
