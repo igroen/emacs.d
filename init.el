@@ -73,9 +73,6 @@
 (projectile-global-mode)
 (setq projectile-enable-caching t)
 
-;; Enable desktop-save-mode
-(desktop-save-mode 1)
-
 ;; Configure Neo Tree
 (global-set-key [f8] 'neotree-toggle)
 
