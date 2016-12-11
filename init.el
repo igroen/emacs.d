@@ -90,7 +90,7 @@
 (global-set-key (kbd "C-x C-m C-a") 'mc/mark-all-like-this)
 
 ;; Erc
-(setq erc-server "irc.freenode.org")
+(setq erc-server "irc.freenode.net")
 (setq erc-port 6667)
 (setq erc-nick "gumol")
 (setq erc-password "***")
