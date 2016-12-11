@@ -91,7 +91,7 @@
 
 ;; Erc
 (setq erc-server "irc.freenode.net")
-(setq erc-port 6667)
+(setq erc-port 6697)
 (setq erc-nick "gumol")
 (setq erc-password "***")
 (setq erc-hide-list '("JOIN" "PART" "QUIT"))
