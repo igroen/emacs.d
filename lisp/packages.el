@@ -2,6 +2,7 @@
 (setq package-list '(
     better-defaults
     magit
+    gist
     projectile
     neotree
     helm
