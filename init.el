@@ -91,9 +91,10 @@
 
 ;; Erc
 (setq erc-server "irc.freenode.net")
+(setq erc-autojoin-channels-alist
+      '(("freenode.net" "#python" "#django" "#emacs")))
 (setq erc-port 6697)
 (setq erc-nick "gumol")
-(setq erc-password "***")
 (setq erc-hide-list '("JOIN" "PART" "QUIT"))
 
 ;; Magit rules!
