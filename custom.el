@@ -5,7 +5,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (py-isort flx-ido yaml-mode virtualenvwrapper py-autopep8 projectile neotree multiple-cursors markdown-mode magit helm go-mode flymake-jslint flycheck expand-region elpy drag-stuff better-defaults))))
+    (py-isort flx-ido yaml-mode virtualenvwrapper py-autopep8 projectile neotree multiple-cursors markdown-mode gist magit helm go-mode flymake-jslint flycheck expand-region elpy drag-stuff better-defaults))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
