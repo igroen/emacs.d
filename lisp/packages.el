@@ -18,7 +18,6 @@
     py-isort
     markdown-mode
     yaml-mode
-    go-mode
     )
 )
 
