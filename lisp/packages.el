@@ -23,9 +23,9 @@
 
 ;; list the repositories containing them
 (setq package-archives
-  '(("gnu" . "http://elpa.gnu.org/packages/")
+  '(("gnu" . "https://elpa.gnu.org/packages/")
     ("marmalade" . "https://marmalade-repo.org/packages/")
-    ("melpa" . "http://melpa.org/packages/")))
+    ("melpa" . "https://melpa.org/packages/")))
 
 ;; activate all the packages (in particular autoloads)
 (package-initialize)
