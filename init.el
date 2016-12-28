@@ -118,9 +118,6 @@
 (add-to-list 'auto-mode-alist '("\\.zcml\\'" . nxml-mode))
 (add-to-list 'auto-mode-alist '("\\.pt\\'" . html-mode))
 
-;; gofmt
-(add-hook 'before-save-hook #'gofmt-before-save)
-
 ;; GnuPG: Open .asc files in the same way of .gpg
 (setq epa-file-name-regexp "\\.\\(gpg\\|asc\\)$")
 (epa-file-name-regexp-update)
