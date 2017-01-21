@@ -2,6 +2,9 @@
 (elpy-enable)
 (global-set-key (kbd "M-*") 'pop-tag-mark)
 
+;; Autocomplet doesn't work with Rope as backend. Use Jedi instead
+(setq elpy-rpc-backend "jedi")
+
 ;; Disable flymake and enable flycheck for realtime syntax checking
 (when (require 'flycheck nil t)
   (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
