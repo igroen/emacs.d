@@ -100,6 +100,9 @@
 ;; Magit rules!
 (global-set-key (kbd "C-x g") 'magit-status)
 
+;; Ask for gist description when creating gist
+(setq gist-ask-for-description t)
+
 ;; Expand region
 (global-set-key (kbd "C-x w") 'er/expand-region)
 
