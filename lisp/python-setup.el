@@ -20,3 +20,11 @@
 (venv-initialize-interactive-shells)  ;; if you want interactive shell support
 (venv-initialize-eshell)  ;; if you want eshell support
 (setq venv-location "~/.virtualenvs/")
+
+;; Example use of python
+(defun example ()
+  (interactive)
+  (let ((cmd (format
+              "/usr/local/bin/python3 ~/.emacs.d/python/example.py %s"
+              (buffer-file-name))))
+    (shell-command-on-region (region-beginning) (region-end) cmd nil "REPLACE" nil t)))
