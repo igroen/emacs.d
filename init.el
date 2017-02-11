@@ -121,7 +121,8 @@
 (add-to-list 'auto-mode-alist '("\\.zcml\\'" . nxml-mode))
 (add-to-list 'auto-mode-alist '("\\.pt\\'" . html-mode))
 
-;; GnuPG: Open .asc files in the same way of .gpg
+;; GnuPG: To use GnuPG gpg-agent must be running.
+;; Open .asc files in the same way of .gpg
 (setq epa-file-name-regexp "\\.\\(gpg\\|asc\\)$")
 (epa-file-name-regexp-update)
 (setq epa-armor t)  ;; Prefer armored ASCII
