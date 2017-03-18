@@ -115,8 +115,8 @@
 (global-set-key (kbd "M-n") 'drag-stuff-down)
 (global-set-key (kbd "M-p") 'drag-stuff-up)
 
-;; jslint must be installed: sudo npm install -g jslint
-(add-hook 'js-mode-hook 'flymake-jslint-load)
+;; turn on flychecking globally
+(add-hook 'after-init-hook #'global-flycheck-mode)
 
 ;; Major mode to use for file extension
 (add-to-list 'auto-mode-alist '("\\.zcml\\'" . nxml-mode))

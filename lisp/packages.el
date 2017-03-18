@@ -12,7 +12,6 @@
     expand-region
     virtualenvwrapper
     drag-stuff
-    flymake-jslint
     flycheck
     py-autopep8
     py-isort
