@@ -101,6 +101,9 @@
 ;; Magit rules!
 (global-set-key (kbd "C-x g") 'magit-status)
 
+;; Enable git-gutter in global minor mode
+(global-git-gutter-mode t)
+
 ;; Ask for gist description when creating gist
 (setq gist-ask-for-description t)
 

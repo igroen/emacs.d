@@ -2,6 +2,7 @@
 (setq package-list '(
     better-defaults
     magit
+    git-gutter
     gist
     projectile
     neotree
