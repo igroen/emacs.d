@@ -11,7 +11,6 @@
     elpy
     multiple-cursors
     expand-region
-    virtualenvwrapper
     drag-stuff
     flycheck
     py-autopep8

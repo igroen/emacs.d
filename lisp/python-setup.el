@@ -20,11 +20,6 @@
 ;; Enable py-isort on save
 (add-hook 'before-save-hook 'py-isort-before-save)
 
-;; virtualenvwrapper
-(venv-initialize-interactive-shells)  ;; if you want interactive shell support
-(venv-initialize-eshell)  ;; if you want eshell support
-(setq venv-location "~/.virtualenvs/")
-
 ;; Example use of python
 (defun example ()
   (interactive)
