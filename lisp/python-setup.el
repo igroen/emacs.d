@@ -2,6 +2,10 @@
 (elpy-enable)
 (global-set-key (kbd "M-*") 'pop-tag-mark)
 
+;; Elpy seems partially incompatible with Emacs 25's 'native completion' feature
+;; https://github.com/jorgenschaefer/elpy/issues/887
+(setq python-shell-completion-native-enable nil)
+
 ;; Autocomplet doesn't work with Rope as backend. Use Jedi instead
 (setq elpy-rpc-backend "jedi")
 
