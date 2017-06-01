@@ -128,9 +128,6 @@
 (add-to-list 'auto-mode-alist '("\\.pt\\'" . html-mode))
 
 ;; GnuPG: To use GnuPG gpg-agent must be running.
-;; Open .asc files in the same way of .gpg
-(setq epa-file-name-regexp "\\.\\(gpg\\|asc\\)$")
-(epa-file-name-regexp-update)
 ;; Prefer armored ASCII
 (setq epa-armor t)
 ;; Prompt for the password in the minibuffer
