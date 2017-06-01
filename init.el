@@ -131,7 +131,10 @@
 ;; Open .asc files in the same way of .gpg
 (setq epa-file-name-regexp "\\.\\(gpg\\|asc\\)$")
 (epa-file-name-regexp-update)
-(setq epa-armor t)  ;; Prefer armored ASCII
+;; Prefer armored ASCII
+(setq epa-armor t)
+;; Prompt for the password in the minibuffer
+(setq epa-pinentry-mode 'loopback)
 
 ;; Move lines added by the customize system to seperate file
 (setq custom-file "~/.emacs.d/custom.el")
