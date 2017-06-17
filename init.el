@@ -54,6 +54,8 @@
       helm-quick-update                     t
       helm-split-window-in-side-p           t)
 
+;; better-defaults
+(require 'better-defaults)
 ;; Fix for better-defaults `save-place' which was removed in emacs 25.1
 ;; https://github.com/technomancy/better-defaults/issues/15
 (save-place-mode t)
