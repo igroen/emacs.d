@@ -1,21 +1,25 @@
 ;; list the packages you want
 (setq package-list '(
     better-defaults
-    magit
-    git-gutter
-    gist
-    projectile
-    neotree
-    helm
-    flx-ido
-    elpy
-    multiple-cursors
-    expand-region
+    company-irony
+    company-irony-c-headers
     drag-stuff
+    elpy
+    expand-region
+    flx-ido
     flycheck
+    flycheck-irony
+    gist
+    git-gutter
+    helm
+    irony
+    magit
+    markdown-mode
+    multiple-cursors
+    neotree
+    projectile
     py-autopep8
     py-isort
-    markdown-mode
     yaml-mode
     )
 )

@@ -20,6 +20,9 @@
 ;; Setup python
 (load-library "python-setup")
 
+;; Setup c++
+(load-library "c++")
+
 ;; Dont't create auto-save-list folder in .emacs.d
 ;; Backups are placed in backups folder by better-defaults plugin
 (setq auto-save-list-file-prefix nil)
@@ -124,6 +127,9 @@
 
 ;; turn on flychecking globally
 (add-hook 'after-init-hook #'global-flycheck-mode)
+
+;; turn on company mode globally
+(add-hook 'after-init-hook 'global-company-mode)
 
 ;; Major mode to use for file extension
 (add-to-list 'auto-mode-alist '("\\.zcml\\'" . nxml-mode))
