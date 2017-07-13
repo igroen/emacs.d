@@ -20,6 +20,7 @@
     projectile
     py-autopep8
     py-isort
+    tide
     yaml-mode
     )
 )

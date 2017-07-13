@@ -19,5 +19,5 @@
   '(add-hook 'flycheck-mode-hook #'flycheck-irony-setup))
 
 ;; Set gcc and clang c++ version used
-(add-hook 'c++-mode-hook (lambda () (setq flycheck-gcc-language-standard "c++14")))
-(add-hook 'c++-mode-hook (lambda () (setq flycheck-clang-language-standard "c++14")))
+;; (add-hook 'c++-mode-hook (lambda () (setq flycheck-gcc-language-standard "c++14")))
+;; (add-hook 'c++-mode-hook (lambda () (setq flycheck-clang-language-standard "c++14")))
