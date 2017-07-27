@@ -13,6 +13,7 @@
     git-gutter
     helm
     irony
+    json-mode
     magit
     markdown-mode
     multiple-cursors
