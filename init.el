@@ -128,11 +128,14 @@
 (global-set-key (kbd "M-n") 'drag-stuff-down)
 (global-set-key (kbd "M-p") 'drag-stuff-up)
 
-;; turn on flychecking globally
+;; Turn on flychecking globally
 (add-hook 'after-init-hook #'global-flycheck-mode)
 
-;; turn on company mode globally
+;; Turn on company mode globally
 (add-hook 'after-init-hook 'global-company-mode)
+
+;; Enable yas globally
+(yas-global-mode)
 
 ;; Major mode to use for file extension
 (add-to-list 'auto-mode-alist '("\\.zcml\\'" . nxml-mode))
