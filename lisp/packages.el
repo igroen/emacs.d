@@ -18,6 +18,7 @@
     markdown-mode
     multiple-cursors
     neotree
+    ng2-mode
     projectile
     py-autopep8
     py-isort
