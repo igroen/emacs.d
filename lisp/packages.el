@@ -5,6 +5,7 @@
     company-irony-c-headers
     drag-stuff
     elpy
+    emmet-mode
     expand-region
     flx-ido
     flycheck

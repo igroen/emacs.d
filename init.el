@@ -21,10 +21,13 @@
 (load-library "python-setup")
 
 ;; Setup c++
-(load-library "c++")
+(load-library "c++-setup")
 
 ;; Setup typescript
-(load-library "typescript")
+(load-library "typescript-setup")
+
+;; Setup HTML
+(load-library "html-setup")
 
 ;; Dont't create auto-save-list folder in .emacs.d
 ;; Backups are placed in backups folder by better-defaults plugin
