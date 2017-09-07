@@ -134,6 +134,10 @@
 ;; Turn on flychecking globally
 (add-hook 'after-init-hook #'global-flycheck-mode)
 
+;; flycheck-yamllint
+(eval-after-load 'flycheck
+  '(add-hook 'flycheck-mode-hook 'flycheck-yamllint-setup))
+
 ;; Turn on company mode globally
 (add-hook 'after-init-hook 'global-company-mode)
 

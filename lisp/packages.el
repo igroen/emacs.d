@@ -10,6 +10,7 @@
     flx-ido
     flycheck
     flycheck-irony
+    flycheck-yamllint
     gist
     git-gutter
     helm
