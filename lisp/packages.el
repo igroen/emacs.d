@@ -14,6 +14,7 @@
     gist
     git-gutter
     helm
+    helm-projectile
     irony
     json-mode
     magit

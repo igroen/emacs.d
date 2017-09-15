@@ -94,6 +94,10 @@
 ;; ‘neotree’ will change root automatically.
 (setq projectile-switch-project-action 'neotree-projectile-action)
 
+;; Enable helm for projectile
+(setq projectile-completion-system 'helm)
+(helm-projectile-on)
+
 ;; Auto close bracket insertion. New in emacs 24
 (electric-pair-mode 1)
 
