@@ -33,9 +33,6 @@
 ;; Backups are placed in backups folder by better-defaults plugin
 (setq auto-save-list-file-prefix nil)
 
-;; Automatically save and restore sessions
-(desktop-save-mode 1)
-
 ;; Enable ido mode and flx-ido
 (ido-mode 1)
 (setq ido-everywhere 1)
