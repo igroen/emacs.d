@@ -12,9 +12,6 @@
 ;; Autocomplet doesn't work with Rope as backend. Use Jedi instead
 (setq elpy-rpc-backend "jedi")
 
-;; Use ipython as REPL
-(elpy-use-ipython)
-
 ;; Disable flymake and enable flycheck for realtime syntax checking
 (when (require 'flycheck nil t)
   (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
