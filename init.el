@@ -82,7 +82,7 @@
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
 ;; Enable projectile globally
-(projectile-global-mode)
+(projectile-mode)
 (setq projectile-enable-caching t)
 
 ;; Configure Neo Tree
