@@ -6,9 +6,6 @@
 ;; https://github.com/jorgenschaefer/elpy/issues/887
 (setq python-shell-completion-native-enable nil)
 
-;; Elpy is detecting wrong rpc-python so set it explicitly
-(setq elpy-rpc-python-command "python")
-
 ;; Autocomplet doesn't work with Rope as backend. Use Jedi instead
 (setq elpy-rpc-backend "jedi")
 
