@@ -39,7 +39,7 @@
 ;; add_executable(main main.cpp)
 ;;
 ;; find_package(Boost REQUIRED COMPONENTS program_options regex)
-;; target_link_libraries(main ${Boost_PROGRAM_OPTIONS_LIBRARY} ${Boost_LIBRARIES})
+;; target_link_libraries(main ${Boost_LIBRARIES})
 ;;
 ;; To generate a JSON compilation database run:
 ;; cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON .
