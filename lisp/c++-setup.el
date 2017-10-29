@@ -19,6 +19,23 @@
   '(add-hook 'flycheck-mode-hook #'flycheck-irony-setup))
 
 ;; Set gcc and clang c++ version used
-(add-hook 'c++-mode-hook (lambda () (setq flycheck-gcc-language-standard "c++14")))
-(add-hook 'c++-mode-hook (lambda () (setq flycheck-clang-language-standard "c++14")))
-(setq irony-additional-clang-options '("-std=c++14"))
+;; (add-hook 'c++-mode-hook (lambda () (setq flycheck-gcc-language-standard "c++14")))
+;; (add-hook 'c++-mode-hook (lambda () (setq flycheck-clang-language-standard "c++14")))
+;; (setq irony-additional-clang-options '("-std=c++14"))
+;;
+;; It's better to use a compilation database instead
+;; ----------------------------------
+;; Create a CMakeLists.txt file.
+;; Example:
+;;
+;; project (MyProject)
+;; cmake_minimum_required (VERSION 3.9)
+;;
+;; set(CMAKE_CXX_STANDARD 14)
+;; set(CMAKE_CXX_STANDARD_REQUIRED ON)
+;; set(CMAKE_CXX_EXTENSIONS OFF)
+;;
+;; add_executable(main main.cpp)
+;;
+;; To generate a JSON compilation database run:
+;; cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON .
