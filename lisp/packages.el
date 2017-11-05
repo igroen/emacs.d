@@ -1,6 +1,7 @@
 ;; list the packages you want
 (setq package-list '(
     better-defaults
+    cmake-mode
     company-irony
     company-irony-c-headers
     drag-stuff
