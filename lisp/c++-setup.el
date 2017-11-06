@@ -18,6 +18,9 @@
 (eval-after-load 'flycheck
   '(add-hook 'flycheck-mode-hook #'flycheck-irony-setup))
 
+;; Enable irony-eldoc
+(add-hook 'irony-mode-hook #'irony-eldoc)
+
 ;; Set gcc and clang c++ version used
 ;; (add-hook 'c++-mode-hook (lambda () (setq flycheck-gcc-language-standard "c++14")))
 ;; (add-hook 'c++-mode-hook (lambda () (setq flycheck-clang-language-standard "c++14")))

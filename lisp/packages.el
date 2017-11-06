@@ -17,6 +17,7 @@
     helm
     helm-projectile
     irony
+    irony-eldoc
     json-mode
     magit
     markdown-mode
