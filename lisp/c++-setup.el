@@ -46,3 +46,5 @@
 ;;
 ;; To generate a JSON compilation database run:
 ;; cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON .
+;; Or from build directory using clang/clang++ compiler
+;; CC=/usr/bin/clang CXX=/usr/bin/clang++ cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON ..
