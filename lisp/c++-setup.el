@@ -39,7 +39,14 @@
 ;; set(CMAKE_CXX_EXTENSIONS OFF)
 ;; add_definitions(-Wall)
 ;;
-;; add_executable(main main.cpp)
+;; set(SOURCE
+;;   ${CMAKE_CURRENT_SOURCE_DIR}/foo.cpp
+;;   )
+;; set(HEADERS
+;;   ${CMAKE_CURRENT_SOURCE_DIR}/foo.hpp
+;;   )
+;;
+;; add_executable(main main.cpp ${SOURCE} ${HEADERS})
 ;;
 ;; find_package(Boost REQUIRED COMPONENTS program_options regex)
 ;; target_link_libraries(main ${Boost_LIBRARIES})
