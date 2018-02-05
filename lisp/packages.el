@@ -15,6 +15,7 @@
     gist
     git-gutter
     helm
+    helm-ag
     helm-projectile
     irony
     irony-eldoc
