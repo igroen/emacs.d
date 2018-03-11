@@ -41,7 +41,9 @@
 (setq ido-use-faces nil)
 
 ;; Hide dot files in dired omit-mode (C-x M-o)
-(setq dired-omit-files "^\\...+$")
+(require 'dired-x)
+(setq-default dired-omit-files-p t)
+(setq dired-omit-files (concat dired-omit-files "\\|^\\..+$"))
 
 ;; Enable helm for M-x
 (global-set-key (kbd "M-x")     'helm-M-x)
