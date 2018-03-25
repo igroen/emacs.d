@@ -30,6 +30,7 @@
     py-isort
     tide
     yaml-mode
+    yasnippet-snippets
     )
 )
 
