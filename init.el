@@ -166,10 +166,6 @@
 ;; Enable yas globally
 (yas-global-mode)
 
-;; Major mode to use for file extension
-(add-to-list 'auto-mode-alist '("\\.zcml\\'" . nxml-mode))
-(add-to-list 'auto-mode-alist '("\\.pt\\'" . html-mode))
-
 ;; GnuPG: To use GnuPG gpg-agent must be running.
 ;; Prefer armored ASCII
 (setq epa-armor t)
