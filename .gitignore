@@ -1,10 +1,12 @@
 /.emacs.desktop*
 /.mc-lists.el
 /backups
+/custom.el
 /elpa
 /eshell
 /games
 /ido.last
+/irony
 /network-security.data
 /places
 /projectile-bookmarks.eld
@@ -13,4 +15,3 @@
 /tramp
 /url
 /var
-/irony
