@@ -21,13 +21,13 @@
 (load-library "python-setup")
 
 ;; Setup c++
-(load-library "c++-setup")
+;; (load-library "c++-setup")
 
 ;; Setup typescript
-(load-library "typescript-setup")
+;; (load-library "typescript-setup")
 
 ;; Setup HTML
-(load-library "html-setup")
+;; (load-library "html-setup")
 
 ;; Use leuven-theme
 (load-theme 'leuven t)
