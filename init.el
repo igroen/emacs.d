@@ -29,6 +29,9 @@
 ;; Setup HTML
 (load-library "html-setup")
 
+;; Use leuven-theme
+(load-theme 'leuven t)
+
 ;; Dont't create auto-save-list folder in .emacs.d
 ;; Backups are placed in backups folder by better-defaults plugin
 (setq auto-save-list-file-prefix nil)
