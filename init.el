@@ -81,7 +81,7 @@
 (save-place-mode t)
 
 ;; Org-mode
-(setq org-log-done 'time)  ;; Show time when done
+(setq org-log-done t)  ;; Show time when done
 
 ;; Syntax highlighting for org-mode
 (setq org-src-fontify-natively 0)
