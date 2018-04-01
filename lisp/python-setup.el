@@ -6,6 +6,10 @@
 ;; https://github.com/jorgenschaefer/elpy/issues/887
 (setq python-shell-completion-native-enable nil)
 
+;; Don't print evaluated code fragments in the python shell
+;; https://elpy.readthedocs.io/en/latest/ide.html#option-elpy-shell-echo-input
+(setq elpy-shell-echo-input nil)
+
 ;; Autocomplet doesn't work with Rope as backend. Use Jedi instead
 (setq elpy-rpc-backend "jedi")
 
