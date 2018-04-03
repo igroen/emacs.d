@@ -17,6 +17,9 @@
 ;; * Delete current file and buffer
 (load-library "snippets")
 
+;; Setup org-mode
+(load-library "org-mode-setup")
+
 ;; Setup python
 (load-library "python-setup")
 
@@ -79,19 +82,6 @@
 ;; Fix for better-defaults `save-place' which was removed in emacs 25.1
 ;; https://github.com/technomancy/better-defaults/issues/15
 (save-place-mode t)
-
-;; Org-mode
-(setq org-log-done t)  ;; Show time when done
-
-;; Syntax highlighting for org-mode
-(setq org-src-fontify-natively 0)
-
-;; Add languages for the ‘src’ code blocks in org-mode
-(org-babel-do-load-languages
- 'org-babel-load-languages
- '((emacs-lisp . t)
-   (sh . t)
-   (python . t)))
 
 ;; Autorefresh buffers on file change
 (global-auto-revert-mode t)
