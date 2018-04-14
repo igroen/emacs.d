@@ -10,7 +10,7 @@
 ;; https://elpy.readthedocs.io/en/latest/ide.html#option-elpy-shell-echo-input
 (setq elpy-shell-echo-input nil)
 
-;; Autocomplet doesn't work with Rope as backend. Use Jedi instead
+;; Autocomplete doesn't work with Rope as backend. Use Jedi instead
 (setq elpy-rpc-backend "jedi")
 
 ;; Disable flymake and enable flycheck for realtime syntax checking
