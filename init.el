@@ -96,7 +96,13 @@
 ;; Configure Neo Tree
 (global-set-key [f8] 'neotree-toggle)
 ;; Add __pycache__ to default list of ignored files/directories
-(setq neo-hidden-regexp-list '("^\\." "^__pycache__$" "\\.pyc$" "~$" "^#.*#$" "\\.elc$"))
+(setq neo-hidden-regexp-list '("^\\."
+                               "^__pycache__$"
+                               "\\.pyc$"
+                               "\\.egg-info$"
+                               "~$"
+                               "^#.*#$"
+                               "\\.elc$"))
 
 ;; When running ‘projectile-switch-project’ (C-c p p),
 ;; ‘neotree’ will change root automatically.
