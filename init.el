@@ -27,13 +27,13 @@
 (load-library "python-setup")
 
 ;; Setup c++
-;; (load-library "c++-setup")
+(load-library "c++-setup")
 
 ;; Setup typescript
-;; (load-library "typescript-setup")
+(load-library "typescript-setup")
 
 ;; Setup HTML
-;; (load-library "html-setup")
+(load-library "html-setup")
 
 ;; Dont't create auto-save-list folder in .emacs.d
 ;; Backups are placed in backups folder by better-defaults plugin
@@ -124,7 +124,8 @@
 ;; Erc
 (setq erc-server "irc.freenode.net")
 (setq erc-autojoin-channels-alist
-      '(("freenode.net" "#python" "#django" "#emacs")))
+      '(("freenode.net"
+         "#python" "#emacs")))
 (setq erc-port 6697)
 (setq erc-nick "gumol")
 (setq erc-hide-list '("JOIN" "PART" "QUIT"))
