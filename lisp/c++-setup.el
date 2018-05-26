@@ -32,6 +32,10 @@
 (setq rtags-autostart-diagnostics t)
 (rtags-enable-standard-keybindings)
 
+;; CMake automation with cmake-ide
+(cmake-ide-setup)
+(setq cmake-ide-build-dir "cmake_build")
+
 ;; Set gcc and clang c++ version used
 ;; (add-hook 'c++-mode-hook (lambda () (setq flycheck-gcc-language-standard "c++14")))
 ;; (add-hook 'c++-mode-hook (lambda () (setq flycheck-clang-language-standard "c++14")))
@@ -43,9 +47,9 @@
 ;; Example:
 ;;
 ;; project (MyProject)
-;; cmake_minimum_required (VERSION 3.9)
+;; cmake_minimum_required (VERSION 3.11)
 ;;
-;; set(CMAKE_CXX_STANDARD 14)
+;; set(CMAKE_CXX_STANDARD 17)
 ;; set(CMAKE_CXX_STANDARD_REQUIRED ON)
 ;; set(CMAKE_CXX_EXTENSIONS OFF)
 ;; add_definitions(-Wall)

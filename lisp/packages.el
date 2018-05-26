@@ -1,6 +1,7 @@
 ;; Packages to install
 (setq package-list '(
     better-defaults
+    cmake-ide
     cmake-mode
     company-irony
     company-irony-c-headers
