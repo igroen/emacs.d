@@ -21,6 +21,17 @@
 ;; Enable irony-eldoc
 (add-hook 'irony-mode-hook #'irony-eldoc)
 
+;; Use RTags (https://github.com/Andersbakken/rtags)
+;; Insure rc can be found by:
+;; - Adding RTags bin directory to path or
+;; - Set rtags-path variable. i.e. (setq rtags-path "/Users/iwan/Development/src/rtags/bin")
+(setq rtags-completions-enabled t)
+(eval-after-load 'company
+  '(add-to-list
+    'company-backends 'company-rtags))
+(setq rtags-autostart-diagnostics t)
+(rtags-enable-standard-keybindings)
+
 ;; Set gcc and clang c++ version used
 ;; (add-hook 'c++-mode-hook (lambda () (setq flycheck-gcc-language-standard "c++14")))
 ;; (add-hook 'c++-mode-hook (lambda () (setq flycheck-clang-language-standard "c++14")))

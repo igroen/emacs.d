@@ -1,9 +1,10 @@
-;; list the packages you want
+;; Packages to install
 (setq package-list '(
     better-defaults
     cmake-mode
     company-irony
     company-irony-c-headers
+    company-rtags
     drag-stuff
     elpy
     emmet-mode
@@ -28,6 +29,7 @@
     projectile
     py-autopep8
     py-isort
+    rtags
     tide
     yaml-mode
     yasnippet-snippets
