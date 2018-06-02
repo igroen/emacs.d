@@ -95,7 +95,7 @@
 
 ;; Configure Neo Tree
 (global-set-key [f8] 'neotree-toggle)
-;; Add __pycache__ to default list of ignored files/directories
+;; List of ignored files/directories
 (setq neo-hidden-regexp-list '("^\\."
                                "^__pycache__$"
                                "\\.pyc$"

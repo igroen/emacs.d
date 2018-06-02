@@ -2,21 +2,9 @@
 (elpy-enable)
 (global-set-key (kbd "M-*") 'pop-tag-mark)
 
-;; Elpy seems partially incompatible with Emacs 25's 'native completion' feature
-;; https://github.com/jorgenschaefer/elpy/issues/887
-(setq python-shell-completion-native-enable nil)
-
 ;; Don't print evaluated code fragments in the python shell
 ;; https://elpy.readthedocs.io/en/latest/ide.html#option-elpy-shell-echo-input
 (setq elpy-shell-echo-input nil)
-
-;; Autocomplete doesn't work with Rope as backend. Use Jedi instead
-(setq elpy-rpc-backend "jedi")
-
-;; Disable flymake and enable flycheck for realtime syntax checking
-(when (require 'flycheck nil t)
-  (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
-  (add-hook 'elpy-mode-hook 'flycheck-mode))
 
 ;; Enable autopep8 on save
 (add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save)
