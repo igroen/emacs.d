@@ -7,10 +7,10 @@
 (setq elpy-shell-echo-input nil)
 
 ;; Enable autopep8 on save
-(add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save)
+;; (add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save)
 
 ;; Enable py-isort on save
-(add-hook 'before-save-hook 'py-isort-before-save)
+;; (add-hook 'before-save-hook 'py-isort-before-save)
 
 ;; Example use of python
 (defun example ()
