@@ -121,15 +121,6 @@
 (global-set-key (kbd "C-x C-m C-p") 'mc/mark-previous-like-this)
 (global-set-key (kbd "C-x C-m C-a") 'mc/mark-all-like-this)
 
-;; Erc
-(setq erc-server "irc.freenode.net")
-(setq erc-autojoin-channels-alist
-      '(("freenode.net"
-         "#python" "#emacs")))
-(setq erc-port 6697)
-(setq erc-nick "gumol")
-(setq erc-hide-list '("JOIN" "PART" "QUIT"))
-
 ;; Magit rules!
 (global-set-key (kbd "C-x g") 'magit-status)
 
