@@ -1,6 +1,5 @@
 ;; Enable elpy (Run M-x elpy-config to configure)
 (elpy-enable)
-(global-set-key (kbd "M-*") 'pop-tag-mark)
 
 ;; Don't print evaluated code fragments in the python shell
 ;; https://elpy.readthedocs.io/en/latest/ide.html#option-elpy-shell-echo-input
