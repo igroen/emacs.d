@@ -11,6 +11,9 @@
 ;; Enable py-isort on save
 ;; (add-hook 'before-save-hook 'py-isort-before-save)
 
+;; Use black to format code on save
+;; (add-hook 'before-save-hook 'elpy-black-fix-code)
+
 ;; Example use of python
 (defun example ()
   (interactive)
