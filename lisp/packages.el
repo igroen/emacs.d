@@ -6,6 +6,7 @@
     company-irony
     company-irony-c-headers
     company-rtags
+    deft
     drag-stuff
     elpy
     emmet-mode
