@@ -83,6 +83,10 @@
 ;; https://github.com/technomancy/better-defaults/issues/15
 (save-place-mode t)
 
+;; Enable xclip-mode to use the system clipboard when killing/yanking
+;; Install xclip on Linux for this to work. On OSX pbcopy/pbpaste will be used
+(xclip-mode t)
+
 ;; Autorefresh buffers on file change
 (global-auto-revert-mode t)
 

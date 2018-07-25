@@ -33,6 +33,7 @@
     py-isort
     rtags
     tide
+    xclip
     yaml-mode
     yasnippet-snippets
     )
