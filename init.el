@@ -8,6 +8,10 @@
 ;; Disable bell completely
 (setq ring-bell-function 'ignore)
 
+;; Scroll one line at a time
+(setq scroll-step 1
+      scroll-conservatively 10000)
+
 ;; Use leuven-theme
 (load-theme 'leuven t)
 
