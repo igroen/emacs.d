@@ -23,6 +23,7 @@
 
 ;; Use RTags (https://github.com/Andersbakken/rtags)
 ;; Insure rc can be found by:
+;; - Run rtags-install within emacs
 ;; - Adding RTags bin directory to path or
 ;; - Set rtags-path variable. i.e. (setq rtags-path "/Users/iwan/Development/src/rtags/bin")
 (setq rtags-completions-enabled t)
