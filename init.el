@@ -1,31 +1,16 @@
 ;; Set load-path for libraries
-(add-to-list 'load-path "~/.emacs.d/lisp/")
+(add-to-list 'load-path "~/.emacs.d/config/")
 
-;; Start with empty buffer
-(setq inhibit-splash-screen t)
-(switch-to-buffer "**")
-
-;; Disable bell completely
-(setq ring-bell-function 'ignore)
-
-;; Scroll one line at a time
-(setq scroll-step 1
-      scroll-conservatively 10000)
-
-;; Use leuven-theme
-(load-theme 'leuven t)
+(load-library "defaults")
 
 ;; Install and initialize packages
 ;; (package-initialize)
-(load-library "packages")
+(load-library "init-use-package")
 
 ;; Snippets
 ;; * Comment/Uncomment line or region
 ;; * Delete current file and buffer
 (load-library "snippets")
-
-;; Setup org-mode
-(load-library "org-mode-setup")
 
 ;; Setup python
 (load-library "python-setup")
@@ -33,141 +18,196 @@
 ;; Setup c++
 (load-library "c++-setup")
 
-;; Setup typescript
-(load-library "typescript-setup")
+;; Setup org-mode
+(load-library "org-mode-setup")
 
-;; Setup HTML
-(load-library "html-setup")
+(use-package abbrev
+  :diminish abbrev-mode)
 
-;; Dont't create auto-save-list folder in .emacs.d
-;; Backups are placed in backups folder by better-defaults plugin
-(setq auto-save-list-file-prefix nil)
+(use-package ido
+  :init (setq ido-everywhere t)
 
-;; Use version contral and keep multiple backup files
-(setq delete-old-versions t
-  kept-new-versions 6
-  kept-old-versions 2
-  version-control t)
+  :config
+  (ido-mode t)
 
-;; Enable ido mode and flx-ido
-(ido-mode 1)
-(setq ido-everywhere 1)
-(flx-ido-mode 1)
-(setq ido-enable-flex-matching 1)
-(setq ido-use-faces nil)
+  (use-package flx-ido
+    :ensure t
 
-;; Hide dot files in dired omit-mode (C-x M-o)
-(require 'dired-x)
-(setq-default dired-omit-files-p t)
-(setq dired-omit-files (concat dired-omit-files "\\|^\\..+$"))
+    :init
+    (setq ido-enable-flex-matching t)
+    (setq ido-use-faces nil)
 
-;; Enable helm for M-x
-(global-set-key (kbd "M-x")     'helm-M-x)
-(global-set-key (kbd "C-x b")   'helm-mini)
-(global-set-key (kbd "C-x C-b") 'helm-buffers-list)
-(global-set-key (kbd "C-x C-f") 'helm-find-files)
+    :config (flx-ido-mode t)))
 
-;; Helm fuzzy matching
-(setq helm-M-x-fuzzy-match                  t
-      helm-bookmark-show-location           t
-      helm-buffers-fuzzy-matching           t
-      helm-completion-in-region-fuzzy-match t
-      helm-file-cache-fuzzy-match           t
-      helm-imenu-fuzzy-match                t
-      helm-mode-fuzzy-match                 t
-      helm-locate-fuzzy-match               t
-      helm-recentf-fuzzy-match              t
-      helm-semantic-fuzzy-match             t
-      helm-quick-update                     t
-      helm-split-window-in-side-p           t)
+(use-package dired-x
+  :init (setq-default dired-omit-files-p t)
 
-;; better-defaults
-(require 'better-defaults)
-;; Fix for better-defaults `save-place' which was removed in emacs 25.1
-;; https://github.com/technomancy/better-defaults/issues/15
-(save-place-mode t)
+  ;; Hide dot files in dired omit-mode (C-x M-o)
+  :config (setq dired-omit-files (concat dired-omit-files "\\|^\\..+$")))
 
-;; Enable xclip-mode to use the system clipboard when killing/yanking
-;; Install xclip on Linux for this to work. On OSX pbcopy/pbpaste will be used
-(xclip-mode t)
+(use-package helm
+  :ensure t
 
-;; Autorefresh buffers on file change
-(global-auto-revert-mode t)
+  :bind (("M-x" . helm-M-x)
+         ("C-x b" . helm-mini)
+         ("C-x C-b" . helm-buffers-list)
+         ("C-x C-f" . helm-find-files))
 
-;; Remove trailing whitespace on save
-(add-hook 'before-save-hook 'delete-trailing-whitespace)
+  ;; Fuzzy matching
+  :init (setq helm-M-x-fuzzy-match                  t
+              helm-bookmark-show-location           t
+              helm-buffers-fuzzy-matching           t
+              helm-completion-in-region-fuzzy-match t
+              helm-file-cache-fuzzy-match           t
+              helm-imenu-fuzzy-match                t
+              helm-mode-fuzzy-match                 t
+              helm-locate-fuzzy-match               t
+              helm-recentf-fuzzy-match              t
+              helm-semantic-fuzzy-match             t
+              helm-quick-update                     t
+              helm-split-window-inside-p            t)
 
-;; Enable projectile globally
-(projectile-mode)
-(setq projectile-enable-caching t)
+  :config
+  (use-package helm-ag
+    :ensure t))
 
-;; Configure Neo Tree
-(global-set-key [f8] 'neotree-toggle)
-;; List of ignored files/directories
-(setq neo-hidden-regexp-list '("^\\."
-                               "^__pycache__$"
-                               "\\.pyc$"
-                               "\\.egg-info$"
-                               "~$"
-                               "^#.*#$"
-                               "\\.elc$"))
+(use-package projectile
+  :ensure t
 
-;; When running ‘projectile-switch-project’ (C-c p p),
-;; ‘neotree’ will change root automatically.
-(setq projectile-switch-project-action 'neotree-projectile-action)
+  :diminish projectile-mode
 
-;; Enable helm for projectile
-(setq projectile-completion-system 'helm)
-(helm-projectile-on)
+  :bind-keymap ("C-c p" . projectile-command-map)
 
-;; Auto close bracket insertion. New in emacs 24
-(electric-pair-mode 1)
+  :init
+  (setq projectile-enable-caching t)
+  (setq projectile-completion-system 'helm)
+  ;; When running projectile-switch-project (C-c p p),
+  ;; neotree will change root automatically.
+  (setq projectile-switch-project-action 'neotree-projectile-action)
 
-;; Multiple cursors
-(global-set-key (kbd "C-x C-m C-e") 'mc/edit-lines)
-(global-set-key (kbd "C-x C-m C-n") 'mc/mark-next-like-this)
-(global-set-key (kbd "C-x C-m C-p") 'mc/mark-previous-like-this)
-(global-set-key (kbd "C-x C-m C-a") 'mc/mark-all-like-this)
+  :config
+  ;; Enable projectile globally
+  (projectile-mode)
 
-;; Magit rules!
-(global-set-key (kbd "C-x g") 'magit-status)
+  (use-package helm-projectile
+    :ensure t
 
-;; Enable git-gutter in global minor mode
-(global-git-gutter-mode t)
+    :config (helm-projectile-on)))
 
-;; Ask for gist description when creating gist
-(setq gist-ask-for-description t)
+(use-package better-defaults
+  :ensure t
 
-;; Expand region
-(global-set-key (kbd "C-x w") 'er/expand-region)
+  ;; Dont't create auto-save-list folder in .emacs.d
+  ;; Backups are placed in backups folder by better-defaults plugin
+  :init (setq auto-save-list-file-prefix nil)
 
-;; drag-stuff
-(drag-stuff-global-mode 1)
-;; Fix for M-up/M-down not working on os x (Meta key doesn't work with symbols)
-(define-key input-decode-map "\e\eOA" [(meta up)])
-(define-key input-decode-map "\e\eOB" [(meta down)])
-(global-set-key (kbd "M-n") 'drag-stuff-down)
-(global-set-key (kbd "M-p") 'drag-stuff-up)
+  ;; Fix for better-defaults `save-place' which was removed in emacs 25.1
+  ;; https://github.com/technomancy/better-defaults/issues/15
+  :config (save-place-mode t))
 
-;; Turn on flychecking globally
-(add-hook 'after-init-hook #'global-flycheck-mode)
+(use-package xclip
+  :ensure t
 
-;; flycheck-yamllint
-(eval-after-load 'flycheck
-  '(add-hook 'flycheck-mode-hook 'flycheck-yamllint-setup))
+  ;; Enable xclip-mode to use the system clipboard when killing/yanking
+  ;; Install xclip on Linux for this to work. On OSX pbcopy/pbpaste will be used
+  :config (xclip-mode t))
 
-;; Turn on company mode globally
-(add-hook 'after-init-hook 'global-company-mode)
+(use-package neotree
+  :ensure t
 
-;; Enable yas globally
-(yas-global-mode)
+  :bind ([f8] . neotree-toggle)
 
-;; GnuPG: To use GnuPG gpg-agent must be running.
-;; Prefer armored ASCII
-(setq epa-armor t)
-;; Prompt for the password in the minibuffer
-(setq epa-pinentry-mode 'loopback)
+  :init
+  ;; List of ignored files/directories
+  (setq neo-hidden-regexp-list
+        '("^\\."
+          "^__pycache__$"
+          "\\.pyc$"
+          "\\.egg-info$"
+          "~$"
+          "^#.*#$"
+          "\\.elc$")))
 
-;; Move lines added by the customize system to seperate file
-(setq custom-file "~/.emacs.d/custom.el")
-(load custom-file 'noerror)
+(use-package multiple-cursors
+  :ensure t
+
+  :bind (("C-x C-m C-e" . mc/edit-lines)
+         ("C-x C-m C-n" . mc/mark-next-like-this)
+         ("C-x C-m C-p" . mc/mark-previous-like-this)
+         ("C-x C-m C-a" . mc/mark-all-like-this)))
+
+(use-package magit
+  :ensure t
+
+  :bind ("C-x g" . magit-status))
+
+(use-package git-gutter
+  :ensure t
+
+  :diminish git-gutter-mode
+
+  :config (global-git-gutter-mode t))
+
+(use-package gist
+  :ensure t
+
+  :defer t
+
+  ;; Ask for gist description when creating gist
+  :init (setq gist-ask-for-description t))
+
+(use-package expand-region
+  :ensure t
+
+  :bind ("C-x w" . er/expand-region))
+
+(use-package drag-stuff
+  :ensure t
+
+  :bind (("M-p" . drag-stuff-up)
+         ("M-n" . drag-stuff-down))
+
+  :config (drag-stuff-global-mode 1))
+
+(use-package yaml-mode
+  :ensure t
+
+  :defer t)
+
+(use-package flycheck
+  :ensure t
+
+  :diminish flycheck-mode
+
+  :hook (after-init . global-flycheck-mode)
+
+  :config
+  (use-package flycheck-yamllint
+    :ensure t
+
+    :defer t
+
+    :hook (flycheck-mode . flycheck-yamllint-setup)))
+
+
+(use-package company
+  :diminish company-mode
+
+  :hook (after-init . global-company-mode))
+
+(use-package flymake
+  :diminish flymake-mode)
+
+(use-package yasnippet-snippets
+  :ensure t
+
+  :diminish yas-minor-mode
+
+  :config (yas-global-mode))
+
+(use-package deft
+  :ensure t
+
+  :bind ("<f9>" . deft)
+
+  :commands (deft))
