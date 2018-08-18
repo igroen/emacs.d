@@ -40,6 +40,8 @@
   (use-package company-irony
     :ensure t
 
+    :disabled
+
     :defer t
 
     :diminish company-mode)
@@ -73,7 +75,10 @@
     :config
     (rtags-enable-standard-keybindings))
 
-  (add-to-list 'company-backends '(company-irony
+  ;; company-irony and company-rtags are both completion backends.
+  ;; When using both of them together duplicate completions are shown.
+  ;; So use one of these completions backends but not both of them.
+  (add-to-list 'company-backends '(;;company-irony
                                    company-irony-c-headers
                                    company-rtags))
   (cmake-ide-setup))
