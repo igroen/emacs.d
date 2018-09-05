@@ -8,6 +8,9 @@
 ;; Use leuven-theme
 (load-theme 'leuven t)
 
+;; Show the current column in  the mode line
+(setq column-number-mode t)
+
 ;; Scroll one line at a time
 (setq scroll-step 1
       scroll-conservatively 10000)
