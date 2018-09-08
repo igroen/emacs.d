@@ -8,7 +8,7 @@
   (setq org-log-done t)
 
   ;; Folder to look for agenda files
-  (setq org-agenda-files '("~/org"))
+  (setq org-agenda-files '("~/Dropbox/org"))
 
   ;; Syntax highlighting for org-mode
   (setq org-src-fontify-natively t)
