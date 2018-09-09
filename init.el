@@ -4,7 +4,6 @@
 (load-library "defaults")
 
 ;; Install and initialize packages
-;; (package-initialize)
 (load-library "init-use-package")
 
 ;; Snippets
