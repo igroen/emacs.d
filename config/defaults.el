@@ -6,7 +6,7 @@
 (setq ring-bell-function 'ignore)
 
 ;; Use leuven-theme
-(load-theme 'leuven t)
+(load-theme 'leuven)
 
 ;; Show the current column in  the mode line
 (setq column-number-mode t)
