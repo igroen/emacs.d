@@ -1,6 +1,8 @@
 ;; Set load-path for libraries
 (add-to-list 'load-path "~/.emacs.d/config/")
 
+(load-library "tweak-startup-time")
+
 (load-library "defaults")
 
 ;; Install and initialize packages
