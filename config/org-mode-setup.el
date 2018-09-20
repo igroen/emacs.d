@@ -8,7 +8,7 @@
   (setq org-log-done t)
 
   ;; Folder to look for agenda files
-  (setq org-agenda-files '("~/Dropbox/org"))
+  (setq org-agenda-files '("~/Sync/org"))
 
   ;; Log quick notes (C-c C-z) into LOGBOOK drawer
   (setq org-log-into-drawer t)
