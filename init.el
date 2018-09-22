@@ -25,6 +25,13 @@
 (use-package abbrev
   :diminish abbrev-mode)
 
+(use-package smart-mode-line
+  :ensure t
+
+  :init (setq sml/theme 'light)
+
+  :config (sml/setup))
+
 (use-package ido
   :init (setq ido-everywhere t)
 
