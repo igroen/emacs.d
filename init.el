@@ -25,6 +25,9 @@
 (use-package abbrev
   :diminish abbrev-mode)
 
+(use-package eldoc
+  :diminish eldoc-mode)
+
 (use-package smart-mode-line
   :ensure t
 
