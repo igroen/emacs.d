@@ -26,8 +26,8 @@
   (unless (package-installed-p package)
     (package-install package)))
 
-;; Enable use-package
+;; Enable use-package and friends
 (eval-when-compile
   (require 'use-package))
-(require 'diminish)  ;; if you use :diminish
-(require 'bind-key)  ;; if you use any :bind variant
+(require 'diminish)
+(require 'bind-key)
