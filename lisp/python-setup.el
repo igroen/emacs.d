@@ -1,3 +1,11 @@
+;;; python-setup.el --- Part of Iwan's Emacs configuration
+
+;;; Commentary:
+;;
+;; This file is part of my default Emacs configuration.
+
+;;; Code:
+
 (use-package elpy
   :ensure t
 
@@ -37,8 +45,11 @@
 
 ;; Example use of python
 (defun example ()
+  "This is an example of using python on an Emacs buffer."
   (interactive)
   (let ((cmd (format
               "/usr/local/bin/python3 ~/.emacs.d/python/example.py %s"
               (buffer-file-name))))
     (shell-command-on-region (region-beginning) (region-end) cmd nil "REPLACE" nil t)))
+
+;;; python-setup.el ends here

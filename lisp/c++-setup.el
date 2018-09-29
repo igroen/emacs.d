@@ -1,3 +1,11 @@
+;;; c++-setup.el --- Part of Iwan's Emacs configuration
+
+;;; Commentary:
+;;
+;; This file is part of my default Emacs configuration.
+
+;;; Code:
+
 (use-package irony
   :ensure t
 
@@ -82,3 +90,5 @@
                                    company-irony-c-headers
                                    company-rtags))
   (cmake-ide-setup))
+
+;;; c++-setup.el ends here

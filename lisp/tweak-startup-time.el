@@ -1,12 +1,19 @@
-;;; Improve Emacs startup time
+;;; tweak-startup-time.el --- Part of Iwan's Emacs configuration
 
+;;; Commentary:
+;;
+;; This file is part of my default Emacs configuration.
+;;
+;;; Improve Emacs startup time
 ;;
 ;; PLEASE DO NOT ADD ANY CODE `BEFORE' THIS SECTION
 ;;
-;; Avoid garbage collection during startup. The GC eats up quite a bit
-;; of time, easily doubling the startup time. The trick is to turn up
+;; Avoid garbage collection during startup.  The GC eats up quite a bit
+;; of time, easily doubling the startup time.  The trick is to turn up
 ;; the memory threshold (500 MB should be sufficient) in order to
 ;; prevent it from running during startup.
+
+;;; Code:
 
 (setq gc-cons-threshold (* 500 1024 1024)
       gc-cons-percentage 0.6)
@@ -22,3 +29,5 @@
 (add-hook 'emacs-startup-hook
           '(lambda ()
              (message (format "Emacs startup time: %s" (emacs-init-time)))))
+
+;;; tweak-startup-time.el ends here

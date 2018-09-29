@@ -1,3 +1,11 @@
+;;; miscellaneous.el --- Part of Iwan's Emacs configuration
+
+;;; Commentary:
+;;
+;; This file is part of my default Emacs configuration.
+
+;;; Code:
+
 (use-package abbrev
   :diminish abbrev-mode)
 
@@ -194,3 +202,5 @@
   :bind ("<f9>" . deft)
 
   :commands (deft))
+
+;;; miscellaneous.el ends here

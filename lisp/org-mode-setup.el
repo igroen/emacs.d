@@ -1,3 +1,11 @@
+;;; org-mode-setup.el --- Part of Iwan's Emacs configuration
+
+;;; Commentary:
+;;
+;; This file is part of my default Emacs configuration.
+
+;;; Code:
+
 (use-package org
   :bind (("C-c a" . org-agenda)
          ("C-c c" . org-capture)
@@ -23,3 +31,5 @@
    '((emacs-lisp . t)
      (shell . t)
      (python . t))))
+
+;;; org-mode-setup.el ends here

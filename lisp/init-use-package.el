@@ -1,3 +1,11 @@
+;;; init-use-package.el --- Part of Iwan's Emacs configuration
+
+;;; Commentary:
+;;
+;; This file is part of my default Emacs configuration.
+
+;;; Code:
+
 (require 'package)
 (setq package-enable-at-startup nil)
 
@@ -31,3 +39,5 @@
   (require 'use-package))
 (require 'diminish)
 (require 'bind-key)
+
+;;; init-use-package.el ends here

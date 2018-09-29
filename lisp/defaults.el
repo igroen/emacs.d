@@ -1,3 +1,11 @@
+;;; defaults.el --- Part of Iwan's Emacs configuration
+
+;;; Commentary:
+;;
+;; This file is part of my default Emacs configuration.
+
+;;; Code:
+
 ;; Start with empty buffer
 (setq inhibit-splash-screen t)
 (switch-to-buffer "**")
@@ -49,3 +57,5 @@
 
 (when (file-exists-p custom-file)
   (load custom-file))
+
+;;; defaults.el ends here

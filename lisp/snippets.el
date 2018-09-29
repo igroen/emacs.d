@@ -1,3 +1,11 @@
+;;; snippets.el --- Part of Iwan's Emacs configuration
+
+;;; Commentary:
+;;
+;; This file is part of my default Emacs configuration.
+
+;;; Code:
+
 
 ;; Delete current file and buffer
 (defun xah-delete-current-file-copy-to-kill-ring ()
@@ -29,3 +37,5 @@ Version 2016-07-20"
       (setq beg (line-beginning-position) end (line-end-position)))
     (comment-or-uncomment-region beg end)))
 (global-set-key (kbd "C-x C-\\") 'comment-or-uncomment-region-or-line)
+
+;;; snippets.el ends here

@@ -1,5 +1,13 @@
+;;; init.el --- Part of Iwan's Emacs configuration
+
+;;; Commentary:
+;;
+;; This file is part of my default Emacs configuration.
+
+;;; Code:
+
 ;; Set load-path for libraries
-(add-to-list 'load-path "~/.emacs.d/config/")
+(add-to-list 'load-path "~/.emacs.d/lisp/")
 
 (load-library "tweak-startup-time")
 
@@ -24,3 +32,5 @@
 
 ;; Setup miscellaneous libraries
 (load-library "miscellaneous")
+
+;;; init.el ends here
