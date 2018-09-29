@@ -11,9 +11,13 @@
 ;; Show the current column in  the mode line
 (setq column-number-mode t)
 
-;; Scroll one line at a time
-(setq scroll-step 1
-      scroll-conservatively 10000)
+;; Nice scrolling
+(setq scroll-margin 0
+      scroll-conservatively 100000
+      scroll-preserve-screen-position 1)
+
+;; Enable y/n answers
+(fset 'yes-or-no-p 'y-or-n-p)
 
 ;; Autorefresh buffers on file change
 (global-auto-revert-mode t)
