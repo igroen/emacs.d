@@ -22,6 +22,9 @@
 ;; Autorefresh buffers on file change
 (global-auto-revert-mode t)
 
+;; Highlight the current line
+(global-hl-line-mode t)
+
 ;; Remove trailing whitespace on save
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
@@ -41,5 +44,8 @@
 (setq epa-pinentry-mode 'loopback)
 
 ;; Move lines added by the customize system to seperate file
-(setq custom-file "~/.emacs.d/custom.el")
-(load custom-file 'noerror)
+;; Config changes made through the customize UI will be stored here
+(setq custom-file (expand-file-name "custom.el" user-emacs-directory))
+
+(when (file-exists-p custom-file)
+  (load custom-file))
