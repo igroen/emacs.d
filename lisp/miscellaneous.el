@@ -95,7 +95,7 @@
 (use-package better-defaults
   :ensure t
 
-  ;; Dont't create auto-save-list folder in .emacs.d
+  ;; Dont't create auto-save-list folder in `user-emacs-directory`
   ;; Backups are placed in backups folder by better-defaults plugin
   :init (setq auto-save-list-file-prefix nil)
 
