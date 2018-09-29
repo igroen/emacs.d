@@ -10,10 +10,10 @@
 (setq package-enable-at-startup nil)
 
 ;; Packages to install
-(setq package-list
-      '(bind-key
-        diminish
-        use-package))
+(defvar package-list
+  '(bind-key
+    diminish
+    use-package))
 
 ;; Set the repository locations
 (setq package-archives

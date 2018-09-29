@@ -45,12 +45,6 @@
 ;; Auto close bracket insertion.
 (electric-pair-mode 1)
 
-;; GnuPG: To use GnuPG gpg-agent must be running.
-;; Prefer armored ASCII
-(setq epa-armor t)
-;; Prompt for the password in the minibuffer
-(setq epa-pinentry-mode 'loopback)
-
 ;; Move lines added by the customize system to seperate file
 ;; Config changes made through the customize UI will be stored here
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))

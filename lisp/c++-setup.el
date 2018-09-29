@@ -81,7 +81,8 @@
     :diminish rtags-mode
 
     :config
-    (rtags-enable-standard-keybindings))
+    (with-no-warnings
+      (rtags-enable-standard-keybindings)))
 
   ;; company-irony and company-rtags are both completion backends.
   ;; When using both of them together duplicate completions are shown.

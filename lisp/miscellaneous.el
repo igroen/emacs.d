@@ -42,18 +42,19 @@
          ("C-x C-f" . helm-find-files))
 
   ;; Fuzzy matching
-  :init (setq helm-M-x-fuzzy-match                  t
-              helm-bookmark-show-location           t
-              helm-buffers-fuzzy-matching           t
-              helm-completion-in-region-fuzzy-match t
-              helm-file-cache-fuzzy-match           t
-              helm-imenu-fuzzy-match                t
-              helm-mode-fuzzy-match                 t
-              helm-locate-fuzzy-match               t
-              helm-recentf-fuzzy-match              t
-              helm-semantic-fuzzy-match             t
-              helm-quick-update                     t
-              helm-split-window-inside-p            t)
+  :init
+  (defvar helm-M-x-fuzzy-match                  t)
+  (defvar helm-bookmark-show-location           t)
+  (defvar helm-buffers-fuzzy-matching           t)
+  (defvar helm-completion-in-region-fuzzy-match t)
+  (defvar helm-file-cache-fuzzy-match           t)
+  (defvar helm-imenu-fuzzy-match                t)
+  (defvar helm-mode-fuzzy-match                 t)
+  (defvar helm-locate-fuzzy-match               t)
+  (defvar helm-recentf-fuzzy-match              t)
+  (defvar helm-semantic-fuzzy-match             t)
+  (defvar helm-quick-update                     t)
+  (defvar helm-split-window-inside-p            t)
 
   :config
   (use-package helm-ag
@@ -81,6 +82,15 @@
     :ensure t
 
     :config (helm-projectile-on)))
+
+
+(use-package epa
+  :init
+  ;; GnuPG: To use GnuPG gpg-agent must be running.
+  ;; Prefer armored ASCII
+  (setq epa-armor t)
+  ;; Prompt for the password in the minibuffer
+  (setq epa-pinentry-mode 'loopback))
 
 (use-package better-defaults
   :ensure t
