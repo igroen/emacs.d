@@ -121,6 +121,9 @@
 
   :bind ("C-x g" . magit-status))
 
+(use-package git-timemachine
+  :ensure t)
+
 (use-package git-gutter
   :ensure t
 
