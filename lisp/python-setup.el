@@ -14,9 +14,6 @@
   :hook (python-mode . elpy-mode)
 
   :init
-  ;; Elpy seems partially incompatible with Emacs 25's 'native completion' feature
-  ;; https://github.com/jorgenschaefer/elpy/issues/887
-  (setq python-shell-completion-native-enable nil)
   ;; Don't print evaluated code fragments in the python shell
   ;; https://elpy.readthedocs.io/en/latest/ide.html#option-elpy-shell-echo-input
   (setq elpy-shell-echo-input nil)
