@@ -213,4 +213,7 @@
 
   :commands (deft))
 
+(use-package try
+  :ensure t)
+
 ;;; miscellaneous.el ends here
