@@ -216,4 +216,11 @@
 (use-package try
   :ensure t)
 
+(use-package which-key
+  :ensure t
+
+  :diminish which-key-mode
+
+  :config (which-key-mode))
+
 ;;; miscellaneous.el ends here
