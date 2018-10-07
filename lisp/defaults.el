@@ -7,7 +7,7 @@
 ;;; Code:
 
 ;; Start with empty buffer
-(setq inhibit-splash-screen t)
+(setq inhibit-startup-message t)
 
 ;; Disable bell completely
 (setq ring-bell-function 'ignore)
