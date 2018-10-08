@@ -34,6 +34,9 @@
 (setq backup-directory-alist
       `(("." . ,(concat user-emacs-directory "backups"))))
 
+;; Replace *Buffer List* with *Ibuffer*
+(global-set-key (kbd "C-x C-b") 'ibuffer)
+
 ;; Autorefresh buffers on file change
 (global-auto-revert-mode t)
 

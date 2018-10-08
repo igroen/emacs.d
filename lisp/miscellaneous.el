@@ -38,7 +38,6 @@
 
   :bind (("M-x" . helm-M-x)
          ("C-x b" . helm-mini)
-         ("C-x C-b" . helm-buffers-list)
          ("C-x C-f" . helm-find-files))
 
   ;; Fuzzy matching
