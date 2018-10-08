@@ -59,6 +59,11 @@
   (use-package helm-ag
     :ensure t))
 
+(use-package swiper-helm
+  :ensure t
+
+  :bind ("C-s" . swiper-helm))
+
 (use-package projectile
   :ensure t
 
