@@ -12,6 +12,9 @@
 ;; Disable bell completely
 (setq ring-bell-function 'ignore)
 
+;; Disable menubar
+(menu-bar-mode -1)
+
 ;; Use leuven-theme
 (load-theme 'leuven)
 
@@ -25,6 +28,11 @@
 
 ;; Enable y/n answers
 (fset 'yes-or-no-p 'y-or-n-p)
+
+;; Store all backup and autosave files in the backups dir
+(setq auto-save-list-file-prefix nil)
+(setq backup-directory-alist
+      `(("." . ,(concat user-emacs-directory "backups"))))
 
 ;; Autorefresh buffers on file change
 (global-auto-revert-mode t)
@@ -43,6 +51,15 @@
 
 ;; Auto close bracket insertion.
 (electric-pair-mode 1)
+
+;; Show corresponding paren
+(show-paren-mode 1)
+
+;; Remember cursor position
+(save-place-mode 1)
+
+;; Require a newline at the end of the file
+(defvar require-final-newline t)
 
 ;; Move lines added by the customize system to seperate file
 ;; Config changes made through the customize UI will be stored here

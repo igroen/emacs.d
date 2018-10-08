@@ -92,17 +92,6 @@
   ;; Prompt for the password in the minibuffer
   (setq epa-pinentry-mode 'loopback))
 
-(use-package better-defaults
-  :ensure t
-
-  ;; Dont't create auto-save-list folder in `user-emacs-directory`
-  ;; Backups are placed in backups folder by better-defaults plugin
-  :init (setq auto-save-list-file-prefix nil)
-
-  ;; Fix for better-defaults `save-place' which was removed in emacs 25.1
-  ;; https://github.com/technomancy/better-defaults/issues/15
-  :config (save-place-mode t))
-
 (use-package xclip
   :ensure t
 
