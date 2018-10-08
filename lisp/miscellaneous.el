@@ -223,4 +223,9 @@
 
   :config (which-key-mode))
 
+(use-package ace-window
+  :ensure t
+
+  :bind ([remap other-window] . ace-window))
+
 ;;; miscellaneous.el ends here
