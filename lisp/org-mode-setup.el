@@ -32,4 +32,9 @@
      (shell . t)
      (python . t))))
 
+(use-package org-bullets
+  :ensure t
+
+  :hook (org-mode lambda () (org-bullets-mode t)))
+
 ;;; org-mode-setup.el ends here
