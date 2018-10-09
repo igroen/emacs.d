@@ -33,36 +33,32 @@
   ;; Hide dot files in dired omit-mode (C-x M-o)
   :config (setq dired-omit-files (concat dired-omit-files "\\|^\\..+$")))
 
-(use-package helm
+(use-package counsel
   :ensure t
 
-  :bind (("M-x" . helm-M-x)
-         ("C-x b" . helm-mini)
-         ("C-x C-f" . helm-find-files))
+  :bind
+  ("M-x" . counsel-M-x)
+  ("C-x C-f" . counsel-find-file))
 
-  ;; Fuzzy matching
+(use-package ivy :demand
+  :ensure t
+
+  :diminish ivy-mode
+
   :init
-  (defvar helm-M-x-fuzzy-match                  t)
-  (defvar helm-bookmark-show-location           t)
-  (defvar helm-buffers-fuzzy-matching           t)
-  (defvar helm-completion-in-region-fuzzy-match t)
-  (defvar helm-file-cache-fuzzy-match           t)
-  (defvar helm-imenu-fuzzy-match                t)
-  (defvar helm-mode-fuzzy-match                 t)
-  (defvar helm-locate-fuzzy-match               t)
-  (defvar helm-recentf-fuzzy-match              t)
-  (defvar helm-semantic-fuzzy-match             t)
-  (defvar helm-quick-update                     t)
-  (defvar helm-split-window-inside-p            t)
+  (setq ivy-use-virtual-buffers t
+        ivy-count-format "%d/%d "
+	ivy-initial-inputs-alist nil)
 
   :config
-  (use-package helm-ag
-    :ensure t))
+  (ivy-mode 1))
 
-(use-package swiper-helm
+(use-package swiper
   :ensure t
 
-  :bind ("C-s" . swiper-helm))
+  :bind
+  ([remap isearch-forward]  . swiper)
+  ([remap isearch-backward] . swiper))
 
 (use-package projectile
   :ensure t
@@ -73,20 +69,15 @@
 
   :init
   (setq projectile-enable-caching t)
-  (setq projectile-completion-system 'helm)
-  ;; When running projectile-switch-project (C-c p p),
-  ;; neotree will change root automatically.
-  (setq projectile-switch-project-action 'neotree-projectile-action)
 
   :config
   ;; Enable projectile globally
-  (projectile-mode)
+  (projectile-mode))
 
-  (use-package helm-projectile
-    :ensure t
+(use-package counsel-projectile
+  :ensure t
 
-    :config (helm-projectile-on)))
-
+  :hook (after-init . counsel-projectile-mode))
 
 (use-package epa
   :init
