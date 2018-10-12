@@ -45,6 +45,8 @@
 
   :diminish ivy-mode
 
+  :bind ("<f6>" . ivy-resume)
+
   :init
   (setq ivy-use-virtual-buffers t
         ivy-count-format "%d/%d "
