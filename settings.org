@@ -1,0 +1,587 @@
+#+STARTUP: overview
+
+* Defaults
+** Screen setup
+   #+BEGIN_SRC emacs-lisp
+     ;; Start with empty buffer
+     (setq inhibit-startup-message t)
+
+     ;; Disable bell
+     (setq ring-bell-function 'ignore)
+
+     ;; Disable menubar
+     (menu-bar-mode -1)
+
+     ;; Set theme
+     (load-theme 'leuven)
+   #+END_SRC
+** Editing
+   #+BEGIN_SRC emacs-lisp
+     ;; Show the current column in the mode line
+     (setq column-number-mode t)
+
+     ;; Nice scrolling
+     (setq scroll-margin 0
+	   scroll-conservatively 100000
+	   scroll-preserve-screen-position 1)
+
+     ;; Highlight the current line
+     (global-hl-line-mode t)
+
+     ;; Remove trailing whitespace on save
+     (add-hook 'before-save-hook 'delete-trailing-whitespace)
+
+     ;; Auto close bracket insertion.
+     (electric-pair-mode 1)
+
+     ;; Show corresponding paren
+     (show-paren-mode 1)
+
+     ;; Require a newline at the end of the file
+     (defvar require-final-newline t)
+   #+END_SRC
+** Tweaks
+   #+BEGIN_SRC emacs-lisp
+     ;; Enable y/n answers
+     (fset 'yes-or-no-p 'y-or-n-p)
+
+     ;; Autorefresh buffers on file change
+     (global-auto-revert-mode t)
+
+     ;; Remember cursor position
+     (save-place-mode 1)
+
+     ;; Replace *Buffer List* with *Ibuffer*
+     (global-set-key (kbd "C-x C-b") 'ibuffer)
+   #+END_SRC
+** Backups
+   #+BEGIN_SRC emacs-lisp
+     ;; Store all backup and autosave files in the backups dir
+     (setq auto-save-list-file-prefix nil)
+     (setq backup-directory-alist
+	   `(("." . ,(concat user-emacs-directory "backups"))))
+
+     ;; Use version contral and keep multiple backup files
+     (setq delete-old-versions t
+       kept-new-versions 6
+       kept-old-versions 2
+       version-control t)
+   #+END_SRC
+** Customize
+   #+BEGIN_SRC emacs-lisp
+     ;; Move lines added by the customize system to a seperate file
+     ;; Config changes made through the customize UI will be stored here
+     (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
+
+     (when (file-exists-p custom-file)
+       (load custom-file))
+   #+END_SRC
+* Miscellaneous
+** Diminish
+   #+BEGIN_SRC emacs-lisp
+     (use-package abbrev
+       :diminish abbrev-mode)
+
+     (use-package eldoc
+       :diminish eldoc-mode)
+
+     (use-package flymake
+       :diminish flymake-mode)
+   #+END_SRC
+** Ido
+   #+BEGIN_SRC emacs-lisp
+     (use-package ido
+       :init (setq ido-everywhere t)
+
+       :config
+       (ido-mode t)
+
+       (use-package flx-ido
+	 :ensure t
+
+	 :init
+	 (setq ido-enable-flex-matching t)
+	 (setq ido-use-faces nil)
+
+	 :config (flx-ido-mode t)))
+   #+END_SRC
+** Dired
+   #+BEGIN_SRC emacs-lisp
+     (use-package dired-x
+       :init (setq-default dired-omit-files-p t)
+
+       ;; Hide dot files in dired omit-mode (C-x M-o)
+       :config (setq dired-omit-files (concat dired-omit-files "\\|^\\..+$")))
+   #+END_SRC
+** Counsel/Ivy/Swiper
+   #+BEGIN_SRC emacs-lisp
+     (use-package counsel
+       :ensure t
+
+       :bind
+       ("M-x" . counsel-M-x)
+       ("C-x C-f" . counsel-find-file))
+
+     (use-package ivy :demand
+       :ensure t
+
+       :diminish ivy-mode
+
+       :bind ("<f6>" . ivy-resume)
+
+       :init
+       (setq ivy-use-virtual-buffers t
+	     ivy-count-format "%d/%d "
+	     ivy-initial-inputs-alist nil)
+
+       :config
+       (ivy-mode 1))
+
+     (use-package swiper
+       :ensure t
+
+       :bind
+       ([remap isearch-forward]  . swiper)
+       ([remap isearch-backward] . swiper))
+   #+END_SRC
+** Projectile
+   #+BEGIN_SRC emacs-lisp
+     (use-package projectile
+       :ensure t
+
+       :diminish projectile-mode
+
+       :bind-keymap ("C-c p" . projectile-command-map)
+
+       :init
+       (setq projectile-enable-caching t)
+
+       :config
+       ;; Enable projectile globally
+       (projectile-mode))
+
+     (use-package counsel-projectile
+       :ensure t
+
+       :hook (after-init . counsel-projectile-mode))
+   #+END_SRC
+** GnuPG
+   #+BEGIN_SRC emacs-lisp
+     (use-package epa
+       :init
+       ;; Prefer armored ASCII
+       (setq epa-armor t)
+       ;; Prompt for the password in the minibuffer
+       (setq epa-pinentry-mode 'loopback))
+   #+END_SRC
+** Git
+   #+BEGIN_SRC emacs-lisp
+     (use-package magit
+       :ensure t
+
+       :bind ("C-x g" . magit-status))
+
+     (use-package git-timemachine
+       :ensure t)
+
+     (use-package git-gutter
+       :ensure t
+
+       :diminish git-gutter-mode
+
+       :config (global-git-gutter-mode t))
+
+     (use-package gist
+       :ensure t
+
+       :defer t
+
+       ;; Ask for gist description when creating gist
+       :init (setq gist-ask-for-description t))
+   #+END_SRC
+** Tools
+*** multiple-cursors
+    #+BEGIN_SRC emacs-lisp
+     (use-package multiple-cursors
+       :ensure t
+
+       :bind (("C-x C-m C-e" . mc/edit-lines)
+	      ("C-x C-m C-n" . mc/mark-next-like-this)
+	      ("C-x C-m C-p" . mc/mark-previous-like-this)
+	      ("C-x C-m C-a" . mc/mark-all-like-this)))
+    #+END_SRC
+*** expand-region
+    #+BEGIN_SRC emacs-lisp
+      (use-package expand-region
+	:ensure t
+
+	:bind ("C-x w" . er/expand-region))
+    #+END_SRC
+*** xclip
+    #+BEGIN_SRC emacs-lisp
+     (use-package xclip
+       :ensure t
+
+       ;; Enable xclip-mode to use the system clipboard when killing/yanking
+       ;; Install xclip on Linux for this to work. On OSX pbcopy/pbpaste will be used
+       :config (xclip-mode t))
+    #+END_SRC
+*** drag-stuff
+    #+BEGIN_SRC emacs-lisp
+      (use-package drag-stuff
+	:ensure t
+
+	:bind (("M-p" . drag-stuff-up)
+	       ("M-n" . drag-stuff-down))
+
+	:config (drag-stuff-global-mode 1))
+    #+END_SRC
+*** neotree
+    #+BEGIN_SRC emacs-lisp
+      (use-package neotree
+	:ensure t
+
+	:bind ([f8] . neotree-toggle)
+
+	:init
+	;; List of ignored files/directories
+	(setq neo-hidden-regexp-list
+	      '("^\\."
+		"^__pycache__$"
+		"\\.pyc$"
+		"\\.egg-info$"
+		"~$"
+		"^#.*#$"
+		"\\.elc$")))
+    #+END_SRC
+*** try
+    #+BEGIN_SRC emacs-lisp
+      (use-package try
+	:ensure t)
+    #+END_SRC
+*** which-key
+    #+BEGIN_SRC emacs-lisp
+      (use-package which-key
+	:ensure t
+
+	:diminish which-key-mode
+
+	:config (which-key-mode))
+    #+END_SRC
+*** ace-window
+    #+BEGIN_SRC emacs-lisp
+      (use-package ace-window
+	:ensure t
+
+	:bind ([remap other-window] . ace-window))
+    #+END_SRC
+** Autocompletion
+*** Company
+    #+BEGIN_SRC emacs-lisp
+      (use-package company
+	:diminish company-mode
+
+	:hook (after-init . global-company-mode))
+    #+END_SRC
+** Syntax checking
+*** Flycheck
+    #+BEGIN_SRC emacs-lisp
+      (use-package flycheck
+	:ensure t
+
+	:diminish flycheck-mode
+
+	:hook (after-init . global-flycheck-mode))
+    #+END_SRC
+*** Flycheck-yamllint
+    #+BEGIN_SRC emacs-lisp
+      (use-package flycheck-yamllint
+	  :ensure t
+
+	  :defer t
+
+	  :hook (flycheck-mode . flycheck-yamllint-setup))
+    #+END_SRC
+
+** YASnippet
+   #+BEGIN_SRC emacs-lisp
+     (use-package yasnippet-snippets
+       :ensure t
+
+       :diminish yas-minor-mode
+
+       :config (yas-global-mode))
+
+   #+END_SRC
+** Major modes
+*** yaml-mode
+    #+BEGIN_SRC emacs-lisp
+      (use-package yaml-mode
+	:ensure t
+
+	:defer t)
+    #+END_SRC
+
+* Snippets
+** Delete current file and buffer
+   #+BEGIN_SRC emacs-lisp
+     (defun xah-delete-current-file-copy-to-kill-ring ()
+       "Delete current buffer/file and close the buffer, push content to `kill-ring'.
+     URL `http://ergoemacs.org/emacs/elisp_delete-current-file.html'
+     Version 2016-07-20"
+       (interactive)
+       (progn
+	 (kill-new (buffer-string))
+	 (message "Buffer content copied to kill-ring.")
+	 (when (buffer-file-name)
+	   (when (file-exists-p (buffer-file-name))
+	     (progn
+	       (delete-file (buffer-file-name))
+	       (message "Deleted file: 「%s」." (buffer-file-name)))))
+	 (let ((buffer-offer-save nil))
+	   (set-buffer-modified-p nil)
+	   (kill-buffer (current-buffer)))))
+     (global-set-key (kbd "C-c k")  'xah-delete-current-file-copy-to-kill-ring)
+   #+END_SRC
+** Comment/Uncomment line or region
+   #+BEGIN_SRC emacs-lisp
+     (defun comment-or-uncomment-region-or-line ()
+       "Comments or uncomments the region or the current line if there's no active region."
+       (interactive)
+       (let (beg end)
+	 (if (region-active-p)
+	   (setq beg (region-beginning) end (region-end))
+	   (setq beg (line-beginning-position) end (line-end-position)))
+	 (comment-or-uncomment-region beg end)))
+     (global-set-key (kbd "C-x C-\\") 'comment-or-uncomment-region-or-line)
+   #+END_SRC
+* Programming
+** Python setup
+*** Elpy
+    #+BEGIN_SRC emacs-lisp
+      (use-package elpy
+	:ensure t
+
+	:diminish elpy-mode
+
+	:hook (python-mode . elpy-mode)
+
+	:init
+	;; Don't print evaluated code fragments in the python shell
+	;; https://elpy.readthedocs.io/en/latest/ide.html#option-elpy-shell-echo-input
+	(setq elpy-shell-echo-input nil)
+
+	:config
+	(elpy-enable)
+
+	;; (add-hook 'before-save-hook 'elpy-black-fix-code)
+	)
+    #+END_SRC
+*** py-autopep8
+    #+BEGIN_SRC emacs-lisp
+      (use-package py-autopep8
+	:ensure t
+
+	:after elpy
+
+	;; :hook (elpy-mode . py-autopep8-enable-on-save)
+	)
+    #+END_SRC
+*** py-isort
+    #+BEGIN_SRC emacs-lisp
+      (use-package py-isort
+	:ensure t
+
+	:after elpy
+
+	;; :hook (before-save . py-isort-before-save)
+	)
+    #+END_SRC
+*** Example use of python on buffer
+    #+BEGIN_SRC emacs-lisp
+      (defun example ()
+	"This is an example of using python on an Emacs buffer."
+	(interactive)
+	(let ((cmd (format
+		    "/usr/local/bin/python3 ~/.emacs.d/python/example.py %s"
+		    (buffer-file-name))))
+	  (shell-command-on-region (region-beginning) (region-end) cmd nil "REPLACE" nil t)))
+    #+END_SRC
+
+** C++ setup
+*** Irony
+    #+BEGIN_SRC emacs-lisp
+      (use-package irony
+	:ensure t
+
+	:diminish irony-mode
+
+	;; Use irony-mode for c-hooks
+	:hook ((c++-mode . irony-mode)
+	       (c-mode . irony-mode)
+	       (objc-mode . irony-mode))
+
+	:init
+	(setq-default c-basic-offset 4)
+	;; Run rtags-install within emacs
+	(setq rtags-completions-enabled t)
+	(setq rtags-autostart-diagnostics t)
+	(setq cmake-ide-build-dir "cmake_build")
+
+	:config
+	(add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
+	(add-hook 'irony-mode-hook 'irony-eldoc)
+	(add-hook 'flycheck-mode-hook 'flycheck-irony-setup)
+
+	;; company-irony and company-rtags are both completion backends.
+	;; When using both of them together duplicate completions are shown.
+	;; So use one of these completions backends but not both of them.
+	(add-to-list 'company-backends '(;;company-irony
+					 company-irony-c-headers
+					 company-rtags))
+	(cmake-ide-setup))
+    #+END_SRC
+*** irony-eldoc
+    #+BEGIN_SRC emacs-lisp
+      (use-package irony-eldoc
+	:ensure t
+
+	:defer t
+
+	:after irony
+
+	:diminish eldoc-mode)
+    #+END_SRC
+*** flycheck-irony
+    #+BEGIN_SRC emacs-lisp
+      (use-package flycheck-irony
+	:ensure t
+
+	:defer t
+
+	:after irony
+
+	:diminish flycheck-mode)
+    #+END_SRC
+*** cmake-mode
+    #+BEGIN_SRC emacs-lisp
+      (use-package cmake-mode
+	:ensure t
+
+	:defer t
+
+	:after irony)
+    #+END_SRC
+*** cmake-ide
+    #+BEGIN_SRC emacs-lisp
+      (use-package cmake-ide
+	:ensure t
+
+	:defer t
+
+	:after irony)
+    #+END_SRC
+*** company-irony
+    #+BEGIN_SRC emacs-lisp
+      (use-package company-irony
+	:ensure t
+
+	:disabled  ;; Using rtags
+
+	:defer t
+
+	:after irony
+
+	:diminish company-mode)
+    #+END_SRC
+*** company-irony-c-headers
+    #+BEGIN_SRC emacs-lisp
+      (use-package company-irony-c-headers
+	:ensure t
+
+	:defer t
+
+	:after irony
+
+	:diminish company-mode)
+    #+END_SRC
+*** company-rtags
+    #+BEGIN_SRC emacs-lisp
+      (use-package company-rtags
+	:ensure t
+
+	:defer t
+
+	:after irony)
+    #+END_SRC
+*** rtags
+    #+BEGIN_SRC emacs-lisp
+      (use-package rtags
+	:ensure t
+
+	:defer t
+
+	:after irony
+
+	:diminish rtags-mode
+
+	:config
+	(rtags-enable-standard-keybindings))
+    #+END_SRC
+* Org mode setup
+** Org
+   #+BEGIN_SRC emacs-lisp
+     (use-package org
+       :bind (("C-c a" . org-agenda)
+	      ("C-c c" . org-capture)
+	      ("C-c l" . org-store-link))
+
+       :init
+       ;; Show time when done
+       (setq org-log-done t)
+
+       ;; Folder to look for agenda files
+       (setq org-agenda-files '("~/Sync/org"))
+
+       ;; Log quick notes (C-c C-z) into LOGBOOK drawer
+       (setq org-log-into-drawer t)
+
+       ;; Syntax highlighting for org-mode
+       (setq org-src-fontify-natively t)
+
+       :config
+       ;; Add languages for the ‘src’ code blocks in org-mode
+       (org-babel-do-load-languages
+	'org-babel-load-languages
+	'((emacs-lisp . t)
+	  (shell . t)
+	  (python . t))))
+   #+END_SRC
+** org-bullets
+   #+BEGIN_SRC emacs-lisp
+     (use-package org-bullets
+       :ensure t
+
+       :hook (org-mode lambda () (org-bullets-mode t)))
+   #+END_SRC
+** Reveal.js
+*** htmlize
+    This package is needed by org-reveal
+    #+BEGIN_SRC emacs-lisp
+      (use-package htmlize
+	:ensure t)
+    #+END_SRC
+*** org-reveal
+   Clone org-reveal to lisp directory first
+   $ git clone https://github.com/yjwen/org-reveal.git
+
+   #+BEGIN_SRC emacs-lisp
+     (setq org_reveal (expand-file-name "lisp/org-reveal" user-emacs-directory))
+
+     (use-package ox-reveal
+       :load-path org_reveal
+
+       :init
+       (setq org-reveal-root "https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.6.0")
+       (setq org-reveal-mathjax t))
+   #+END_SRC

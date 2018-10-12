@@ -13,26 +13,9 @@
 
 (load-library "tweak-startup-time")
 
-(load-library "defaults")
-
 ;; Initialize use-package
 (load-library "init-use-package")
 
-;; Snippets
-;; * Comment/Uncomment line or region
-;; * Delete current file and buffer
-(load-library "snippets")
-
-;; Setup python
-(load-library "python-setup")
-
-;; Setup c++
-(load-library "c++-setup")
-
-;; Setup org-mode
-(load-library "org-mode-setup")
-
-;; Setup miscellaneous libraries
-(load-library "miscellaneous")
+(org-babel-load-file (expand-file-name "settings.org" user-emacs-directory))
 
 ;;; init.el ends here
