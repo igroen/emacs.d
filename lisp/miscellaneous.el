@@ -190,13 +190,6 @@
 
   :config (yas-global-mode))
 
-(use-package deft
-  :ensure t
-
-  :bind ("<f9>" . deft)
-
-  :commands (deft))
-
 (use-package try
   :ensure t)
 
