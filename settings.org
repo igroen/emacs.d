@@ -567,12 +567,14 @@
 ** Reveal.js
 *** htmlize
     This package is needed by org-reveal
+
     #+BEGIN_SRC emacs-lisp
       (use-package htmlize
 	:ensure t)
     #+END_SRC
 *** org-reveal
-   Clone org-reveal to lisp directory first
+   Clone org-reveal to lisp directory first:
+
    $ git clone https://github.com/yjwen/org-reveal.git
 
    #+BEGIN_SRC emacs-lisp
