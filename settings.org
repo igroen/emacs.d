@@ -283,6 +283,14 @@
 	:init
 	(global-undo-tree-mode))
     #+END_SRC
+*** beacon
+    #+BEGIN_SRC emacs-lisp
+      (use-package beacon
+	:ensure t
+
+	:config
+	(beacon-mode t))
+    #+END_SRC
 ** Autocompletion
 *** Company
     #+BEGIN_SRC emacs-lisp
