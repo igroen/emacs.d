@@ -604,17 +604,22 @@
 	:ensure t)
     #+END_SRC
 *** org-reveal
-   Clone org-reveal to lisp directory first:
-
+   Download from MELPA doesn't work because the required version of org could not be found.
+   So clone org-reveal in lisp directory first:
    $ git clone https://github.com/yjwen/org-reveal.git
 
+   Because speaker notes don't seem to work when using a CDN
+   clone reveal.js next to your org file:
+   $ git clone https://github.com/hakimel/reveal.js.git
+
+   See [[https://github.com/yjwen/org-reveal#set-the-location-of-revealjs][set-the-location-of-revealjs]] for other options.
+
    #+BEGIN_SRC emacs-lisp
-     (setq org_reveal (expand-file-name "lisp/org-reveal" user-emacs-directory))
+     (setq org_reveal_path (expand-file-name "lisp/org-reveal" user-emacs-directory))
 
      (use-package ox-reveal
-       :load-path org_reveal
+       :load-path org_reveal_path
 
        :init
-       (setq org-reveal-root "https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.6.0")
        (setq org-reveal-mathjax t))
    #+END_SRC
