@@ -281,6 +281,8 @@
       (use-package undo-tree
 	:ensure t
 
+	:diminish undo-tree-mode
+
 	:init
 	(global-undo-tree-mode))
     #+END_SRC
@@ -289,6 +291,8 @@
       (use-package beacon
 	:ensure t
 
+	:diminish beacon-mode
+
 	:config
 	(beacon-mode t))
     #+END_SRC
@@ -296,6 +300,8 @@
     #+BEGIN_SRC emacs-lisp
       (use-package hungry-delete
 	:ensure t
+
+	:diminish hungry-delete-mode
 
 	:config
 	(global-hungry-delete-mode))
