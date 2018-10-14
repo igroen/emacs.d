@@ -275,6 +275,14 @@
 
 	:bind ([remap other-window] . ace-window))
     #+END_SRC
+*** undo-tree
+    #+BEGIN_SRC emacs-lisp
+      (use-package undo-tree
+	:ensure t
+
+	:init
+	(global-undo-tree-mode))
+    #+END_SRC
 ** Autocompletion
 *** Company
     #+BEGIN_SRC emacs-lisp
