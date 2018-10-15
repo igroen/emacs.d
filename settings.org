@@ -53,6 +53,13 @@
 
      ;; Replace *Buffer List* with *Ibuffer*
      (global-set-key (kbd "C-x C-b") 'ibuffer)
+
+     ;; Add interactive command to this file
+     (defun settings.org ()
+       "Open settings.org file."
+       (interactive)
+       (find-file-other-window (expand-file-name "settings.org" user-emacs-directory)))
+     (global-set-key (kbd "C-c s") 'settings.org)
    #+END_SRC
 ** Backups
    #+BEGIN_SRC emacs-lisp
@@ -615,10 +622,8 @@
    See [[https://github.com/yjwen/org-reveal#set-the-location-of-revealjs][set-the-location-of-revealjs]] for other options.
 
    #+BEGIN_SRC emacs-lisp
-     (setq org_reveal_path (expand-file-name "lisp/org-reveal" user-emacs-directory))
-
      (use-package ox-reveal
-       :load-path org_reveal_path
+       :load-path (lambda () (expand-file-name "lisp/org-reveal" user-emacs-directory))
 
        :init
        (setq org-reveal-mathjax t))
