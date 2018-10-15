@@ -612,8 +612,13 @@
     #+END_SRC
 *** org-reveal
    Download from MELPA doesn't work because the required version of org could not be found.
-   So clone org-reveal in lisp directory first:
-   $ git clone https://github.com/yjwen/org-reveal.git
+   Hence git-reveal is available as a git submodule in the lisp directory.
+
+   If the git-reveal submodule folder is empty run:
+   $ git submodule update --init --recursive
+
+   To update the git submodule to the latest version run:
+   $ git submodule update --recursive
 
    Because speaker notes don't seem to work when using a CDN
    clone reveal.js next to your org file:

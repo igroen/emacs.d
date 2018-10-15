@@ -1,0 +1,3 @@
+[submodule "lisp/org-reveal"]
+	path = lisp/org-reveal
+	url = https://github.com/yjwen/org-reveal.git
