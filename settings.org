@@ -1,5 +1,58 @@
 #+STARTUP: overview
 
+* Init
+** Startup tweaks
+   #+BEGIN_SRC emacs-lisp
+     (setq gc-cons-threshold (* 500 1024 1024)
+	   gc-cons-percentage 0.6)
+
+     ;; After Emacs startup has been completed, set `gc-cons-threshold' to
+     ;; 16 MB and reset `gc-cons-percentage' to its original value.
+     (add-hook 'emacs-startup-hook
+	       '(lambda ()
+		  (setq gc-cons-threshold (* 16 1024 1024)
+			gc-cons-percentage 0.1)))
+
+     ;; Log Emacs startup time in *Messages*
+     (add-hook 'emacs-startup-hook
+	       '(lambda ()
+		  (message (format "Emacs startup time: %s" (emacs-init-time)))))
+   #+END_SRC
+** Package management
+   Setup package management with use-package
+
+   #+BEGIN_SRC emacs-lisp
+     (require 'package)
+     (setq package-enable-at-startup nil)
+
+     ;; Packages to install
+     (defvar package-list
+       '(bind-key
+	 diminish
+	 use-package))
+
+     ;; Set the repository locations
+     (add-to-list 'package-archives
+		 '("melpa" . "https://melpa.org/packages/"))
+
+     ;; Activate all the packages (in particular autoloads)
+     (package-initialize)
+
+     ;; Fetch the list of packages available
+     (unless package-archive-contents
+       (package-refresh-contents))
+
+     ;; Install the missing packages
+     (dolist (package package-list)
+       (unless (package-installed-p package)
+	 (package-install package)))
+
+     ;; Enable use-package and friends
+     (eval-when-compile
+       (require 'use-package))
+     (require 'diminish)
+     (require 'bind-key)
+   #+END_SRC
 * Defaults
 ** Screen setup
    #+BEGIN_SRC emacs-lisp
