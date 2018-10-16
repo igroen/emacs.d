@@ -1,4 +1,5 @@
 #+STARTUP: overview
+#+PROPERTY: header-args :tangle yes
 
 * Init
 ** Startup tweaks
