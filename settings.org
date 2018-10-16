@@ -114,11 +114,11 @@
      (global-set-key (kbd "C-x C-b") 'ibuffer)
 
      ;; Add interactive command to this file
-     (defun settings.org ()
-       "Open settings.org file."
-       (interactive)
-       (find-file-other-window (expand-file-name "settings.org" user-emacs-directory)))
-     (global-set-key (kbd "C-c s") 'settings.org)
+     (global-set-key
+      (kbd "C-c s")
+      (lambda ()
+	(interactive)
+	(find-file-other-window (expand-file-name "settings.org" user-emacs-directory))))
    #+END_SRC
 ** Backups
    #+BEGIN_SRC emacs-lisp
