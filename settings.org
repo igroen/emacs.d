@@ -54,6 +54,13 @@
      (require 'bind-key)
    #+END_SRC
 * Defaults
+** Username & Email
+   #+BEGIN_SRC emacs-lisp
+     (setq user-full-name "Iwan in 't Groen"
+	   user-login-name "iwan"
+	   user-mail-address "iwanintgroen@gmail.com"
+	   smtpmail-smtp-user user-mail-address)
+   #+END_SRC
 ** Screen setup
    #+BEGIN_SRC emacs-lisp
      ;; Start with empty buffer
