@@ -1,5 +1,5 @@
 #+STARTUP: overview
-#+PROPERTY: header-args :tangle yes
+#+PROPERTY: header-args :tangle init.el
 
 * Init
 ** Startup tweaks
@@ -126,7 +126,7 @@
       (kbd "C-c s")
       (lambda ()
 	(interactive)
-	(find-file-other-window (expand-file-name "settings.org" user-emacs-directory))))
+	(find-file-other-window (expand-file-name "init.org" user-emacs-directory))))
    #+END_SRC
 ** Backups
    #+BEGIN_SRC emacs-lisp
@@ -700,3 +700,18 @@
        :init
        (setq org-reveal-mathjax t))
    #+END_SRC
+* Tangle on save
+  When opening this file for the first time the following warning is shown:
+  "The local variables list in init.org contains values that may not be safe (*)".
+
+  Press 'y' to continue.
+
+  Next run `org-babel-tangle` (C-c C-v t) to create init.el.
+
+  The next time the warning is shown press '!' to prevent future warnings.
+
+  #+BEGIN_SRC emacs-lisp
+    ;; Local Variables:
+    ;; eval: (add-hook 'after-save-hook (lambda ()(org-babel-tangle)) nil t)
+    ;; End:
+  #+END_SRC
