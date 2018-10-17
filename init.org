@@ -73,6 +73,9 @@
      ;; Disable menubar
      (menu-bar-mode -1)
 
+     ;; Disable toolbar
+     (tool-bar-mode -1)
+
      ;; Set theme
      (load-theme 'leuven)
    #+END_SRC
