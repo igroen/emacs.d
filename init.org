@@ -54,6 +54,15 @@
      (require 'diminish)
      (require 'bind-key)
    #+END_SRC
+** Benchmarks
+   #+BEGIN_SRC emacs-lisp
+     (use-package benchmark-init
+       :ensure t
+
+       :config
+       ;; To disable collection of benchmark data after init is done.
+       (add-hook 'after-init-hook 'benchmark-init/deactivate))
+   #+END_SRC
 * Defaults
 ** Username & Email
    #+BEGIN_SRC emacs-lisp
@@ -428,10 +437,11 @@
      (use-package yasnippet-snippets
        :ensure t
 
+       :defer t
+
        :diminish yas-minor-mode
 
        :config (yas-global-mode))
-
    #+END_SRC
 ** Major modes
 *** yaml-mode
@@ -710,6 +720,8 @@
    #+BEGIN_SRC emacs-lisp
      (use-package ox-reveal
        :load-path (lambda () (expand-file-name "lisp/org-reveal" user-emacs-directory))
+
+       :disabled  ;; Disabled for faster emacs startup
 
        :init
        (setq org-reveal-mathjax t))
