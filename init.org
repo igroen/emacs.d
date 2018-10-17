@@ -85,6 +85,13 @@
      ;; Disable toolbar
      (tool-bar-mode -1)
 
+     ;; Disable scrollbars
+     (dolist (mode '(menu-bar-mode tool-bar-mode scroll-bar-mode))
+       (when (fboundp mode) (funcall mode -1)))
+
+     ;; Show the current column in the mode line
+     (setq column-number-mode t)
+
      ;; Set theme
      (load-theme 'leuven)
    #+END_SRC
@@ -96,9 +103,6 @@
    #+END_SRC
 ** Editing
    #+BEGIN_SRC emacs-lisp
-     ;; Show the current column in the mode line
-     (setq column-number-mode t)
-
      ;; Nice scrolling
      (setq scroll-margin 0
 	   scroll-conservatively 100000
