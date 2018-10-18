@@ -745,11 +745,10 @@
   When opening this file for the first time the following warning is shown:
   "The local variables list in init.org contains values that may not be safe (*)".
 
-  Press 'y' to continue.
-
-  Next run `org-babel-tangle` (C-c C-v t) to create init.el.
-
-  The next time the warning is shown press '!' to prevent future warnings.
+  - Press 'y' to continue.
+  - Next run `org-babel-tangle` (C-c C-v t) to create init.el.
+  - Restart emacs or use 'C-x load-file <enter> init.el'
+  - The next time this warning is shown press '!' to prevent future warnings.
 
   #+BEGIN_SRC emacs-lisp
     ;; Local Variables:
