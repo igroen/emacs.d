@@ -3,21 +3,21 @@
 
 * Init
 ** Startup tweaks
+   Make startup faster by reducing the frequency of garbage collection.
+
    #+BEGIN_SRC emacs-lisp
      (setq gc-cons-threshold (* 500 1024 1024)
 	   gc-cons-percentage 0.6)
+   #+END_SRC
 
-     ;; After Emacs startup has been completed, set `gc-cons-threshold' to
-     ;; 16 MB and reset `gc-cons-percentage' to its original value.
+   After Emacs startup has been completed, set `gc-cons-threshold' to
+   16 MB and reset `gc-cons-percentage' to its original value.
+
+   #+BEGIN_SRC emacs-lisp
      (add-hook 'emacs-startup-hook
 	       '(lambda ()
 		  (setq gc-cons-threshold (* 16 1024 1024)
 			gc-cons-percentage 0.1)))
-
-     ;; Log Emacs startup time in *Messages*
-     (add-hook 'emacs-startup-hook
-	       '(lambda ()
-		  (message (format "Emacs startup time: %s" (emacs-init-time)))))
    #+END_SRC
 ** Package management
    Setup package management with use-package
@@ -54,15 +54,26 @@
      (require 'diminish)
      (require 'bind-key)
    #+END_SRC
-** Benchmarks
-   #+BEGIN_SRC emacs-lisp
-     (use-package benchmark-init
-       :ensure t
+** Debug
+*** Startup time
+    Log Emacs startup time in *Messages*
 
-       :config
-       ;; To disable collection of benchmark data after init is done.
-       (add-hook 'after-init-hook 'benchmark-init/deactivate))
-   #+END_SRC
+    #+BEGIN_SRC emacs-lisp
+      (add-hook 'emacs-startup-hook
+		'(lambda ()
+		   (message (format "Emacs startup time: %s" (emacs-init-time)))))
+    #+END_SRC
+*** Benchmarks
+    Benchmark your Emacs initialization
+
+    #+BEGIN_SRC emacs-lisp
+      (use-package benchmark-init
+	:ensure t
+
+	:config
+	;; To disable collection of benchmark data after init is done.
+	(add-hook 'after-init-hook 'benchmark-init/deactivate))
+    #+END_SRC
 * Defaults
 ** Username & Email
    #+BEGIN_SRC emacs-lisp
