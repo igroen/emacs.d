@@ -103,6 +103,9 @@
      ;; Show the current column in the mode line
      (setq column-number-mode t)
 
+     ;; Maximize Emacs on init
+     (toggle-frame-maximized)
+
      ;; Set theme
      (load-theme 'leuven)
    #+END_SRC
