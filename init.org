@@ -426,6 +426,8 @@
 *** Company
     #+BEGIN_SRC emacs-lisp
       (use-package company
+	:ensure t
+
 	:diminish company-mode
 
 	:hook (after-init . global-company-mode))
