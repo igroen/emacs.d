@@ -546,17 +546,6 @@
 	;; :hook (before-save . py-isort-before-save)
 	)
     #+END_SRC
-*** Example use of python on buffer
-    #+BEGIN_SRC emacs-lisp
-      (defun example ()
-	"This is an example of using python on an Emacs buffer."
-	(interactive)
-	(let ((cmd (format
-		    "/usr/local/bin/python3 ~/.emacs.d/python/example.py %s"
-		    (buffer-file-name))))
-	  (shell-command-on-region (region-beginning) (region-end) cmd nil "REPLACE" nil t)))
-    #+END_SRC
-
 ** C++ setup
 *** Irony
     #+BEGIN_SRC emacs-lisp
