@@ -412,16 +412,6 @@
 	:config
 	(beacon-mode t))
     #+END_SRC
-*** hungry-delete
-    #+BEGIN_SRC emacs-lisp
-      (use-package hungry-delete
-	:ensure t
-
-	:diminish hungry-delete-mode
-
-	:config
-	(global-hungry-delete-mode))
-    #+END_SRC
 ** Autocompletion
 *** Company
     #+BEGIN_SRC emacs-lisp
