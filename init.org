@@ -137,6 +137,24 @@
      ;; Require a newline at the end of the file
      (defvar require-final-newline t)
    #+END_SRC
+** Tramp
+   Set remote password prompts
+
+   #+BEGIN_SRC emacs-lisp
+     (customize-set-variable
+      'tramp-password-prompt-regexp
+      (concat
+       "^.*"
+       (regexp-opt
+	'("passphrase"
+	  "Passphrase"
+	  "password"
+	  "Password"
+	  ;; Google Authenticator
+	  "Verification code")
+	t)
+       ".*:\0? *"))
+   #+END_SRC
 ** Tweaks
    #+BEGIN_SRC emacs-lisp
      ;; Enable y/n answers
