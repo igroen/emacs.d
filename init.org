@@ -117,11 +117,6 @@
    #+END_SRC
 ** Editing
    #+BEGIN_SRC emacs-lisp
-     ;; Nice scrolling
-     (setq scroll-margin 0
-	   scroll-conservatively 100000
-	   scroll-preserve-screen-position 1)
-
      ;; Highlight the current line
      (global-hl-line-mode t)
 
@@ -380,6 +375,17 @@
 	:defer t)
     #+END_SRC
 ** Tools
+*** smooth-scrolling
+    #+BEGIN_SRC emacs-lisp
+      (use-package smooth-scrolling
+	:ensure t
+
+	:init
+	(setq smooth-scroll-margin 3)
+
+	:config
+	(smooth-scrolling-mode 1))
+    #+END_SRC
 *** power-line
     #+BEGIN_SRC emacs-lisp
       (use-package powerline
