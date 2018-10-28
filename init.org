@@ -51,8 +51,25 @@
      ;; Enable use-package and friends
      (eval-when-compile
        (require 'use-package))
+
+     ;; :diminish keyword
      (require 'diminish)
+
+     ;; :bind keyword
      (require 'bind-key)
+
+     ;; :quelpa keyword
+     (use-package quelpa
+       :ensure t
+
+       :defer t
+
+       :custom
+       ;; Don't update melpa on Emacs startup
+       (quelpa-update-melpa-p nil))
+
+     (use-package quelpa-use-package
+       :ensure t)
    #+END_SRC
 ** Debug
 *** Startup time
@@ -757,7 +774,7 @@
    #+END_SRC
 ** Reveal.js
 *** htmlize
-    This package is needed by org-reveal
+    This package is used by org-reveal
 
     #+BEGIN_SRC emacs-lisp
       (use-package htmlize
@@ -765,13 +782,7 @@
     #+END_SRC
 *** org-reveal
    Download from MELPA doesn't work because the required version of org could not be found.
-   Hence git-reveal is available as a git submodule in the lisp directory.
-
-   If the git-reveal submodule folder is empty run:
-   $ git submodule update --init --recursive
-
-   To update the git submodule to the latest version run:
-   $ git submodule update --recursive
+   Hence git-reveal is installed from github using `quelpa-use-package`
 
    Because speaker notes don't seem to work when using a CDN
    clone reveal.js next to your org file:
@@ -781,9 +792,12 @@
 
    #+BEGIN_SRC emacs-lisp
      (use-package ox-reveal
-       :load-path (lambda () (expand-file-name "lisp/org-reveal" user-emacs-directory))
+       :ensure t
 
        :disabled  ;; Disabled for faster emacs startup
+
+       :quelpa
+       (ox-reveal :repo "yjwen/org-reveal" :fetcher github :version original)
 
        :init
        (setq org-reveal-mathjax t))
