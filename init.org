@@ -70,6 +70,12 @@
 
      (use-package quelpa-use-package
        :ensure t)
+
+     ;; :chords keyword
+     (use-package use-package-chords
+       :ensure t
+
+       :config (key-chord-mode 1))
    #+END_SRC
 ** Debug
 *** Startup time
@@ -211,15 +217,6 @@
        (load custom-file))
    #+END_SRC
 * Miscellaneous packages
-** Key chords for use-package
-   Load early because use-package depends on it
-
-   #+BEGIN_SRC emacs-lisp
-     (use-package use-package-chords
-       :ensure t
-
-       :config (key-chord-mode 1))
-   #+END_SRC
 ** Diminish only
    #+BEGIN_SRC emacs-lisp
      (use-package abbrev
