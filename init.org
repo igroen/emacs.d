@@ -217,41 +217,44 @@
        (load custom-file))
    #+END_SRC
 * Miscellaneous packages
-** Diminish only
+** Ace window
    #+BEGIN_SRC emacs-lisp
-     (use-package abbrev
-       :diminish abbrev-mode)
+     (use-package ace-window
+       :ensure t
 
-     (use-package eldoc
-       :diminish eldoc-mode)
-
-     (use-package flymake
-       :diminish flymake-mode)
+       :bind ([remap other-window] . ace-window))
    #+END_SRC
-** Ido
+** Autocompletion
+*** Company
+    #+BEGIN_SRC emacs-lisp
+      (use-package company
+	:ensure t
+
+	:diminish company-mode
+
+	:hook (after-init . global-company-mode))
+    #+END_SRC
+** Avy
+   Jump to things in Emacs tree-style
+
    #+BEGIN_SRC emacs-lisp
-     (use-package ido
-       :init (setq ido-everywhere t)
+     (use-package avy
+       :ensure t
+
+       :chords
+       ("jj" . avy-goto-char)
+       ("jk" . avy-goto-word-1)
+       ("jl" . avy-goto-line))
+   #+END_SRC
+** Beacon
+   #+BEGIN_SRC emacs-lisp
+     (use-package beacon
+       :ensure t
+
+       :diminish beacon-mode
 
        :config
-       (ido-mode t)
-
-       (use-package flx-ido
-	 :ensure t
-
-	 :init
-	 (setq ido-enable-flex-matching t)
-	 (setq ido-use-faces nil)
-
-	 :config (flx-ido-mode t)))
-   #+END_SRC
-** Dired
-   #+BEGIN_SRC emacs-lisp
-     (use-package dired-x
-       :init (setq-default dired-omit-files-p t)
-
-       ;; Hide dot files in dired omit-mode (C-x M-o)
-       :config (setq dired-omit-files (concat dired-omit-files "\\|^\\..+$")))
+       (beacon-mode t))
    #+END_SRC
 ** Counsel/Ivy/Swiper
    #+BEGIN_SRC emacs-lisp
@@ -285,35 +288,53 @@
        ([remap isearch-forward]  . swiper)
        ([remap isearch-backward] . swiper))
    #+END_SRC
-** Projectile
+** Diminish only
    #+BEGIN_SRC emacs-lisp
-     (use-package projectile
+     (use-package abbrev
+       :diminish abbrev-mode)
+
+     (use-package eldoc
+       :diminish eldoc-mode)
+
+     (use-package flymake
+       :diminish flymake-mode)
+   #+END_SRC
+** Dired
+   #+BEGIN_SRC emacs-lisp
+     (use-package dired-x
+       :init (setq-default dired-omit-files-p t)
+
+       ;; Hide dot files in dired omit-mode (C-x M-o)
+       :config (setq dired-omit-files (concat dired-omit-files "\\|^\\..+$")))
+   #+END_SRC
+** Drag stuff
+   #+BEGIN_SRC emacs-lisp
+     (use-package drag-stuff
        :ensure t
 
-       :diminish projectile-mode
+       :bind (("M-p" . drag-stuff-up)
+	      ("M-n" . drag-stuff-down))
 
-       :bind-keymap ("C-c p" . projectile-command-map)
+       :config (drag-stuff-global-mode 1))
+   #+END_SRC
+** Exec path from shell
+   Make *GUI Emacs* use the proper $PATH and avoid a [[http://www.flycheck.org/en/latest/user/troubleshooting.html#flycheck-cant-find-any-programs-in-gui-emacs-on-macos][common setup issue on MacOS]].
+   Without this package packages such as flycheck and EPA are not working correctly.
 
-       :init
-       (setq projectile-enable-caching t)
+   #+BEGIN_SRC emacs-lisp
+     (use-package exec-path-from-shell
+       :ensure t
 
        :config
-       ;; Enable projectile globally
-       (projectile-mode))
-
-     (use-package counsel-projectile
+       (when (memq window-system '(mac ns x))
+	 (exec-path-from-shell-initialize)))
+   #+END_SRC
+** Expand region
+   #+BEGIN_SRC emacs-lisp
+     (use-package expand-region
        :ensure t
 
-       :hook (after-init . counsel-projectile-mode))
-   #+END_SRC
-** GnuPG
-   #+BEGIN_SRC emacs-lisp
-     (use-package epa
-       :init
-       ;; Prefer armored ASCII
-       (setq epa-armor t)
-       ;; Prompt for the password in the minibuffer
-       (setq epa-pinentry-mode 'loopback))
+       :bind ("C-x w" . er/expand-region))
    #+END_SRC
 ** Git
    #+BEGIN_SRC emacs-lisp
@@ -340,16 +361,109 @@
        ;; Ask for gist description when creating gist
        :init (setq gist-ask-for-description t))
    #+END_SRC
-** Autocompletion
-*** Company
+** GnuPG
+   #+BEGIN_SRC emacs-lisp
+     (use-package epa
+       :init
+       ;; Prefer armored ASCII
+       (setq epa-armor t)
+       ;; Prompt for the password in the minibuffer
+       (setq epa-pinentry-mode 'loopback))
+   #+END_SRC
+** Ido
+   #+BEGIN_SRC emacs-lisp
+     (use-package ido
+       :init (setq ido-everywhere t)
+
+       :config
+       (ido-mode t)
+
+       (use-package flx-ido
+	 :ensure t
+
+	 :init
+	 (setq ido-enable-flex-matching t)
+	 (setq ido-use-faces nil)
+
+	 :config (flx-ido-mode t)))
+   #+END_SRC
+** Major modes
+*** yaml-mode
     #+BEGIN_SRC emacs-lisp
-      (use-package company
+      (use-package yaml-mode
 	:ensure t
 
-	:diminish company-mode
-
-	:hook (after-init . global-company-mode))
+	:defer t)
     #+END_SRC
+** Multiple cursors
+   #+BEGIN_SRC emacs-lisp
+    (use-package multiple-cursors
+      :ensure t
+
+      :bind (("C-x C-m C-e" . mc/edit-lines)
+	     ("C-x C-m C-n" . mc/mark-next-like-this)
+	     ("C-x C-m C-p" . mc/mark-previous-like-this)
+	     ("C-x C-m C-a" . mc/mark-all-like-this)))
+   #+END_SRC
+** Neotree
+   #+BEGIN_SRC emacs-lisp
+     (use-package neotree
+       :ensure t
+
+       :chords
+       ("nt" . neotree-toggle)
+       ("np" . neotree-projectile-action)
+
+       :init
+       ;; List of ignored files/directories
+       (setq neo-hidden-regexp-list
+	     '("^\\."
+	       "^__pycache__$"
+	       "\\.pyc$"
+	       "\\.egg-info$"
+	       "~$"
+	       "^#.*#$"
+	       "\\.elc$")))
+   #+END_SRC
+** Power line
+   #+BEGIN_SRC emacs-lisp
+     (use-package powerline
+       :ensure t
+
+       :config (powerline-default-theme))
+   #+END_SRC
+** Projectile
+   #+BEGIN_SRC emacs-lisp
+     (use-package projectile
+       :ensure t
+
+       :diminish projectile-mode
+
+       :bind-keymap ("C-c p" . projectile-command-map)
+
+       :init
+       (setq projectile-enable-caching t)
+
+       :config
+       ;; Enable projectile globally
+       (projectile-mode))
+
+     (use-package counsel-projectile
+       :ensure t
+
+       :hook (after-init . counsel-projectile-mode))
+   #+END_SRC
+** Smooth scrolling
+   #+BEGIN_SRC emacs-lisp
+     (use-package smooth-scrolling
+       :ensure t
+
+       :init
+       (setq smooth-scroll-margin 3)
+
+       :config
+       (smooth-scrolling-mode 1))
+   #+END_SRC
 ** Syntax checking
 *** Flycheck
     #+BEGIN_SRC emacs-lisp
@@ -369,6 +483,39 @@
 
 	  :hook (flycheck-mode . flycheck-yamllint-setup))
     #+END_SRC
+** Try
+   #+BEGIN_SRC emacs-lisp
+     (use-package try
+       :ensure t)
+   #+END_SRC
+** Undo tree
+   #+BEGIN_SRC emacs-lisp
+     (use-package undo-tree
+       :ensure t
+
+       :diminish undo-tree-mode
+
+       :init
+       (global-undo-tree-mode))
+   #+END_SRC
+** Which key
+   #+BEGIN_SRC emacs-lisp
+     (use-package which-key
+       :ensure t
+
+       :diminish which-key-mode
+
+       :config (which-key-mode))
+   #+END_SRC
+** XClip
+   #+BEGIN_SRC emacs-lisp
+    (use-package xclip
+      :ensure t
+
+      ;; Enable xclip-mode to use the system clipboard when killing/yanking
+      ;; Install xclip on Linux for this to work. On OSX pbcopy/pbpaste will be used
+      :config (xclip-mode t))
+   #+END_SRC
 ** YASnippet
    #+BEGIN_SRC emacs-lisp
      (use-package yasnippet-snippets
@@ -380,155 +527,19 @@
 
        :config (yas-global-mode))
    #+END_SRC
-** Major modes
-*** yaml-mode
-    #+BEGIN_SRC emacs-lisp
-      (use-package yaml-mode
-	:ensure t
-
-	:defer t)
-    #+END_SRC
-** Tools
-*** smooth-scrolling
-    #+BEGIN_SRC emacs-lisp
-      (use-package smooth-scrolling
-	:ensure t
-
-	:init
-	(setq smooth-scroll-margin 3)
-
-	:config
-	(smooth-scrolling-mode 1))
-    #+END_SRC
-*** power-line
-    #+BEGIN_SRC emacs-lisp
-      (use-package powerline
-	:ensure t
-
-	:config (powerline-default-theme))
-    #+END_SRC
-*** avy
-    Jump to things in Emacs tree-style
-
-    #+BEGIN_SRC emacs-lisp
-      (use-package avy
-	:ensure t
-
-	:chords
-	("jj" . avy-goto-char)
-	("jk" . avy-goto-word-1)
-	("jl" . avy-goto-line))
-    #+END_SRC
-*** exec-path-from-shell
-    Make *GUI Emacs* use the proper $PATH and avoid a [[http://www.flycheck.org/en/latest/user/troubleshooting.html#flycheck-cant-find-any-programs-in-gui-emacs-on-macos][common setup issue on MacOS]].
-    Without this package packages such as flycheck and EPA are not working correctly.
-
-    #+BEGIN_SRC emacs-lisp
-      (use-package exec-path-from-shell
-	:ensure t
-
-	:config
-	(when (memq window-system '(mac ns x))
-	  (exec-path-from-shell-initialize)))
-    #+END_SRC
-*** multiple-cursors
-    #+BEGIN_SRC emacs-lisp
-     (use-package multiple-cursors
-       :ensure t
-
-       :bind (("C-x C-m C-e" . mc/edit-lines)
-	      ("C-x C-m C-n" . mc/mark-next-like-this)
-	      ("C-x C-m C-p" . mc/mark-previous-like-this)
-	      ("C-x C-m C-a" . mc/mark-all-like-this)))
-    #+END_SRC
-*** expand-region
-    #+BEGIN_SRC emacs-lisp
-      (use-package expand-region
-	:ensure t
-
-	:bind ("C-x w" . er/expand-region))
-    #+END_SRC
-*** xclip
-    #+BEGIN_SRC emacs-lisp
-     (use-package xclip
-       :ensure t
-
-       ;; Enable xclip-mode to use the system clipboard when killing/yanking
-       ;; Install xclip on Linux for this to work. On OSX pbcopy/pbpaste will be used
-       :config (xclip-mode t))
-    #+END_SRC
-*** drag-stuff
-    #+BEGIN_SRC emacs-lisp
-      (use-package drag-stuff
-	:ensure t
-
-	:bind (("M-p" . drag-stuff-up)
-	       ("M-n" . drag-stuff-down))
-
-	:config (drag-stuff-global-mode 1))
-    #+END_SRC
-*** neotree
-    #+BEGIN_SRC emacs-lisp
-      (use-package neotree
-	:ensure t
-
-	:chords
-	("nt" . neotree-toggle)
-	("np" . neotree-projectile-action)
-
-	:init
-	;; List of ignored files/directories
-	(setq neo-hidden-regexp-list
-	      '("^\\."
-		"^__pycache__$"
-		"\\.pyc$"
-		"\\.egg-info$"
-		"~$"
-		"^#.*#$"
-		"\\.elc$")))
-    #+END_SRC
-*** try
-    #+BEGIN_SRC emacs-lisp
-      (use-package try
-	:ensure t)
-    #+END_SRC
-*** which-key
-    #+BEGIN_SRC emacs-lisp
-      (use-package which-key
-	:ensure t
-
-	:diminish which-key-mode
-
-	:config (which-key-mode))
-    #+END_SRC
-*** ace-window
-    #+BEGIN_SRC emacs-lisp
-      (use-package ace-window
-	:ensure t
-
-	:bind ([remap other-window] . ace-window))
-    #+END_SRC
-*** undo-tree
-    #+BEGIN_SRC emacs-lisp
-      (use-package undo-tree
-	:ensure t
-
-	:diminish undo-tree-mode
-
-	:init
-	(global-undo-tree-mode))
-    #+END_SRC
-*** beacon
-    #+BEGIN_SRC emacs-lisp
-      (use-package beacon
-	:ensure t
-
-	:diminish beacon-mode
-
-	:config
-	(beacon-mode t))
-    #+END_SRC
 * Snippets
+** Comment/Uncomment line or region
+   #+BEGIN_SRC emacs-lisp
+     (defun comment-or-uncomment-region-or-line ()
+       "Comments or uncomments the region or the current line if there's no active region."
+       (interactive)
+       (let (beg end)
+	 (if (region-active-p)
+	   (setq beg (region-beginning) end (region-end))
+	   (setq beg (line-beginning-position) end (line-end-position)))
+	 (comment-or-uncomment-region beg end)))
+     (global-set-key (kbd "C-x C-\\") 'comment-or-uncomment-region-or-line)
+   #+END_SRC
 ** Delete current file and buffer
    #+BEGIN_SRC emacs-lisp
      (defun xah-delete-current-file-copy-to-kill-ring ()
@@ -549,70 +560,7 @@
 	   (kill-buffer (current-buffer)))))
      (global-set-key (kbd "C-c k")  'xah-delete-current-file-copy-to-kill-ring)
    #+END_SRC
-** Comment/Uncomment line or region
-   #+BEGIN_SRC emacs-lisp
-     (defun comment-or-uncomment-region-or-line ()
-       "Comments or uncomments the region or the current line if there's no active region."
-       (interactive)
-       (let (beg end)
-	 (if (region-active-p)
-	   (setq beg (region-beginning) end (region-end))
-	   (setq beg (line-beginning-position) end (line-end-position)))
-	 (comment-or-uncomment-region beg end)))
-     (global-set-key (kbd "C-x C-\\") 'comment-or-uncomment-region-or-line)
-   #+END_SRC
 * Programming
-** Python setup
-*** Elpy
-    #+BEGIN_SRC emacs-lisp
-      (use-package elpy
-	:ensure t
-
-	:diminish elpy-mode
-
-	:hook (python-mode . elpy-mode)
-
-	:init
-	;; Don't print evaluated code fragments in the python shell
-	;; https://elpy.readthedocs.io/en/latest/ide.html#option-elpy-shell-echo-input
-	(setq elpy-shell-echo-input nil)
-
-	:config
-	(elpy-enable)
-
-	;; (add-hook 'before-save-hook 'elpy-black-fix-code)
-	)
-    #+END_SRC
-*** py-autopep8
-    #+BEGIN_SRC emacs-lisp
-      (use-package py-autopep8
-	:ensure t
-
-	:disabled
-
-	:after elpy
-
-	:hook (elpy-mode . py-autopep8-enable-on-save))
-    #+END_SRC
-*** py-isort
-    #+BEGIN_SRC emacs-lisp
-      (use-package py-isort
-	:ensure t
-
-	:disabled
-
-	:after elpy
-
-	:hook (before-save . py-isort-before-save))
-    #+END_SRC
-*** auto-virtualenvwrapper
-    #+BEGIN_SRC emacs-lisp
-      (use-package auto-virtualenvwrapper
-	:ensure t
-
-	:config
-	(add-hook 'projectile-after-switch-project-hook #'auto-virtualenvwrapper-activate))
-    #+END_SRC
 ** C++ setup
 *** Irony
     #+BEGIN_SRC emacs-lisp
@@ -733,6 +681,57 @@
 	:config
 	(rtags-enable-standard-keybindings))
     #+END_SRC
+** Python setup
+*** Elpy
+    #+BEGIN_SRC emacs-lisp
+      (use-package elpy
+	:ensure t
+
+	:diminish elpy-mode
+
+	:hook (python-mode . elpy-mode)
+
+	:init
+	;; Don't print evaluated code fragments in the python shell
+	;; https://elpy.readthedocs.io/en/latest/ide.html#option-elpy-shell-echo-input
+	(setq elpy-shell-echo-input nil)
+
+	:config
+	(elpy-enable)
+
+	;; (add-hook 'before-save-hook 'elpy-black-fix-code)
+	)
+    #+END_SRC
+*** py-autopep8
+    #+BEGIN_SRC emacs-lisp
+      (use-package py-autopep8
+	:ensure t
+
+	:disabled
+
+	:after elpy
+
+	:hook (elpy-mode . py-autopep8-enable-on-save))
+    #+END_SRC
+*** py-isort
+    #+BEGIN_SRC emacs-lisp
+      (use-package py-isort
+	:ensure t
+
+	:disabled
+
+	:after elpy
+
+	:hook (before-save . py-isort-before-save))
+    #+END_SRC
+*** auto-virtualenvwrapper
+    #+BEGIN_SRC emacs-lisp
+      (use-package auto-virtualenvwrapper
+	:ensure t
+
+	:config
+	(add-hook 'projectile-after-switch-project-hook #'auto-virtualenvwrapper-activate))
+    #+END_SRC
 * Org mode setup
 ** Org
    #+BEGIN_SRC emacs-lisp
@@ -764,7 +763,7 @@
 	  (shell . t)
 	  (python . t))))
    #+END_SRC
-** org-bullets
+** Org bullets
    #+BEGIN_SRC emacs-lisp
      (use-package org-bullets
        :ensure t
@@ -791,12 +790,10 @@
 
    #+BEGIN_SRC emacs-lisp
      (use-package ox-reveal
-       :ensure t
-
-       :disabled  ;; Disabled for faster emacs startup
-
        :quelpa
        (ox-reveal :repo "yjwen/org-reveal" :fetcher github :version original)
+
+       :disabled  ;; Disabled for faster emacs startup
 
        :init
        (setq org-reveal-mathjax t))
