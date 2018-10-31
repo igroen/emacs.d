@@ -370,23 +370,6 @@
        ;; Prompt for the password in the minibuffer
        (setq epa-pinentry-mode 'loopback))
    #+END_SRC
-** Ido
-   #+BEGIN_SRC emacs-lisp
-     (use-package ido
-       :init (setq ido-everywhere t)
-
-       :config
-       (ido-mode t)
-
-       (use-package flx-ido
-	 :ensure t
-
-	 :init
-	 (setq ido-enable-flex-matching t)
-	 (setq ido-use-faces nil)
-
-	 :config (flx-ido-mode t)))
-   #+END_SRC
 ** Major modes
 *** yaml-mode
     #+BEGIN_SRC emacs-lisp
