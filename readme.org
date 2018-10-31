@@ -20,7 +20,7 @@
 			gc-cons-percentage 0.1)))
    #+END_SRC
 ** Package management
-   Setup package management with use-package
+   Setup package management with use-package and quelpa
 
    #+BEGIN_SRC emacs-lisp
      (require 'package)
@@ -216,7 +216,7 @@
      (when (file-exists-p custom-file)
        (load custom-file))
    #+END_SRC
-* Miscellaneous packages
+* Packages
 ** Ace window
    #+BEGIN_SRC emacs-lisp
      (use-package ace-window
@@ -510,38 +510,71 @@
 
        :config (yas-global-mode))
    #+END_SRC
-* Snippets
-** Comment/Uncomment line or region
+* Org mode
+** Org
    #+BEGIN_SRC emacs-lisp
-     (defun comment-or-uncomment-region-or-line ()
-       "Comments or uncomments the region or the current line if there's no active region."
-       (interactive)
-       (let (beg end)
-	 (if (region-active-p)
-	   (setq beg (region-beginning) end (region-end))
-	   (setq beg (line-beginning-position) end (line-end-position)))
-	 (comment-or-uncomment-region beg end)))
-     (global-set-key (kbd "C-x C-\\") 'comment-or-uncomment-region-or-line)
+     (use-package org
+       :ensure org-plus-contrib
+
+       :bind (("C-c a" . org-agenda)
+	      ("C-c c" . org-capture)
+	      ("C-c l" . org-store-link))
+
+       :init
+       ;; Show time when done
+       (setq org-log-done t)
+
+       ;; Folder to look for agenda files
+       (setq org-agenda-files '("~/Sync/org"))
+
+       ;; Log quick notes (C-c C-z) into LOGBOOK drawer
+       (setq org-log-into-drawer t)
+
+       ;; Syntax highlighting for org-mode
+       (setq org-src-fontify-natively t)
+
+       :config
+       ;; Add languages for the ‘src’ code blocks in org-mode
+       (org-babel-do-load-languages
+	'org-babel-load-languages
+	'((emacs-lisp . t)
+	  (shell . t)
+	  (python . t))))
    #+END_SRC
-** Delete current file and buffer
+** Org bullets
    #+BEGIN_SRC emacs-lisp
-     (defun xah-delete-current-file-copy-to-kill-ring ()
-       "Delete current buffer/file and close the buffer, push content to `kill-ring'.
-     URL `http://ergoemacs.org/emacs/elisp_delete-current-file.html'
-     Version 2016-07-20"
-       (interactive)
-       (progn
-	 (kill-new (buffer-string))
-	 (message "Buffer content copied to kill-ring.")
-	 (when (buffer-file-name)
-	   (when (file-exists-p (buffer-file-name))
-	     (progn
-	       (delete-file (buffer-file-name))
-	       (message "Deleted file: 「%s」." (buffer-file-name)))))
-	 (let ((buffer-offer-save nil))
-	   (set-buffer-modified-p nil)
-	   (kill-buffer (current-buffer)))))
-     (global-set-key (kbd "C-c k")  'xah-delete-current-file-copy-to-kill-ring)
+     (use-package org-bullets
+       :ensure t
+
+       :hook (org-mode lambda () (org-bullets-mode t)))
+   #+END_SRC
+** Reveal.js
+*** htmlize
+    This package is used by org-reveal
+
+    #+BEGIN_SRC emacs-lisp
+      (use-package htmlize
+	:ensure t)
+    #+END_SRC
+*** org-reveal
+   Download from MELPA doesn't work because the required version of org could not be found.
+   Hence git-reveal is installed from github using `quelpa-use-package`
+
+   Because speaker notes don't seem to work when using a CDN
+   clone reveal.js next to your org file:
+   $ git clone https://github.com/hakimel/reveal.js.git
+
+   See [[https://github.com/yjwen/org-reveal#set-the-location-of-revealjs][set-the-location-of-revealjs]] for other options.
+
+   #+BEGIN_SRC emacs-lisp
+     (use-package ox-reveal
+       :quelpa
+       (ox-reveal :repo "yjwen/org-reveal" :fetcher github :version original)
+
+       :disabled  ;; Disabled for faster emacs startup
+
+       :init
+       (setq org-reveal-mathjax t))
    #+END_SRC
 * Programming
 ** C++ setup
@@ -715,71 +748,38 @@
 	:config
 	(add-hook 'projectile-after-switch-project-hook #'auto-virtualenvwrapper-activate))
     #+END_SRC
-* Org mode setup
-** Org
+* Snippets
+** Comment/Uncomment line or region
    #+BEGIN_SRC emacs-lisp
-     (use-package org
-       :ensure org-plus-contrib
-
-       :bind (("C-c a" . org-agenda)
-	      ("C-c c" . org-capture)
-	      ("C-c l" . org-store-link))
-
-       :init
-       ;; Show time when done
-       (setq org-log-done t)
-
-       ;; Folder to look for agenda files
-       (setq org-agenda-files '("~/Sync/org"))
-
-       ;; Log quick notes (C-c C-z) into LOGBOOK drawer
-       (setq org-log-into-drawer t)
-
-       ;; Syntax highlighting for org-mode
-       (setq org-src-fontify-natively t)
-
-       :config
-       ;; Add languages for the ‘src’ code blocks in org-mode
-       (org-babel-do-load-languages
-	'org-babel-load-languages
-	'((emacs-lisp . t)
-	  (shell . t)
-	  (python . t))))
+     (defun comment-or-uncomment-region-or-line ()
+       "Comments or uncomments the region or the current line if there's no active region."
+       (interactive)
+       (let (beg end)
+	 (if (region-active-p)
+	   (setq beg (region-beginning) end (region-end))
+	   (setq beg (line-beginning-position) end (line-end-position)))
+	 (comment-or-uncomment-region beg end)))
+     (global-set-key (kbd "C-x C-\\") 'comment-or-uncomment-region-or-line)
    #+END_SRC
-** Org bullets
+** Delete current file and buffer
    #+BEGIN_SRC emacs-lisp
-     (use-package org-bullets
-       :ensure t
-
-       :hook (org-mode lambda () (org-bullets-mode t)))
-   #+END_SRC
-** Reveal.js
-*** htmlize
-    This package is used by org-reveal
-
-    #+BEGIN_SRC emacs-lisp
-      (use-package htmlize
-	:ensure t)
-    #+END_SRC
-*** org-reveal
-   Download from MELPA doesn't work because the required version of org could not be found.
-   Hence git-reveal is installed from github using `quelpa-use-package`
-
-   Because speaker notes don't seem to work when using a CDN
-   clone reveal.js next to your org file:
-   $ git clone https://github.com/hakimel/reveal.js.git
-
-   See [[https://github.com/yjwen/org-reveal#set-the-location-of-revealjs][set-the-location-of-revealjs]] for other options.
-
-   #+BEGIN_SRC emacs-lisp
-     (use-package ox-reveal
-       :quelpa
-       (ox-reveal :repo "yjwen/org-reveal" :fetcher github :version original)
-
-       :disabled  ;; Disabled for faster emacs startup
-
-       :init
-       (setq org-reveal-mathjax t))
+     (defun xah-delete-current-file-copy-to-kill-ring ()
+       "Delete current buffer/file and close the buffer, push content to `kill-ring'.
+     URL `http://ergoemacs.org/emacs/elisp_delete-current-file.html'
+     Version 2016-07-20"
+       (interactive)
+       (progn
+	 (kill-new (buffer-string))
+	 (message "Buffer content copied to kill-ring.")
+	 (when (buffer-file-name)
+	   (when (file-exists-p (buffer-file-name))
+	     (progn
+	       (delete-file (buffer-file-name))
+	       (message "Deleted file: 「%s」." (buffer-file-name)))))
+	 (let ((buffer-offer-save nil))
+	   (set-buffer-modified-p nil)
+	   (kill-buffer (current-buffer)))))
+     (global-set-key (kbd "C-c k")  'xah-delete-current-file-copy-to-kill-ring)
    #+END_SRC
 * Tangle on save
   When opening this file for the first time the following warning is shown:
