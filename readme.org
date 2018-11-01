@@ -400,13 +400,13 @@
      (use-package neotree
        :ensure t
 
-       :chords
-       ("nt" . neotree-toggle)
-       ("np" . neotree-projectile-action)
+       :bind
+       ("<f8>" . neotree-toggle)
+       ("S-<f8>" . neotree-projectile-action)
 
        :init
-       ;; List of ignored files/directories
-       (setq neo-hidden-regexp-list
+       (setq neo-smart-open t
+	     neo-hidden-regexp-list
 	     '("^\\."
 	       "^__pycache__$"
 	       "\\.pyc$"
