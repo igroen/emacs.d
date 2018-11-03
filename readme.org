@@ -215,9 +215,10 @@
        version-control t)
    #+END_SRC
 ** Customize
+   Move lines added by the customize system to a seperate file.
+   Config changes made through the customize UI will be stored here.
+
    #+BEGIN_SRC emacs-lisp
-     ;; Move lines added by the customize system to a seperate file
-     ;; Config changes made through the customize UI will be stored here
      (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 
      (when (file-exists-p custom-file)
@@ -231,16 +232,6 @@
 
        :bind ([remap other-window] . ace-window))
    #+END_SRC
-** Autocompletion
-*** Company
-    #+BEGIN_SRC emacs-lisp
-      (use-package company
-	:ensure t
-
-	:diminish company-mode
-
-	:hook (after-init . global-company-mode))
-    #+END_SRC
 ** Avy
    Jump to things in Emacs tree-style
 
@@ -262,6 +253,15 @@
 
        :config
        (beacon-mode t))
+   #+END_SRC
+** Company
+   #+BEGIN_SRC emacs-lisp
+     (use-package company
+       :ensure t
+
+       :diminish company-mode
+
+       :hook (after-init . global-company-mode))
    #+END_SRC
 ** Counsel/Ivy/Swiper
    #+BEGIN_SRC emacs-lisp
