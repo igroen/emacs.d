@@ -200,6 +200,13 @@
       (lambda ()
 	(interactive)
 	(find-file-other-window (expand-file-name "readme.org" user-emacs-directory))))
+
+     ;; Add interactive command to elfeed.org file
+     (global-set-key
+      (kbd "C-c f")
+      (lambda ()
+	(interactive)
+	(find-file-other-window "~/Sync/org/elfeed.org")))
    #+END_SRC
 ** Backups
    #+BEGIN_SRC emacs-lisp
@@ -323,6 +330,29 @@
 	      ("M-n" . drag-stuff-down))
 
        :config (drag-stuff-global-mode 1))
+   #+END_SRC
+** Elfeed
+   #+BEGIN_SRC emacs-lisp
+     (use-package elfeed
+       :ensure t
+
+       :bind
+       ("C-c w" . elfeed))
+
+     (use-package elfeed-org
+       :ensure t
+
+       :init
+       (setq rmh-elfeed-org-files (list "~/Sync/org/elfeed.org"))
+
+       :config
+       (elfeed-org))
+
+     (use-package elfeed-goodies
+       :ensure t
+
+       :config
+       (elfeed-goodies/setup))
    #+END_SRC
 ** Exec path from shell
    Make *GUI Emacs* use the proper $PATH and avoid a [[http://www.flycheck.org/en/latest/user/troubleshooting.html#flycheck-cant-find-any-programs-in-gui-emacs-on-macos][common setup issue on MacOS]].
