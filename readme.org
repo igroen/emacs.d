@@ -373,6 +373,15 @@
 
        :bind ("C-x w" . er/expand-region))
    #+END_SRC
+** Flycheck
+   #+BEGIN_SRC emacs-lisp
+     (use-package flycheck
+       :ensure t
+
+       :diminish flycheck-mode
+
+       :hook (after-init . global-flycheck-mode))
+   #+END_SRC
 ** Git
    #+BEGIN_SRC emacs-lisp
      (use-package magit
@@ -407,14 +416,6 @@
        ;; Prompt for the password in the minibuffer
        (setq epa-pinentry-mode 'loopback))
    #+END_SRC
-** Major modes
-*** yaml-mode
-    #+BEGIN_SRC emacs-lisp
-      (use-package yaml-mode
-	:ensure t
-
-	:defer t)
-    #+END_SRC
 ** Multiple cursors
    #+BEGIN_SRC emacs-lisp
     (use-package multiple-cursors
@@ -473,25 +474,6 @@
 
        :hook (after-init . counsel-projectile-mode))
    #+END_SRC
-** Syntax checking
-*** Flycheck
-    #+BEGIN_SRC emacs-lisp
-      (use-package flycheck
-	:ensure t
-
-	:diminish flycheck-mode
-
-	:hook (after-init . global-flycheck-mode))
-    #+END_SRC
-*** Flycheck-yamllint
-    #+BEGIN_SRC emacs-lisp
-      (use-package flycheck-yamllint
-	  :ensure t
-
-	  :defer t
-
-	  :hook (flycheck-mode . flycheck-yamllint-setup))
-    #+END_SRC
 ** Try
    #+BEGIN_SRC emacs-lisp
      (use-package try
