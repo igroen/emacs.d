@@ -565,9 +565,6 @@
 	:ensure t)
     #+END_SRC
 *** org-reveal
-   Download from MELPA doesn't work because the required version of org could not be found.
-   Hence git-reveal is installed from github using `quelpa-use-package`
-
    Because speaker notes don't seem to work when using a CDN
    clone reveal.js next to your org file:
    $ git clone https://github.com/hakimel/reveal.js.git
@@ -576,10 +573,7 @@
 
    #+BEGIN_SRC emacs-lisp
      (use-package ox-reveal
-       :quelpa
-       (ox-reveal :repo "yjwen/org-reveal" :fetcher github :version original)
-
-       :disabled  ;; Disabled for faster emacs startup
+       :ensure t
 
        :init
        (setq org-reveal-mathjax t))
