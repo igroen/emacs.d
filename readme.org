@@ -181,33 +181,38 @@
        ".*:\0? *"))
    #+END_SRC
 ** Tweaks
-   #+BEGIN_SRC emacs-lisp
-     ;; Enable y/n answers
-     (fset 'yes-or-no-p 'y-or-n-p)
-
-     ;; Autorefresh buffers on file change
-     (global-auto-revert-mode t)
-
-     ;; Remember cursor position
-     (save-place-mode 1)
-
-     ;; Replace *Buffer List* with *Ibuffer*
-     (global-set-key (kbd "C-x C-b") 'ibuffer)
-
-     ;; Add interactive command to this file
-     (global-set-key
-      (kbd "C-c s")
-      (lambda ()
-	(interactive)
-	(find-file-other-window (expand-file-name "readme.org" user-emacs-directory))))
-
-     ;; Add interactive command to elfeed.org file
-     (global-set-key
-      (kbd "C-c f")
-      (lambda ()
-	(interactive)
-	(find-file-other-window "~/Sync/org/elfeed.org")))
-   #+END_SRC
+*** Add interactive command to elfeed.org file
+    #+BEGIN_SRC emacs-lisp
+      (global-set-key
+       (kbd "C-c f")
+       (lambda ()
+	 (interactive)
+	 (find-file-other-window "~/Sync/org/elfeed.org")))
+    #+END_SRC
+*** Add interactive command to readme.org file
+    #+BEGIN_SRC emacs-lisp
+      (global-set-key
+       (kbd "C-c s")
+       (lambda ()
+	 (interactive)
+	 (find-file-other-window (expand-file-name "readme.org" user-emacs-directory))))
+    #+END_SRC
+*** Autorefresh buffers on file change
+    #+BEGIN_SRC emacs-lisp
+      (global-auto-revert-mode t)
+    #+END_SRC
+*** Enable y/n answers
+    #+BEGIN_SRC emacs-lisp
+      (fset 'yes-or-no-p 'y-or-n-p)
+    #+END_SRC
+*** Remember cursor position
+    #+BEGIN_SRC emacs-lisp
+      (save-place-mode 1)
+    #+END_SRC
+*** Replace *Buffer List* with *Ibuffer*
+    #+BEGIN_SRC emacs-lisp
+      (global-set-key (kbd "C-x C-b") 'ibuffer)
+    #+END_SRC
 ** Backups
    #+BEGIN_SRC emacs-lisp
      ;; Store all backup and autosave files in the backups dir
