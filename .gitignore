@@ -4,8 +4,10 @@
 /backups/
 /custom.el
 /elpa/
+/eshell/
 /init.el
 /irony/
+/network-security.data
 /places
 /projectile*
 /recentf
