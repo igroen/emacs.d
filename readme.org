@@ -541,28 +541,6 @@
 
        :hook (org-mode lambda () (org-bullets-mode t)))
    #+END_SRC
-** Reveal.js
-*** htmlize
-    This package is used by org-reveal
-
-    #+BEGIN_SRC emacs-lisp
-      (use-package htmlize
-	:ensure t)
-    #+END_SRC
-*** org-reveal
-   Because speaker notes don't seem to work when using a CDN
-   clone reveal.js next to your org file:
-   $ git clone https://github.com/hakimel/reveal.js.git
-
-   See [[https://github.com/yjwen/org-reveal#set-the-location-of-revealjs][set-the-location-of-revealjs]] for other options.
-
-   #+BEGIN_SRC emacs-lisp
-     (use-package ox-reveal
-       :ensure t
-
-       :init
-       (setq org-reveal-mathjax t))
-   #+END_SRC
 * Programming
 ** C++ setup
 *** Irony
