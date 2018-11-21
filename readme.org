@@ -556,10 +556,6 @@
 
 	:init
 	(setq-default c-basic-offset 4)
-	;; Run rtags-install within emacs
-	(setq rtags-completions-enabled t)
-	(setq rtags-autostart-diagnostics t)
-	(setq cmake-ide-build-dir "cmake_build")
 
 	:config
 	(add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
@@ -612,7 +608,10 @@
 
 	:defer t
 
-	:after irony)
+	:after irony
+
+	:init
+	(setq cmake-ide-build-dir "cmake_build"))
     #+END_SRC
 *** company-irony
     #+BEGIN_SRC emacs-lisp
@@ -657,6 +656,9 @@
 	:after irony
 
 	:diminish rtags-mode
+
+	:init
+	(setq rtags-completions-enabled t)
 
 	:config
 	(rtags-enable-standard-keybindings))
