@@ -156,7 +156,7 @@
    #+END_SRC
 ** Scrolling
    #+BEGIN_SRC emacs-lisp
-     (setq scroll-margin                   3
+     (setq scroll-margin                   0  ;; Default
 	   scroll-step                     1
 	   scroll-conservatively           10000
 	   scroll-preserve-screen-position 1)
