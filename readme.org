@@ -541,6 +541,11 @@
 
        :hook (org-mode lambda () (org-bullets-mode t)))
    #+END_SRC
+** Org tempo
+   Expansion of templates
+   #+BEGIN_SRC emacs-lisp
+     (use-package org-tempo)
+   #+END_SRC
 * Programming
 ** C++ setup
 *** rtags
