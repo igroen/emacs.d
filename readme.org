@@ -722,6 +722,20 @@
 	   (kill-buffer (current-buffer)))))
      (global-set-key (kbd "C-c k")  'xah-delete-current-file-copy-to-kill-ring)
    #+END_SRC
+** Duplicate current line
+   #+begin_src emacs-lisp
+     (defun duplicate-line ()
+	(interactive)
+	(let ((col (current-column)))
+	  (move-beginning-of-line 1)
+	  (kill-line)
+	  (yank)
+	  (newline)
+	  (yank)
+	  (move-to-column col)))
+
+      (global-set-key (kbd "C-c d") 'duplicate-line)
+   #+end_src
 ** Smarter move to beginning of line
    #+BEGIN_SRC emacs-lisp
      (defun smarter-move-beginning-of-line (arg)
