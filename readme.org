@@ -154,6 +154,9 @@
 
      ;; Require a newline at the end of the file
      (defvar require-final-newline t)
+
+     ;; Set indentation to always use spaces
+     (setq-default indent-tabs-mode nil)
    #+END_SRC
 ** Scrolling
    #+BEGIN_SRC emacs-lisp
