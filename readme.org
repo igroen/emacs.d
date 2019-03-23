@@ -7,7 +7,7 @@
 
    #+BEGIN_SRC emacs-lisp
      (setq gc-cons-threshold (* 500 1024 1024)
-	   gc-cons-percentage 0.6)
+           gc-cons-percentage 0.6)
    #+END_SRC
 
    After Emacs startup has been completed, set `gc-cons-threshold' to
@@ -15,9 +15,9 @@
 
    #+BEGIN_SRC emacs-lisp
      (add-hook 'emacs-startup-hook
-	       '(lambda ()
-		  (setq gc-cons-threshold (* 16 1024 1024)
-			gc-cons-percentage 0.1)))
+               '(lambda ()
+                  (setq gc-cons-threshold (* 16 1024 1024)
+                        gc-cons-percentage 0.1)))
    #+END_SRC
 ** Package management
    Setup package management with use-package and quelpa
@@ -44,7 +44,7 @@
      ;; Install the missing packages
      (dolist (package package-list)
        (unless (package-installed-p package)
-	 (package-install package)))
+         (package-install package)))
 
      ;; Enable use-package and friends
      (eval-when-compile
@@ -83,27 +83,27 @@
 
     #+BEGIN_SRC emacs-lisp
       (add-hook 'emacs-startup-hook
-		'(lambda ()
-		   (message (format "Emacs startup time: %s" (emacs-init-time)))))
+                '(lambda ()
+                   (message (format "Emacs startup time: %s" (emacs-init-time)))))
     #+END_SRC
 *** Benchmarks
     Benchmark your Emacs initialization
 
     #+BEGIN_SRC emacs-lisp
       (use-package benchmark-init
-	:ensure t
+        :ensure t
 
-	:config
-	;; To disable collection of benchmark data after init is done.
-	(add-hook 'after-init-hook 'benchmark-init/deactivate))
+        :config
+        ;; To disable collection of benchmark data after init is done.
+        (add-hook 'after-init-hook 'benchmark-init/deactivate))
     #+END_SRC
 * Defaults
 ** Username & Email
    #+BEGIN_SRC emacs-lisp
      (setq user-full-name "Iwan in 't Groen"
-	   user-login-name "iwan"
-	   user-mail-address "iwanintgroen@gmail.com"
-	   smtpmail-smtp-user user-mail-address)
+           user-login-name "iwan"
+           user-mail-address "iwanintgroen@gmail.com"
+           smtpmail-smtp-user user-mail-address)
    #+END_SRC
 ** Screen setup
    #+BEGIN_SRC emacs-lisp
@@ -161,9 +161,9 @@
 ** Scrolling
    #+BEGIN_SRC emacs-lisp
      (setq scroll-margin                   0  ;; Default
-	   scroll-step                     1
-	   scroll-conservatively           10000
-	   scroll-preserve-screen-position 1)
+           scroll-step                     1
+           scroll-conservatively           10000
+           scroll-preserve-screen-position 1)
    #+END_SRC
 ** Tramp
    Set remote password prompts
@@ -174,13 +174,13 @@
       (concat
        "^.*"
        (regexp-opt
-	'("passphrase"
-	  "Passphrase"
-	  "password"
-	  "Password"
-	  ;; Google Authenticator
-	  "Verification code")
-	t)
+        '("passphrase"
+          "Passphrase"
+          "password"
+          "Password"
+          ;; Google Authenticator
+          "Verification code")
+        t)
        ".*:\0? *"))
    #+END_SRC
 ** Tweaks
@@ -189,16 +189,16 @@
       (global-set-key
        (kbd "C-c f")
        (lambda ()
-	 (interactive)
-	 (find-file-other-window "~/Sync/org/elfeed.org")))
+         (interactive)
+         (find-file-other-window "~/Sync/org/elfeed.org")))
     #+END_SRC
 *** Add interactive command to readme.org file
     #+BEGIN_SRC emacs-lisp
       (global-set-key
        (kbd "C-c s")
        (lambda ()
-	 (interactive)
-	 (find-file-other-window (expand-file-name "readme.org" user-emacs-directory))))
+         (interactive)
+         (find-file-other-window (expand-file-name "readme.org" user-emacs-directory))))
     #+END_SRC
 *** Autorefresh buffers on file change
     #+BEGIN_SRC emacs-lisp
@@ -221,7 +221,7 @@
      ;; Store all backup and autosave files in the backups dir
      (setq auto-save-list-file-prefix nil)
      (setq backup-directory-alist
-	   `(("." . ,(concat user-emacs-directory "backups"))))
+           `(("." . ,(concat user-emacs-directory "backups"))))
 
      ;; Use version contral and keep multiple backup files
      (setq delete-old-versions t
@@ -287,8 +287,8 @@
 
        :init
        (setq ivy-use-virtual-buffers t
-	     ivy-count-format "%d/%d "
-	     ivy-initial-inputs-alist nil)
+             ivy-count-format "%d/%d "
+             ivy-initial-inputs-alist nil)
 
        :config
        (ivy-mode 1))
@@ -325,7 +325,7 @@
        :ensure t
 
        :bind (("M-p" . drag-stuff-up)
-	      ("M-n" . drag-stuff-down))
+              ("M-n" . drag-stuff-down))
 
        :config (drag-stuff-global-mode 1))
    #+END_SRC
@@ -362,7 +362,7 @@
 
        :config
        (when (memq window-system '(mac ns x))
-	 (exec-path-from-shell-initialize)))
+         (exec-path-from-shell-initialize)))
    #+END_SRC
 ** Expand region
    #+BEGIN_SRC emacs-lisp
@@ -420,9 +420,9 @@
       :ensure t
 
       :bind (("C-x C-m C-e" . mc/edit-lines)
-	     ("C-x C-m C-n" . mc/mark-next-like-this)
-	     ("C-x C-m C-p" . mc/mark-previous-like-this)
-	     ("C-x C-m C-a" . mc/mark-all-like-this)))
+             ("C-x C-m C-n" . mc/mark-next-like-this)
+             ("C-x C-m C-p" . mc/mark-previous-like-this)
+             ("C-x C-m C-a" . mc/mark-all-like-this)))
    #+END_SRC
 ** Neotree
    #+BEGIN_SRC emacs-lisp
@@ -435,14 +435,14 @@
 
        :init
        (setq neo-smart-open t
-	     neo-hidden-regexp-list
-	     '("^\\."
-	       "^__pycache__$"
-	       "\\.pyc$"
-	       "\\.egg-info$"
-	       "~$"
-	       "^#.*#$"
-	       "\\.elc$")))
+             neo-hidden-regexp-list
+             '("^\\."
+               "^__pycache__$"
+               "\\.pyc$"
+               "\\.egg-info$"
+               "~$"
+               "^#.*#$"
+               "\\.elc$")))
    #+END_SRC
 ** Power line
    #+BEGIN_SRC emacs-lisp
@@ -513,8 +513,8 @@
        :ensure org-plus-contrib
 
        :bind (("C-c a" . org-agenda)
-	      ("C-c c" . org-capture)
-	      ("C-c l" . org-store-link))
+              ("C-c c" . org-capture)
+              ("C-c l" . org-store-link))
 
        :init
        ;; Show time when done
@@ -532,10 +532,10 @@
        :config
        ;; Add languages for the ‘src’ code blocks in org-mode
        (org-babel-do-load-languages
-	'org-babel-load-languages
-	'((emacs-lisp . t)
-	  (shell . t)
-	  (python . t))))
+        'org-babel-load-languages
+        '((emacs-lisp . t)
+          (shell . t)
+          (python . t))))
    #+END_SRC
 ** Org bullets
    #+BEGIN_SRC emacs-lisp
@@ -554,143 +554,143 @@
 *** rtags
     #+BEGIN_SRC emacs-lisp
       (use-package rtags
-	:ensure t
+        :ensure t
 
-	:diminish rtags-mode
+        :diminish rtags-mode
 
-	:init
-	(setq rtags-completions-enabled t)
+        :init
+        (setq rtags-completions-enabled t)
 
-	:config
-	(rtags-enable-standard-keybindings))
+        :config
+        (rtags-enable-standard-keybindings))
     #+END_SRC
 *** company-rtags
     #+BEGIN_SRC emacs-lisp
       (use-package company-rtags
-	:ensure t)
+        :ensure t)
     #+END_SRC
 *** company-irony-c-headers
     #+BEGIN_SRC emacs-lisp
       (use-package company-irony-c-headers
-	:ensure t
+        :ensure t
 
-	:diminish company-mode)
+        :diminish company-mode)
     #+END_SRC
 *** company-irony
     #+BEGIN_SRC emacs-lisp
       (use-package company-irony
-	:ensure t
+        :ensure t
 
-	:disabled  ;; Using rtags
+        :disabled  ;; Using rtags
 
-	:diminish company-mode)
+        :diminish company-mode)
     #+END_SRC
 *** Irony
     #+BEGIN_SRC emacs-lisp
       (use-package irony
-	:ensure t
+        :ensure t
 
-	;; :after company
+        ;; :after company
 
-	:diminish irony-mode
+        :diminish irony-mode
 
-	;; Use irony-mode for c-hooks
-	:hook ((c++-mode . irony-mode)
-	       (c-mode . irony-mode)
-	       (objc-mode . irony-mode))
+        ;; Use irony-mode for c-hooks
+        :hook ((c++-mode . irony-mode)
+               (c-mode . irony-mode)
+               (objc-mode . irony-mode))
 
-	:init
-	(setq-default c-basic-offset 4)
+        :init
+        (setq-default c-basic-offset 4)
 
-	:config
-	(add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
-	(add-hook 'irony-mode-hook 'irony-eldoc)
-	(add-hook 'flycheck-mode-hook 'flycheck-irony-setup)
+        :config
+        (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
+        (add-hook 'irony-mode-hook 'irony-eldoc)
+        (add-hook 'flycheck-mode-hook 'flycheck-irony-setup)
 
-	;; company-irony and company-rtags are both completion backends.
-	;; When using both of them together duplicate completions are shown.
-	;; So use one of these completions backends but not both of them.
-	(add-to-list 'company-backends '(;;company-irony
-					 company-irony-c-headers
-					 company-rtags))
-	(cmake-ide-setup))
+        ;; company-irony and company-rtags are both completion backends.
+        ;; When using both of them together duplicate completions are shown.
+        ;; So use one of these completions backends but not both of them.
+        (add-to-list 'company-backends '(;;company-irony
+                                         company-irony-c-headers
+                                         company-rtags))
+        (cmake-ide-setup))
     #+END_SRC
 *** irony-eldoc
     #+BEGIN_SRC emacs-lisp
       (use-package irony-eldoc
-	:ensure t
+        :ensure t
 
-	:diminish eldoc-mode)
+        :diminish eldoc-mode)
     #+END_SRC
 *** flycheck-irony
     #+BEGIN_SRC emacs-lisp
       (use-package flycheck-irony
-	:ensure t
+        :ensure t
 
-	:diminish flycheck-mode)
+        :diminish flycheck-mode)
     #+END_SRC
 *** cmake-mode
     #+BEGIN_SRC emacs-lisp
       (use-package cmake-mode
-	:ensure t)
+        :ensure t)
     #+END_SRC
 *** cmake-ide
     #+BEGIN_SRC emacs-lisp
       (use-package cmake-ide
-	:ensure t
+        :ensure t
 
-	:init
-	(setq cmake-ide-build-dir "cmake_build"))
+        :init
+        (setq cmake-ide-build-dir "cmake_build"))
     #+END_SRC
 ** Python setup
 *** Elpy
     #+BEGIN_SRC emacs-lisp
       (use-package elpy
-	:ensure t
+        :ensure t
 
-	:diminish elpy-mode
+        :diminish elpy-mode
 
-	:hook ((python-mode . elpy-mode)
-	       ;; (before-save . elpy-black-fix-code)
-	       )
+        :hook ((python-mode . elpy-mode)
+               ;; (before-save . elpy-black-fix-code)
+               )
 
-	:init
-	;; Don't print evaluated code fragments in the python shell
-	;; https://elpy.readthedocs.io/en/latest/ide.html#option-elpy-shell-echo-input
-	(setq elpy-shell-echo-input nil)
+        :init
+        ;; Don't print evaluated code fragments in the python shell
+        ;; https://elpy.readthedocs.io/en/latest/ide.html#option-elpy-shell-echo-input
+        (setq elpy-shell-echo-input nil)
 
-	:config
-	(elpy-enable))
+        :config
+        (elpy-enable))
     #+END_SRC
 *** py-autopep8
     #+BEGIN_SRC emacs-lisp
       (use-package py-autopep8
-	:ensure t
+        :ensure t
 
-	:disabled
+        :disabled
 
-	:after elpy
+        :after elpy
 
-	:hook (elpy-mode . py-autopep8-enable-on-save))
+        :hook (elpy-mode . py-autopep8-enable-on-save))
     #+END_SRC
 *** py-isort
     #+BEGIN_SRC emacs-lisp
       (use-package py-isort
-	:ensure t
+        :ensure t
 
-	:disabled
+        :disabled
 
-	:after elpy
+        :after elpy
 
-	:hook (before-save . py-isort-before-save))
+        :hook (before-save . py-isort-before-save))
     #+END_SRC
 *** auto-virtualenvwrapper
     #+BEGIN_SRC emacs-lisp
       (use-package auto-virtualenvwrapper
-	:ensure t
+        :ensure t
 
-	:config
-	(add-hook 'projectile-after-switch-project-hook #'auto-virtualenvwrapper-activate))
+        :config
+        (add-hook 'projectile-after-switch-project-hook #'auto-virtualenvwrapper-activate))
     #+END_SRC
 * Snippets
 ** Comment/Uncomment line or region
@@ -699,10 +699,10 @@
        "Comments or uncomments the region or the current line if there's no active region."
        (interactive)
        (let (beg end)
-	 (if (region-active-p)
-	   (setq beg (region-beginning) end (region-end))
-	   (setq beg (line-beginning-position) end (line-end-position)))
-	 (comment-or-uncomment-region beg end)))
+         (if (region-active-p)
+           (setq beg (region-beginning) end (region-end))
+           (setq beg (line-beginning-position) end (line-end-position)))
+         (comment-or-uncomment-region beg end)))
      (global-set-key (kbd "C-x C-\\") 'comment-or-uncomment-region-or-line)
    #+END_SRC
 ** Delete current file and buffer
@@ -713,29 +713,29 @@
      Version 2016-07-20"
        (interactive)
        (progn
-	 (kill-new (buffer-string))
-	 (message "Buffer content copied to kill-ring.")
-	 (when (buffer-file-name)
-	   (when (file-exists-p (buffer-file-name))
-	     (progn
-	       (delete-file (buffer-file-name))
-	       (message "Deleted file: 「%s」." (buffer-file-name)))))
-	 (let ((buffer-offer-save nil))
-	   (set-buffer-modified-p nil)
-	   (kill-buffer (current-buffer)))))
+         (kill-new (buffer-string))
+         (message "Buffer content copied to kill-ring.")
+         (when (buffer-file-name)
+           (when (file-exists-p (buffer-file-name))
+             (progn
+               (delete-file (buffer-file-name))
+               (message "Deleted file: 「%s」." (buffer-file-name)))))
+         (let ((buffer-offer-save nil))
+           (set-buffer-modified-p nil)
+           (kill-buffer (current-buffer)))))
      (global-set-key (kbd "C-c k")  'xah-delete-current-file-copy-to-kill-ring)
    #+END_SRC
 ** Duplicate current line
    #+begin_src emacs-lisp
      (defun duplicate-line ()
-	(interactive)
-	(let ((col (current-column)))
-	  (move-beginning-of-line 1)
-	  (kill-line)
-	  (yank)
-	  (newline)
-	  (yank)
-	  (move-to-column col)))
+        (interactive)
+        (let ((col (current-column)))
+          (move-beginning-of-line 1)
+          (kill-line)
+          (yank)
+          (newline)
+          (yank)
+          (move-to-column col)))
 
       (global-set-key (kbd "C-c d") 'duplicate-line)
    #+end_src
@@ -756,17 +756,17 @@
 
        ;; Move lines first
        (when (/= arg 1)
-	 (let ((line-move-visual nil))
-	   (forward-line (1- arg))))
+         (let ((line-move-visual nil))
+           (forward-line (1- arg))))
 
        (let ((orig-point (point)))
-	 (back-to-indentation)
-	 (when (= orig-point (point))
-	   (move-beginning-of-line 1))))
+         (back-to-indentation)
+         (when (= orig-point (point))
+           (move-beginning-of-line 1))))
 
      ;; remap C-a to `smarter-move-beginning-of-line'
      (global-set-key [remap move-beginning-of-line]
-		     'smarter-move-beginning-of-line)
+                     'smarter-move-beginning-of-line)
    #+END_SRC
 * Tangle on save
   When opening this file for the first time the following warning is shown:
