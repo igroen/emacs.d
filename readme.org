@@ -424,26 +424,6 @@
              ("C-x C-m C-p" . mc/mark-previous-like-this)
              ("C-x C-m C-a" . mc/mark-all-like-this)))
    #+END_SRC
-** Neotree
-   #+BEGIN_SRC emacs-lisp
-     (use-package neotree
-       :ensure t
-
-       :bind
-       ("<f8>" . neotree-toggle)
-       ("S-<f8>" . neotree-projectile-action)
-
-       :init
-       (setq neo-smart-open t
-             neo-hidden-regexp-list
-             '("^\\."
-               "^__pycache__$"
-               "\\.pyc$"
-               "\\.egg-info$"
-               "~$"
-               "^#.*#$"
-               "\\.elc$")))
-   #+END_SRC
 ** Power line
    #+BEGIN_SRC emacs-lisp
      (use-package powerline
@@ -472,6 +452,40 @@
 
        :hook (after-init . counsel-projectile-mode))
    #+END_SRC
+** Treemacs
+*** treemacs
+    #+BEGIN_SRC emacs-lisp
+      (use-package treemacs
+        :ensure t
+
+        :bind (("M-0"       . treemacs-select-window)
+               ("C-x t 1"   . treemacs-delete-other-windows)
+               ("C-x t t"   . treemacs)
+               ("C-x t B"   . treemacs-bookmark)
+               ("C-x t C-t" . treemacs-find-file)
+               ("C-x t M-t" . treemacs-find-tag))
+
+        :config (treemacs-git-mode 'simple))
+    #+END_SRC
+*** treemacs-projectile
+    #+begin_src emacs-lisp
+      (use-package treemacs-projectile
+        :after treemacs projectile
+        :ensure t)
+    #+end_src
+*** treemacs-icons-dired
+    #+begin_src emacs-lisp
+      (use-package treemacs-icons-dired
+        :after treemacs dired
+        :ensure t
+        :config (treemacs-icons-dired-mode))
+    #+end_src
+*** treemacs-magit
+    #+begin_src emacs-lisp
+      (use-package treemacs-magit
+        :after treemacs magit
+        :ensure t)
+    #+end_src
 ** Try
    #+BEGIN_SRC emacs-lisp
      (use-package try
