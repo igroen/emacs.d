@@ -329,6 +329,33 @@
 
        :config (drag-stuff-global-mode 1))
    #+END_SRC
+** Dumb jump
+   #+begin_src emacs-lisp
+     (use-package dumb-jump
+       :ensure t
+
+       :bind (("M-g j" . dumb-jump-go)
+              ("M-g o" . dumb-jump-go-other-window)
+              ("M-g i" . dumb-jump-go-prompt)
+              ("M-g e" . dumb-jump-go-prefer-external)
+              ("M-g x" . dumb-jump-go-prefer-external-other-window)
+              ("M-g l" . dumb-jump-quick-look)
+              ("M-g b" . dumb-jump-back)
+              ("M-g ?" . dumb-jump-hydra/body))
+
+       :init
+       (defhydra dumb-jump-hydra (:color blue :columns 3)
+         "Dumb Jump"
+         ("j" dumb-jump-go "Go")
+         ("o" dumb-jump-go-other-window "Go other window")
+         ("i" dumb-jump-go-prompt "Prompt")
+         ("e" dumb-jump-go-prefer-external "Go external")
+         ("x" dumb-jump-go-prefer-external-other-window "Go external other window")
+         ("l" dumb-jump-quick-look "Quick look")
+         ("b" dumb-jump-back "Back"))
+
+       :config (setq dumb-jump-selector 'ivy))
+   #+end_src
 ** Elfeed
    #+BEGIN_SRC emacs-lisp
      (use-package elfeed
