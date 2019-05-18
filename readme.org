@@ -334,6 +334,8 @@
      (use-package dumb-jump
        :ensure t
 
+       :after hydra
+
        :bind (("M-g j" . dumb-jump-go)
               ("M-g o" . dumb-jump-go-other-window)
               ("M-g i" . dumb-jump-go-prompt)
@@ -441,6 +443,11 @@
        ;; Prompt for the password in the minibuffer
        (setq epa-pinentry-mode 'loopback))
    #+END_SRC
+** Hydra
+   #+begin_src emacs-lisp
+     (use-package hydra
+       :ensure t)
+   #+end_src
 ** Multiple cursors
    #+BEGIN_SRC emacs-lisp
     (use-package multiple-cursors
@@ -497,21 +504,25 @@
 *** treemacs-projectile
     #+begin_src emacs-lisp
       (use-package treemacs-projectile
-        :after treemacs projectile
-        :ensure t)
+        :ensure t
+
+        :after (treemacs projectile))
     #+end_src
 *** treemacs-icons-dired
     #+begin_src emacs-lisp
       (use-package treemacs-icons-dired
-        :after treemacs dired
         :ensure t
+
+        :after (treemacs dired)
+
         :config (treemacs-icons-dired-mode))
     #+end_src
 *** treemacs-magit
     #+begin_src emacs-lisp
       (use-package treemacs-magit
-        :after treemacs magit
-        :ensure t)
+        :ensure t
+
+        :after (treemacs magit))
     #+end_src
 ** Try
    #+BEGIN_SRC emacs-lisp
