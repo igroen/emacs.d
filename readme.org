@@ -499,7 +499,15 @@
                ("C-x t C-t" . treemacs-find-file)
                ("C-x t M-t" . treemacs-find-tag))
 
-        :config (treemacs-git-mode 'simple))
+        :config
+        (treemacs-git-mode 'simple)
+
+        (defun treemacs-ignore (filename absolute-path)
+          (or (seq-contains '("__pycache__" "build" "dist" "venv") filename)
+              (string-match "^.+\\.egg-info$" filename)
+              (string-match "^.+\\.pyc$" filename)))
+
+        (add-to-list 'treemacs-ignored-file-predicates #'treemacs-ignore))
     #+END_SRC
 *** treemacs-projectile
     #+begin_src emacs-lisp
