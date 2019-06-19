@@ -679,17 +679,14 @@
 
         :diminish elpy-mode
 
-        :hook ((python-mode . elpy-mode)
-               ;; (before-save . elpy-black-fix-code)
-               )
+        ;; :hook (before-save . elpy-black-fix-code)
 
         :init
+        (elpy-enable)
+
         ;; Don't print evaluated code fragments in the python shell
         ;; https://elpy.readthedocs.io/en/latest/ide.html#option-elpy-shell-echo-input
-        (setq elpy-shell-echo-input nil)
-
-        :config
-        (elpy-enable))
+        (setq elpy-shell-echo-input nil))
     #+END_SRC
 *** py-autopep8
     #+BEGIN_SRC emacs-lisp
