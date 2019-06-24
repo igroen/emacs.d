@@ -524,17 +524,6 @@
       ;; Install xclip on Linux for this to work. On OSX pbcopy/pbpaste will be used
       :config (xclip-mode t))
    #+END_SRC
-** YASnippet
-   #+BEGIN_SRC emacs-lisp
-     (use-package yasnippet-snippets
-       :ensure t
-
-       :defer t
-
-       :diminish yas-minor-mode
-
-       :config (yas-global-mode))
-   #+END_SRC
 * Org mode
 ** Org
    #+BEGIN_SRC emacs-lisp
