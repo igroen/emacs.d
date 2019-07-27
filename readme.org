@@ -208,6 +208,12 @@
     #+BEGIN_SRC emacs-lisp
       (global-set-key (kbd "C-x C-b") 'ibuffer)
     #+END_SRC
+*** Enable windmove
+    Enable windmove default keybindings for easier switching between windows
+
+    #+begin_src emacs-lisp
+      (windmove-default-keybindings)
+    #+end_src
 ** Backups
    #+BEGIN_SRC emacs-lisp
      ;; Store all backup and autosave files in the backups dir
@@ -564,6 +570,7 @@
    #+END_SRC
 ** Org tempo
    Expansion of templates
+
    #+BEGIN_SRC emacs-lisp
      (use-package org-tempo)
    #+END_SRC
