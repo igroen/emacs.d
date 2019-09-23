@@ -32,7 +32,6 @@
      ;; Set the repository locations
      (add-to-list 'package-archives '("gnu" . "https://elpa.gnu.org/packages/"))
      (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
-     (add-to-list 'package-archives '("org" . "https://orgmode.org/elpa/"))
 
      ;; Activate all the packages (in particular autoloads)
      (package-initialize)
@@ -534,8 +533,6 @@
 ** Org
    #+BEGIN_SRC emacs-lisp
      (use-package org
-       :ensure org-plus-contrib
-
        :bind (("C-c a" . org-agenda)
               ("C-c c" . org-capture)
               ("C-c l" . org-store-link))
@@ -567,12 +564,6 @@
        :ensure t
 
        :hook (org-mode lambda () (org-bullets-mode t)))
-   #+END_SRC
-** Org tempo
-   Expansion of templates
-
-   #+BEGIN_SRC emacs-lisp
-     (use-package org-tempo)
    #+END_SRC
 * Programming
 ** C++ setup
