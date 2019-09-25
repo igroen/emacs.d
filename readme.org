@@ -57,19 +57,6 @@
      (use-package bind-key
        :ensure t)
 
-     ;; :quelpa keyword
-     (use-package quelpa
-       :ensure t
-
-       :defer t
-
-       :custom
-       ;; Don't update melpa on Emacs startup
-       (quelpa-update-melpa-p nil))
-
-     (use-package quelpa-use-package
-       :ensure t)
-
      ;; :chords keyword
      (use-package use-package-chords
        :ensure t
