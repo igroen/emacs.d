@@ -399,8 +399,13 @@
    #+BEGIN_SRC emacs-lisp
      (use-package epa
        :init
-       ;; Prefer armored ASCII
+       ;; Prefer armored ASCII (.asc)
        (setq epa-armor t)
+
+       ;; Open .asc files in the same way as .gpg files
+       (setq epa-file-name-regexp "\\.\\(gpg\\|asc\\)$")
+       (epa-file-name-regexp-update)
+
        ;; Prompt for the password in the minibuffer
        (setq epa-pinentry-mode 'loopback))
    #+END_SRC

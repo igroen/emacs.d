@@ -2,9 +2,9 @@
 /.mc-lists.el
 /backups/
 /bookmarks
-/backups/
 /custom.el
 /elpa/
+/elpy/
 /eshell/
 /init.el
 /irony/
