@@ -665,17 +665,6 @@
         ;; https://elpy.readthedocs.io/en/latest/ide.html#option-elpy-shell-echo-input
         (setq elpy-shell-echo-input nil))
     #+END_SRC
-*** py-autopep8
-    #+BEGIN_SRC emacs-lisp
-      (use-package py-autopep8
-        :ensure t
-
-        :disabled
-
-        :after elpy
-
-        :hook (elpy-mode . py-autopep8-enable-on-save))
-    #+END_SRC
 *** py-isort
     #+BEGIN_SRC emacs-lisp
       (use-package py-isort
