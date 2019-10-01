@@ -763,7 +763,7 @@
   - Restart emacs or use 'C-x load-file <enter> init.el'
   - The next time this warning is shown press '!' to prevent future warnings.
 
-  #+BEGIN_SRC emacs-lisp
+  #+BEGIN_SRC emacs-lisp :tangle no
     ;; Local Variables:
     ;; eval: (add-hook 'after-save-hook (lambda ()(org-babel-tangle)) nil t)
     ;; End:
