@@ -20,7 +20,7 @@
                         gc-cons-percentage 0.1)))
    #+END_SRC
 ** Package management
-   Setup package management with use-package and quelpa
+   Setup package management with use-package
 
    #+BEGIN_SRC emacs-lisp
      (require 'package)
@@ -29,11 +29,11 @@
      ;; Packages to install
      (defvar package-list '(use-package))
 
-     ;; Set the repository locations
+     ;; Set repository locations
      (add-to-list 'package-archives '("gnu" . "https://elpa.gnu.org/packages/"))
      (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
 
-     ;; Activate all the packages (in particular autoloads)
+     ;; Find all installed packages and activate them
      (package-initialize)
 
      ;; Fetch the list of packages available
@@ -45,7 +45,7 @@
        (unless (package-installed-p package)
          (package-install package)))
 
-     ;; Enable use-package and friends
+     ;; Enable use-package
      (eval-when-compile
        (require 'use-package))
 
