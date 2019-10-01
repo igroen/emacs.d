@@ -63,25 +63,13 @@
 
        :config (key-chord-mode 1))
    #+END_SRC
-** Debug
-*** Startup time
-    Log Emacs startup time in *Messages*
+** Startup time
+   Log Emacs startup time in *Messages* buffer
 
-    #+BEGIN_SRC emacs-lisp
-      (add-hook 'emacs-startup-hook
-                '(lambda ()
-                   (message (format "Emacs startup time: %s" (emacs-init-time)))))
-    #+END_SRC
-*** Benchmarks
-    Benchmark your Emacs initialization
-
-    #+BEGIN_SRC emacs-lisp
-      (use-package benchmark-init
-        :ensure t
-
-        :config
-        ;; To disable collection of benchmark data after init is done.
-        (add-hook 'after-init-hook 'benchmark-init/deactivate))
+   #+BEGIN_SRC emacs-lisp
+     (add-hook 'emacs-startup-hook
+               '(lambda ()
+                  (message (format "Emacs startup time: %s" (emacs-init-time)))))
     #+END_SRC
 * Defaults
 ** Username & Email
