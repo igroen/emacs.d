@@ -572,21 +572,15 @@
 
         :diminish company-mode)
     #+END_SRC
-*** company-irony
-    #+BEGIN_SRC emacs-lisp
-      (use-package company-irony
-        :ensure t
-
-        :disabled  ;; Using rtags
-
-        :diminish company-mode)
-    #+END_SRC
 *** Irony
+    To compile Irony on MacOS add '-DCMAKE_PREFIX_PATH=/usr/local/opt/llvm'
+    to the irony-install-server make command.
+
+    https://github.com/Sarcasm/irony-mode/pull/539#issuecomment-504792763
+
     #+BEGIN_SRC emacs-lisp
       (use-package irony
         :ensure t
-
-        ;; :after company
 
         :diminish irony-mode
 
@@ -603,11 +597,7 @@
         (add-hook 'irony-mode-hook 'irony-eldoc)
         (add-hook 'flycheck-mode-hook 'flycheck-irony-setup)
 
-        ;; company-irony and company-rtags are both completion backends.
-        ;; When using both of them together duplicate completions are shown.
-        ;; So use one of these completions backends but not both of them.
-        (add-to-list 'company-backends '(;;company-irony
-                                         company-irony-c-headers
+        (add-to-list 'company-backends '(company-irony-c-headers
                                          company-rtags))
         (cmake-ide-setup))
     #+END_SRC
