@@ -6,7 +6,7 @@
    Make startup faster by reducing the frequency of garbage collection.
 
    #+BEGIN_SRC emacs-lisp
-     (setq gc-cons-threshold (* 500 1024 1024)
+     (setq gc-cons-threshold (* 512 1024 1024)
            gc-cons-percentage 0.6)
    #+END_SRC
 
