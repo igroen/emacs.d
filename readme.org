@@ -480,9 +480,7 @@
       (use-package treemacs-projectile
         :straight t
 
-        :after treemacs projectile
-
-        :after (treemacs projectile))
+        :after treemacs projectile)
     #+end_src
 *** treemacs-icons-dired
     #+begin_src emacs-lisp
