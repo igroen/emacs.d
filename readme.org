@@ -431,13 +431,6 @@
              ("C-x C-m C-p" . mc/mark-previous-like-this)
              ("C-x C-m C-a" . mc/mark-all-like-this)))
    #+END_SRC
-** Power line
-   #+BEGIN_SRC emacs-lisp
-     (use-package powerline
-       :straight t
-
-       :config (powerline-default-theme))
-   #+END_SRC
 ** Projectile
    #+BEGIN_SRC emacs-lisp
      (use-package projectile
