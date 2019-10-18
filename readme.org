@@ -46,12 +46,6 @@
      ;; :bind keyword
      (use-package bind-key
        :straight t)
-
-     ;; :chords keyword
-     (use-package use-package-chords
-       :straight t
-
-       :config (key-chord-mode 1))
    #+END_SRC
 ** Startup time
    Log Emacs startup time in *Messages* buffer
@@ -208,18 +202,6 @@
        :straight t
 
        :bind ([remap other-window] . ace-window))
-   #+END_SRC
-** Avy
-   Jump to things in Emacs tree-style
-
-   #+BEGIN_SRC emacs-lisp
-     (use-package avy
-       :straight t
-
-       :chords
-       ("jj" . avy-goto-char)
-       ("jk" . avy-goto-word-1)
-       ("jl" . avy-goto-line))
    #+END_SRC
 ** Company
    #+BEGIN_SRC emacs-lisp
