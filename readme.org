@@ -413,6 +413,34 @@
              ("C-x C-m C-p" . mc/mark-previous-like-this)
              ("C-x C-m C-a" . mc/mark-all-like-this)))
    #+END_SRC
+** Org mode
+   #+BEGIN_SRC emacs-lisp
+     (use-package org
+       :bind (("C-c a" . org-agenda)
+              ("C-c c" . org-capture)
+              ("C-c l" . org-store-link))
+
+       :init
+       ;; Show time when done
+       (setq org-log-done t)
+
+       ;; Folder to look for agenda files
+       (setq org-agenda-files '("~/org"))
+
+       ;; Log quick notes (C-c C-z) into LOGBOOK drawer
+       (setq org-log-into-drawer t)
+
+       ;; Syntax highlighting for org-mode
+       (setq org-src-fontify-natively t)
+
+       :config
+       ;; Add languages for the ‘src’ code blocks in org-mode
+       (org-babel-do-load-languages
+        'org-babel-load-languages
+        '((emacs-lisp . t)
+          (shell . t)
+          (python . t))))
+   #+END_SRC
 ** Projectile
    #+BEGIN_SRC emacs-lisp
      (use-package projectile
@@ -497,42 +525,6 @@
       ;; Enable xclip-mode to use the system clipboard when killing/yanking
       ;; Install xclip on Linux for this to work. On OSX pbcopy/pbpaste will be used
       :config (xclip-mode t))
-   #+END_SRC
-* Org mode
-** Org
-   #+BEGIN_SRC emacs-lisp
-     (use-package org
-       :bind (("C-c a" . org-agenda)
-	      ("C-c c" . org-capture)
-	      ("C-c l" . org-store-link))
-
-       :init
-       ;; Show time when done
-       (setq org-log-done t)
-
-       ;; Folder to look for agenda files
-       (setq org-agenda-files '("~/org"))
-
-       ;; Log quick notes (C-c C-z) into LOGBOOK drawer
-       (setq org-log-into-drawer t)
-
-       ;; Syntax highlighting for org-mode
-       (setq org-src-fontify-natively t)
-
-       :config
-       ;; Add languages for the ‘src’ code blocks in org-mode
-       (org-babel-do-load-languages
-	'org-babel-load-languages
-	'((emacs-lisp . t)
-	  (shell . t)
-	  (python . t))))
-   #+END_SRC
-** Org bullets
-   #+BEGIN_SRC emacs-lisp
-     (use-package org-bullets
-       :straight t
-
-       :hook (org-mode lambda () (org-bullets-mode t)))
    #+END_SRC
 * Programming
 ** C++ setup
