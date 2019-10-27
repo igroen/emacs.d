@@ -173,17 +173,21 @@
       (windmove-default-keybindings)
     #+end_src
 ** Backups
+   Store all backup and autosave files in the 'backups' dir.
+
    #+BEGIN_SRC emacs-lisp
-     ;; Store all backup and autosave files in the backups dir
      (setq auto-save-list-file-prefix nil)
      (setq backup-directory-alist
            `(("." . ,(concat user-emacs-directory "backups"))))
+   #+END_SRC
+   Use version contral and keep multiple backup files.
 
-     ;; Use version contral and keep multiple backup files
-     (setq delete-old-versions t
-       kept-new-versions 6
-       kept-old-versions 2
-       version-control t)
+   #+BEGIN_SRC emacs-lisp
+     (setq backup-by-copying t
+           delete-old-versions t
+           kept-new-versions 6
+           kept-old-versions 2
+           version-control t)
    #+END_SRC
 ** Customize
    Move lines added by the customize system to a seperate file.
