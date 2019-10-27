@@ -187,7 +187,8 @@
            delete-old-versions t
            kept-new-versions 6
            kept-old-versions 2
-           version-control t)
+           version-control t
+           vc-make-backup-files t)
    #+END_SRC
 ** Customize
    Move lines added by the customize system to a seperate file.
