@@ -47,14 +47,6 @@
      (use-package bind-key
        :straight t)
    #+END_SRC
-** Startup time
-   Log Emacs startup time in *Messages* buffer
-
-   #+BEGIN_SRC emacs-lisp
-     (add-hook 'emacs-startup-hook
-               '(lambda ()
-                  (message (format "Emacs startup time: %s" (emacs-init-time)))))
-    #+END_SRC
 * Defaults
 ** Username & Email
    #+BEGIN_SRC emacs-lisp
