@@ -63,13 +63,7 @@
      ;; Disable bell
      (setq ring-bell-function 'ignore)
 
-     ;; Disable menubar
-     (menu-bar-mode -1)
-
-     ;; Disable toolbar
-     (tool-bar-mode -1)
-
-     ;; Disable scrollbars
+     ;; Disable menubar, toolbar and scrollbars
      (dolist (mode '(menu-bar-mode tool-bar-mode scroll-bar-mode))
        (when (fboundp mode) (funcall mode -1)))
 
