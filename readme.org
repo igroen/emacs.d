@@ -48,12 +48,11 @@
        :straight t)
    #+END_SRC
 * Defaults
-** Username & Email
+** Encoding
    #+BEGIN_SRC emacs-lisp
-     (setq user-full-name "Iwan in 't Groen"
-           user-login-name "iwan"
-           user-mail-address "iwanintgroen@gmail.com"
-           smtpmail-smtp-user user-mail-address)
+     (set-terminal-coding-system 'utf-8)
+     (set-keyboard-coding-system 'utf-8)
+     (prefer-coding-system 'utf-8)
    #+END_SRC
 ** Screen setup
    #+BEGIN_SRC emacs-lisp
@@ -75,12 +74,6 @@
 
      ;; Set theme
      (load-theme 'leuven)
-   #+END_SRC
-** Encoding
-   #+BEGIN_SRC emacs-lisp
-     (set-terminal-coding-system 'utf-8)
-     (set-keyboard-coding-system 'utf-8)
-     (prefer-coding-system 'utf-8)
    #+END_SRC
 ** Editing
    #+BEGIN_SRC emacs-lisp
