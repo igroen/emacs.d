@@ -39,54 +39,62 @@
 
      (straight-use-package 'use-package)
 
-     ;; :diminish keyword
      (use-package diminish
        :straight t)
 
-     ;; :bind keyword
      (use-package bind-key
        :straight t)
    #+END_SRC
 * Defaults
 ** Screen setup
-   #+BEGIN_SRC emacs-lisp
-     ;; Start with empty buffer
-     (setq inhibit-startup-message t)
-
-     ;; Disable bell
-     (setq ring-bell-function 'ignore)
-
-     ;; Disable menubar, toolbar and scrollbars
-     (dolist (mode '(menu-bar-mode tool-bar-mode scroll-bar-mode))
-       (when (fboundp mode) (funcall mode -1)))
-
-     ;; Show the current column in the mode line
-     (setq column-number-mode t)
-
-     ;; Maximize Emacs on init
-     (toggle-frame-maximized)
-
-     ;; Set theme
-     (load-theme 'leuven)
-   #+END_SRC
+*** Start with empty buffer
+    #+BEGIN_SRC emacs-lisp
+      (setq inhibit-startup-message t)
+    #+END_SRC
+*** Disable bell
+    #+BEGIN_SRC emacs-lisp
+      (setq ring-bell-function 'ignore)
+    #+END_SRC
+*** Disable menubar, toolbar and scrollbars
+    #+BEGIN_SRC emacs-lisp
+      (dolist (mode '(menu-bar-mode tool-bar-mode scroll-bar-mode))
+             (when (fboundp mode) (funcall mode -1)))
+    #+END_SRC
+*** Show the current column in the mode line
+    #+BEGIN_SRC emacs-lisp
+      (setq column-number-mode t)
+    #+END_SRC
+*** Maximize Emacs on init
+    #+BEGIN_SRC emacs-lisp
+      (toggle-frame-maximized)
+    #+END_SRC
+*** Set theme
+    #+BEGIN_SRC emacs-lisp
+      (load-theme 'leuven)
+    #+END_SRC
 ** Editing
+*** Highlight the current line
+    #+BEGIN_SRC emacs-lisp
+      (global-hl-line-mode t)
+    #+END_SRC
+*** Remove trailing whitespace on save
+    #+BEGIN_SRC emacs-lisp
+      (add-hook 'before-save-hook 'delete-trailing-whitespace)
+    #+END_SRC
+*** Auto close bracket insertion
+    #+BEGIN_SRC emacs-lisp
+      (electric-pair-mode 1)
+    #+END_SRC
+*** Show corresponding paren
+    #+BEGIN_SRC emacs-lisp
+      (show-paren-mode 1)
+    #+END_SRC
+*** Require a newline at the end of the file
+    #+BEGIN_SRC emacs-lisp
+      (defvar require-final-newline t)
+    #+END_SRC
+*** Set indentation to always use spaces
    #+BEGIN_SRC emacs-lisp
-     ;; Highlight the current line
-     (global-hl-line-mode t)
-
-     ;; Remove trailing whitespace on save
-     (add-hook 'before-save-hook 'delete-trailing-whitespace)
-
-     ;; Auto close bracket insertion.
-     (electric-pair-mode 1)
-
-     ;; Show corresponding paren
-     (show-paren-mode 1)
-
-     ;; Require a newline at the end of the file
-     (defvar require-final-newline t)
-
-     ;; Set indentation to always use spaces
      (setq-default indent-tabs-mode nil)
    #+END_SRC
 ** Scrolling
@@ -97,7 +105,7 @@
            scroll-preserve-screen-position 1)
    #+END_SRC
 ** Tramp
-   Set remote password prompts
+   Set remote password prompts.
 
    #+BEGIN_SRC emacs-lisp
      (customize-set-variable
@@ -140,7 +148,7 @@
       (global-set-key (kbd "C-x C-b") 'ibuffer)
     #+END_SRC
 *** Enable windmove
-    Enable windmove default keybindings for easier switching between windows
+    Enable windmove default keybindings for easier switching between windows.
 
     #+begin_src emacs-lisp
       (windmove-default-keybindings)
@@ -359,7 +367,6 @@
      (use-package gist
        :straight t
 
-       ;; Ask for gist description when creating gist
        :init (setq gist-ask-for-description t))
    #+END_SRC
 ** GnuPG
@@ -412,7 +419,7 @@
        (setq org-src-fontify-natively t)
 
        :config
-       ;; Add languages for the ‘src’ code blocks in org-mode
+       ;; Add languages for the ‘SRC’ code blocks in org-mode
        (org-babel-do-load-languages
         'org-babel-load-languages
         '((emacs-lisp . t)
@@ -496,12 +503,13 @@
        :config (which-key-mode))
    #+END_SRC
 ** XClip
+   Enable xclip-mode to use the system clipboard when killing/yanking.
+   Install xclip on Linux for this to work. On OSX pbcopy/pbpaste will be used.
+
    #+BEGIN_SRC emacs-lisp
     (use-package xclip
       :straight t
 
-      ;; Enable xclip-mode to use the system clipboard when killing/yanking
-      ;; Install xclip on Linux for this to work. On OSX pbcopy/pbpaste will be used
       :config (xclip-mode t))
    #+END_SRC
 * Programming
@@ -698,7 +706,7 @@
   "The local variables list in init.org contains values that may not be safe (*)".
 
   - Press 'y' to continue.
-  - Next run `org-babel-tangle` (C-c C-v t) to create init.el.
+  - Next run `org-babel-tangle` (C-c C-v t) to create an init.el file.
   - Restart emacs or use 'C-x load-file <enter> init.el'
   - The next time this warning is shown press '!' to prevent future warnings.
 
