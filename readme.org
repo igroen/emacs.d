@@ -58,7 +58,7 @@
 *** Disable menubar, toolbar and scrollbars
     #+BEGIN_SRC emacs-lisp
       (dolist (mode '(menu-bar-mode tool-bar-mode scroll-bar-mode))
-             (when (fboundp mode) (funcall mode -1)))
+        (when (fboundp mode) (funcall mode -1)))
     #+END_SRC
 *** Show the current column in the mode line
     #+BEGIN_SRC emacs-lisp
