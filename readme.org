@@ -274,11 +274,16 @@
    #+END_SRC
 ** Dired
    #+BEGIN_SRC emacs-lisp
-     (use-package dired-x
-       :init (setq-default dired-omit-files-p t)
+     (use-package dired
+       :init
+       ;; Use dired-x to enable C-x C-j (dired-jump) and other features
+       (use-package dired-x)
 
-       ;; Hide dot files in dired omit-mode (C-x M-o)
-       :config (setq dired-omit-files (concat dired-omit-files "\\|^\\..+$")))
+       :config
+       ;; Omit files starting with a dot
+       (setq dired-omit-files (concat dired-omit-files "\\|^\\..+$"))
+       ;; Default omit files
+       (setq-default dired-omit-mode t))
    #+END_SRC
 ** Drag stuff
    #+BEGIN_SRC emacs-lisp
