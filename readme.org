@@ -23,6 +23,9 @@
    Setup package management with straight.el and use-package.
 
    #+BEGIN_SRC emacs-lisp
+     ;; Disable automatic package rebuilding
+     (setq straight-check-for-modifications nil)
+
      (defvar bootstrap-version)
 
      (let ((bootstrap-file
