@@ -608,6 +608,11 @@
         :init
         (setq cmake-ide-build-dir "cmake_build"))
     #+END_SRC
+** Common Lisp setup
+   #+BEGIN_SRC emacs-lisp
+     (use-package sly
+       :straight t)
+   #+END_SRC
 ** Python setup
 *** Elpy
     #+BEGIN_SRC emacs-lisp
