@@ -23,6 +23,8 @@
    Setup package management with straight.el and use-package.
 
    #+BEGIN_SRC emacs-lisp
+     ;; Use develop branch
+     (setq straight-repository-branch "develop")
      ;; Disable automatic package rebuilding
      (setq straight-check-for-modifications nil)
 
