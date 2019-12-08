@@ -719,6 +719,17 @@
      (global-set-key [remap move-beginning-of-line]
                      'smarter-move-beginning-of-line)
    #+END_SRC
+** Update all packages
+   #+BEGIN_SRC emacs-lisp
+     (defun update-all-packages ()
+       "Update all packages"
+       (interactive)
+       (progn
+         (straight-prune-build)
+         (straight-normalize-all)
+         (straight-pull-all)
+         (straight-rebuild-all)))
+   #+END_SRC
 * Tangle on save
   When opening this file for the first time the following warning is shown:
   "The local variables list in init.org contains values that may not be safe (*)".
