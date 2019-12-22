@@ -611,7 +611,10 @@
 ** Common Lisp setup
    #+BEGIN_SRC emacs-lisp
      (use-package sly
-       :straight t)
+       :straight t
+
+       :config
+       (setq inferior-lisp-program "sbcl"))
    #+END_SRC
 ** Python setup
 *** Elpy
