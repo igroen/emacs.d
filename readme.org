@@ -532,10 +532,10 @@
 
         :diminish rtags-mode
 
-        :init
+        :config
+        (setq rtags-path (expand-file-name "straight/repos/rtags" straight-base-dir))
         (setq rtags-completions-enabled t)
 
-        :config
         (rtags-enable-standard-keybindings))
     #+END_SRC
 *** company-rtags
