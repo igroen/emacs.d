@@ -368,17 +368,23 @@
      (use-package git-timemachine
        :straight t)
 
-     (use-package git-gutter
-       :straight t
-
-       :diminish git-gutter-mode
-
-       :config (global-git-gutter-mode t))
-
      (use-package gist
        :straight t
 
        :init (setq gist-ask-for-description t))
+
+     (use-package diff-hl
+       :straight t
+
+       :hook ((magit-post-refresh . diff-hl-magit-post-refresh)
+              (dired-mode . diff-hl-dired-mode-unless-remote))
+
+       :init
+       (global-diff-hl-mode)
+
+       :config
+       (diff-hl-margin-mode)
+       (diff-hl-flydiff-mode))
    #+END_SRC
 ** GnuPG
    #+BEGIN_SRC emacs-lisp
