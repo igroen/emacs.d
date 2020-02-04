@@ -213,11 +213,9 @@
 
        :bind ("<f6>" . ivy-resume)
 
-       :init
+       :config
        (setq ivy-use-virtual-buffers t
              ivy-count-format "%d/%d ")
-
-       :config
        (ivy-mode 1))
    #+END_SRC
 *** Counsel
@@ -275,21 +273,21 @@
 ** Dired
    #+BEGIN_SRC emacs-lisp
      (use-package dired
-       :init
+       :config
        ;; Use dired-x to enable C-x C-j (dired-jump) and other features
        (use-package dired-x)
 
-       :config
        ;; Omit files starting with a dot
        (setq dired-omit-files (concat dired-omit-files "\\|^\\..+$"))
+
        ;; Default omit files
        (setq-default dired-omit-mode t)
 
        ;; Make dired open in the same window when using RET or ^
-       (put 'dired-find-alternate-file 'disabled nil)
        (define-key dired-mode-map (kbd "RET") 'dired-find-alternate-file)
        (define-key dired-mode-map (kbd "^")
-         (lambda () (interactive) (find-alternate-file ".."))))
+         (lambda () (interactive) (find-alternate-file "..")))
+       (put 'dired-find-alternate-file 'disabled nil))
    #+END_SRC
 ** Drag stuff
    #+BEGIN_SRC emacs-lisp
@@ -317,7 +315,9 @@
               ("M-g b" . dumb-jump-back)
               ("M-g ?" . dumb-jump-hydra/body))
 
-       :init
+       :config
+       (setq dumb-jump-selector 'ivy)
+
        (defhydra dumb-jump-hydra (:color blue :columns 3)
          "Dumb Jump"
          ("j" dumb-jump-go "Go")
@@ -326,9 +326,7 @@
          ("e" dumb-jump-go-prefer-external "Go external")
          ("x" dumb-jump-go-prefer-external-other-window "Go external other window")
          ("l" dumb-jump-quick-look "Quick look")
-         ("b" dumb-jump-back "Back"))
-
-       :config (setq dumb-jump-selector 'ivy))
+         ("b" dumb-jump-back "Back")))
    #+end_src
 ** Exec path from shell
    Make *GUI Emacs* use the proper $PATH and avoid a [[http://www.flycheck.org/en/latest/user/troubleshooting.html#flycheck-cant-find-any-programs-in-gui-emacs-on-macos][common setup issue on MacOS]].
@@ -371,7 +369,8 @@
      (use-package gist
        :straight t
 
-       :init (setq gist-ask-for-description t))
+       :config
+       (setq gist-ask-for-description t))
 
      (use-package diff-hl
        :straight t
@@ -389,7 +388,7 @@
 ** GnuPG
    #+BEGIN_SRC emacs-lisp
      (use-package epa
-       :init
+       :config
        ;; Prefer armored ASCII (.asc)
        (setq epa-armor t)
 
@@ -422,7 +421,7 @@
               ("C-c c" . org-capture)
               ("C-c l" . org-store-link))
 
-       :init
+       :config
        ;; Show time when done
        (setq org-log-done t)
 
@@ -435,7 +434,6 @@
        ;; Syntax highlighting for org-mode
        (setq org-src-fontify-natively t)
 
-       :config
        ;; Add languages for the ‘SRC’ code blocks in org-mode
        (org-babel-do-load-languages
         'org-babel-load-languages
@@ -452,10 +450,8 @@
 
        :bind-keymap ("C-c p" . projectile-command-map)
 
-       :init
-       (setq projectile-enable-caching t)
-
        :config
+       (setq projectile-enable-caching t)
        ;; Enable projectile globally
        (projectile-mode))
 
@@ -611,7 +607,7 @@
       (use-package cmake-ide
         :straight t
 
-        :init
+        :config
         (setq cmake-ide-build-dir "cmake_build"))
     #+END_SRC
 ** Common Lisp setup
@@ -630,7 +626,7 @@
 
         :diminish elpy-mode
 
-        :init
+        :config
         (elpy-enable)
 
         ;; Don't print evaluated code fragments in the python shell
