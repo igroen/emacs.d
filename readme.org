@@ -328,18 +328,6 @@
          ("l" dumb-jump-quick-look "Quick look")
          ("b" dumb-jump-back "Back")))
    #+end_src
-** Exec path from shell
-   Make *GUI Emacs* use the proper $PATH and avoid a [[http://www.flycheck.org/en/latest/user/troubleshooting.html#flycheck-cant-find-any-programs-in-gui-emacs-on-macos][common setup issue on MacOS]].
-   Without this package packages such as flycheck and EPA are not working correctly.
-
-   #+BEGIN_SRC emacs-lisp
-     (use-package exec-path-from-shell
-       :straight t
-
-       :config
-       (when (memq window-system '(mac ns x))
-         (exec-path-from-shell-initialize)))
-   #+END_SRC
 ** Expand region
    #+BEGIN_SRC emacs-lisp
      (use-package expand-region
