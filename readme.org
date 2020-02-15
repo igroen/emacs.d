@@ -600,11 +600,14 @@
     #+END_SRC
 ** Common Lisp setup
    #+BEGIN_SRC emacs-lisp
-     (use-package sly
+     (use-package slime
        :straight t
 
        :config
-       (setq inferior-lisp-program "sbcl"))
+       (setq inferior-lisp-program "sbcl")
+       (setq slime-contribs '(slime-asdf
+                              slime-fancy
+                              slime-quicklisp)))
    #+END_SRC
 ** Python setup
 *** Elpy
