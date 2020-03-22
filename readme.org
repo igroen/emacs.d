@@ -504,20 +504,20 @@
 
        :config (which-key-mode))
    #+END_SRC
-** YAML
-   #+BEGIN_SRC emacs-lisp
-     (use-package yaml-mode
-       :straight t)
-   #+END_SRC
-* XClip
+** XClip
    Enable xclip-mode to use the system clipboard when killing/yanking.
    Install xclip on Linux for this to work. On OSX pbcopy/pbpaste will be used.
 
    #+BEGIN_SRC emacs-lisp
-    (use-package xclip
-      :straight t
+     (use-package xclip
+       :straight t
 
-      :config (xclip-mode t))
+       :config (xclip-mode t))
+   #+END_SRC
+** YAML
+   #+BEGIN_SRC emacs-lisp
+     (use-package yaml-mode
+       :straight t)
    #+END_SRC
 * Programming
 ** C++ setup
