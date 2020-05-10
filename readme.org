@@ -549,14 +549,16 @@
 *** company-rtags
     #+BEGIN_SRC emacs-lisp
       (use-package company-rtags
-        :straight t)
+        :straight t
+        :config
+        (add-to-list 'company-backends 'company-rtags))
     #+END_SRC
 *** company-irony-c-headers
     #+BEGIN_SRC emacs-lisp
       (use-package company-irony-c-headers
         :straight t
-
-        :diminish company-mode)
+        :config
+        (add-to-list 'company-backends 'company-irony-c-headers))
     #+END_SRC
 *** Irony
     To compile Irony on MacOS add '-DCMAKE_PREFIX_PATH=/usr/local/opt/llvm'
@@ -567,8 +569,6 @@
     #+BEGIN_SRC emacs-lisp
       (use-package irony
         :straight t
-
-        :after cmake-ide
 
         :diminish irony-mode
 
@@ -583,11 +583,7 @@
         :config
         (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
         (add-hook 'irony-mode-hook 'irony-eldoc)
-        (add-hook 'flycheck-mode-hook 'flycheck-irony-setup)
-
-        (add-to-list 'company-backends '(company-irony-c-headers
-                                         company-rtags))
-        (cmake-ide-setup))
+        (add-hook 'flycheck-mode-hook 'flycheck-irony-setup))
     #+END_SRC
 *** irony-eldoc
     #+BEGIN_SRC emacs-lisp
@@ -614,6 +610,7 @@
         :straight t
 
         :config
+        (cmake-ide-setup)
         (setq cmake-ide-build-dir "cmake_build"))
     #+END_SRC
 ** Common Lisp setup
