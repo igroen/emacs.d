@@ -418,24 +418,8 @@
 ** Org mode
    #+BEGIN_SRC emacs-lisp
      (use-package org
-       :bind (("C-c a" . org-agenda)
-              ("C-c c" . org-capture)
-              ("C-c l" . org-store-link))
-
        :config
-       ;; Show time when done
-       (setq org-log-done t)
-
-       ;; Folder to look for agenda files
-       (setq org-agenda-files '("~/org"))
-
-       ;; Log quick notes (C-c C-z) into LOGBOOK drawer
-       (setq org-log-into-drawer t)
-
-       ;; Syntax highlighting for org-mode
-       (setq org-src-fontify-natively t)
-
-       ;; Add languages for the ‘SRC’ code blocks in org-mode
+       ;; Add languages for `SRC` code blocks in org-mode
        (org-babel-do-load-languages
         'org-babel-load-languages
         '((emacs-lisp . t)
