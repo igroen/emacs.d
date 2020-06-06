@@ -609,17 +609,33 @@
         (cmake-ide-setup)
         (setq cmake-ide-build-dir "cmake_build"))
     #+END_SRC
-** Common Lisp setup
-   #+BEGIN_SRC emacs-lisp
-     (use-package slime
-       :straight t
+** Lisp setup
+*** Slime
+    #+BEGIN_SRC emacs-lisp
+      (use-package slime
+        :straight t
 
-       :config
-       (setq inferior-lisp-program "sbcl")
-       (setq slime-contribs '(slime-asdf
-                              slime-fancy
-                              slime-quicklisp)))
-   #+END_SRC
+        :config
+        (setq inferior-lisp-program "sbcl")
+        (setq slime-contribs '(slime-asdf
+                               slime-fancy
+                               slime-quicklisp)))
+    #+END_SRC
+*** Paredit
+    #+BEGIN_SRC emacs-lisp
+      (use-package paredit
+        :straight t
+
+        :diminish paredit-mode
+
+        :hook ((emacs-lisp-mode . paredit-mode)
+               (eval-expression-minibuffer-setup . paredit-mode)
+               (ielm-mode . paredit-mode)
+               (lisp-mode . paredit-mode)
+               (lisp-interaction-mode . paredit-mode)
+               (common-lisp-mode . paredit-mode)
+               (slime-repl-mode . paredit-mode)))
+    #+END_SRC
 ** Python setup
 *** Elpy
     #+BEGIN_SRC emacs-lisp
