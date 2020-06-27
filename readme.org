@@ -503,6 +503,15 @@
 
         :after treemacs magit)
     #+end_src
+** VTerm
+   #+BEGIN_SRC emacs-lisp
+     (use-package vterm
+       :straight t
+
+       :config
+       (setq vterm-always-compile-module t)
+       (setq vterm-kill-buffer-on-exit t))
+   #+END_SRC
 ** Which key
    #+BEGIN_SRC emacs-lisp
      (use-package which-key
