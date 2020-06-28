@@ -512,12 +512,17 @@
        (setq vterm-always-compile-module t)
 
        :config
-       (setq vterm-kill-buffer-on-exit t))
+       (setq vterm-kill-buffer-on-exit t)
+       (setq vterm-clear-scrollback-when-clearing t))
 
      (use-package vterm-toggle
        :straight t
 
-       :bind ("C-c ," . vterm-toggle))
+       :bind (("C-c , RET" . vterm)
+              ("C-c , /" . vterm-toggle)
+              ("C-c , p" . vterm-toggle-forward)
+              ("C-c , n" . vterm-toggle-backward)
+              ("C-c , ." . vterm-toggle-insert-cd)))
    #+END_SRC
 ** Which key
    #+BEGIN_SRC emacs-lisp
