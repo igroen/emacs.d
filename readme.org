@@ -508,9 +508,16 @@
      (use-package vterm
        :straight t
 
-       :config
+       :init
        (setq vterm-always-compile-module t)
+
+       :config
        (setq vterm-kill-buffer-on-exit t))
+
+     (use-package vterm-toggle
+       :straight t
+
+       :bind ("C-c ," . vterm-toggle))
    #+END_SRC
 ** Which key
    #+BEGIN_SRC emacs-lisp
