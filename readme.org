@@ -317,29 +317,8 @@
      (use-package dumb-jump
        :straight t
 
-       :after hydra
-
-       :bind (("M-g j" . dumb-jump-go)
-              ("M-g o" . dumb-jump-go-other-window)
-              ("M-g i" . dumb-jump-go-prompt)
-              ("M-g e" . dumb-jump-go-prefer-external)
-              ("M-g x" . dumb-jump-go-prefer-external-other-window)
-              ("M-g l" . dumb-jump-quick-look)
-              ("M-g b" . dumb-jump-back)
-              ("M-g ?" . dumb-jump-hydra/body))
-
        :config
-       (setq dumb-jump-selector 'ivy)
-
-       (defhydra dumb-jump-hydra (:color blue :columns 3)
-         "Dumb Jump"
-         ("j" dumb-jump-go "Go")
-         ("o" dumb-jump-go-other-window "Go other window")
-         ("i" dumb-jump-go-prompt "Prompt")
-         ("e" dumb-jump-go-prefer-external "Go external")
-         ("x" dumb-jump-go-prefer-external-other-window "Go external other window")
-         ("l" dumb-jump-quick-look "Quick look")
-         ("b" dumb-jump-back "Back")))
+       (add-to-list 'xref-backend-functions #'dumb-jump-xref-activate))
    #+end_src
 ** Exec path from shell
    Make *GUI Emacs* use the proper $PATH and avoid a [[http://www.flycheck.org/en/latest/user/troubleshooting.html#flycheck-cant-find-any-programs-in-gui-emacs-on-macos][common setup issue on MacOS]].
