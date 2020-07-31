@@ -77,7 +77,7 @@
     #+END_SRC
 *** Set font
     #+BEGIN_SRC emacs-lisp
-      (set-default-font "Monaco 12")
+      (set-frame-font "Monaco 12" nil t)
     #+END_SRC
 ** Editing
 *** Highlight the current line
