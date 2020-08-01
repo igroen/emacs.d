@@ -427,7 +427,7 @@
        (epa-file-name-regexp-update)
 
        ;; Prompt for the password in the minibuffer
-       (setq epa-pinentry-mode 'loopback))
+       (setq epg-pinentry-mode 'loopback))
    #+END_SRC
 ** Hydra
    #+begin_src emacs-lisp
