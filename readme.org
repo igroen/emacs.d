@@ -491,7 +491,7 @@
         (treemacs-git-mode 'simple)
 
         (defun treemacs-ignore (filename absolute-path)
-          (or (seq-contains '("__pycache__" "build" "dist" "venv") filename)
+          (or (seq-contains-p '("__pycache__" "build" "dist" "venv") filename)
               (string-match "^.+\\.egg-info$" filename)
               (string-match "^.+\\.pyc$" filename)))
 
