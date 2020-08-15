@@ -396,12 +396,6 @@
      (use-package git-timemachine
        :straight t)
 
-     (use-package gist
-       :straight t
-
-       :config
-       (setq gist-ask-for-description t))
-
      (use-package diff-hl
        :straight t
 
