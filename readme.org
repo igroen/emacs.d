@@ -564,72 +564,17 @@
    #+END_SRC
 * Programming
 ** C++ setup
-*** rtags
-    #+BEGIN_SRC emacs-lisp
-      (use-package rtags
+*** lsp-mode
+    #+begin_src emacs-lisp
+      (setq lsp-keymap-prefix "C-c l")
+
+      (use-package lsp-mode
         :straight t
-
-        :diminish rtags-mode
-
-        :config
-        (setq rtags-path (expand-file-name "straight/repos/rtags" straight-base-dir))
-        (setq rtags-completions-enabled t)
-
-        (rtags-enable-standard-keybindings))
-    #+END_SRC
-*** company-rtags
-    #+BEGIN_SRC emacs-lisp
-      (use-package company-rtags
-        :straight t
-        :config
-        (add-to-list 'company-backends 'company-rtags))
-    #+END_SRC
-*** company-irony-c-headers
-    #+BEGIN_SRC emacs-lisp
-      (use-package company-irony-c-headers
-        :straight t
-        :config
-        (add-to-list 'company-backends 'company-irony-c-headers))
-    #+END_SRC
-*** Irony
-    To compile Irony on MacOS add '-DCMAKE_PREFIX_PATH=/usr/local/opt/llvm'
-    to the irony-install-server make command.
-
-    https://github.com/Sarcasm/irony-mode/pull/539#issuecomment-504792763
-
-    #+BEGIN_SRC emacs-lisp
-      (use-package irony
-        :straight t
-
-        :diminish irony-mode
-
-        ;; Use irony-mode for c-hooks
-        :hook ((c++-mode . irony-mode)
-               (c-mode . irony-mode)
-               (objc-mode . irony-mode))
-
-        :init
-        (setq-default c-basic-offset 4)
-
-        :config
-        (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
-        (add-hook 'irony-mode-hook 'irony-eldoc)
-        (add-hook 'flycheck-mode-hook 'flycheck-irony-setup))
-    #+END_SRC
-*** irony-eldoc
-    #+BEGIN_SRC emacs-lisp
-      (use-package irony-eldoc
-        :straight t
-
-        :diminish eldoc-mode)
-    #+END_SRC
-*** flycheck-irony
-    #+BEGIN_SRC emacs-lisp
-      (use-package flycheck-irony
-        :straight t
-
-        :diminish flycheck-mode)
-    #+END_SRC
+        :hook ((c-mode . lsp)
+               (c++-mode . lsp)
+               (lsp-mode . lsp-enable-which-key-integration))
+        :commands lsp)
+    #+end_src
 *** cmake-mode
     #+BEGIN_SRC emacs-lisp
       (use-package cmake-mode
