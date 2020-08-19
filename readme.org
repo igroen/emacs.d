@@ -564,6 +564,12 @@
    #+END_SRC
 * Programming
 ** C++ setup
+*** Indentation
+    Set indentation to 4 spaces
+
+    #+BEGIN_SRC emacs-lisp
+      (setq-default c-basic-offset 4)
+    #+END_SRC
 *** lsp-mode
     #+begin_src emacs-lisp
       (setq lsp-keymap-prefix "C-c l")
