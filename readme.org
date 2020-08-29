@@ -637,11 +637,6 @@
         ;; https://elpy.readthedocs.io/en/latest/ide.html#option-elpy-shell-echo-input
         (setq elpy-shell-echo-input nil))
     #+END_SRC
-*** py-isort
-    #+BEGIN_SRC emacs-lisp
-      (use-package py-isort
-        :straight t)
-    #+END_SRC
 *** auto-virtualenvwrapper
     #+BEGIN_SRC emacs-lisp
       (use-package auto-virtualenvwrapper
