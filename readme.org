@@ -563,6 +563,28 @@
        :straight t)
    #+END_SRC
 * Programming
+** lsp-mode
+   #+begin_src emacs-lisp
+     (use-package lsp-mode
+       :straight t
+       :hook ((c-mode . lsp)
+              (c++-mode . lsp)
+              (python-mode . lsp)
+              (lsp-mode . lsp-enable-which-key-integration))
+       :commands lsp
+       :init
+       (setq lsp-keymap-prefix "C-c l")
+       :config
+       ;; Use flake8 instead of pycodestyle
+       (setq lsp-pyls-plugins-pycodestyle-enabled nil)
+       (setq lsp-pyls-plugins-flake8-enabled t))
+
+     (use-package lsp-ui
+       :straight t
+       :commands lsp-ui-mode
+       :config
+       (setq lsp-ui-doc-enable nil))
+   #+end_src
 ** C++ setup
 *** Indentation
     Set indentation to 4 spaces
@@ -570,17 +592,6 @@
     #+BEGIN_SRC emacs-lisp
       (setq-default c-basic-offset 4)
     #+END_SRC
-*** lsp-mode
-    #+begin_src emacs-lisp
-      (setq lsp-keymap-prefix "C-c l")
-
-      (use-package lsp-mode
-        :straight t
-        :hook ((c-mode . lsp)
-               (c++-mode . lsp)
-               (lsp-mode . lsp-enable-which-key-integration))
-        :commands lsp)
-    #+end_src
 *** cmake-mode
     #+BEGIN_SRC emacs-lisp
       (use-package cmake-mode
@@ -623,20 +634,6 @@
                (slime-repl-mode . paredit-mode)))
     #+END_SRC
 ** Python setup
-*** Elpy
-    #+BEGIN_SRC emacs-lisp
-      (use-package elpy
-        :straight t
-
-        :diminish elpy-mode
-
-        :config
-        (elpy-enable)
-
-        ;; Don't print evaluated code fragments in the python shell
-        ;; https://elpy.readthedocs.io/en/latest/ide.html#option-elpy-shell-echo-input
-        (setq elpy-shell-echo-input nil))
-    #+END_SRC
 *** auto-virtualenvwrapper
     #+BEGIN_SRC emacs-lisp
       (use-package auto-virtualenvwrapper
@@ -645,6 +642,11 @@
         :config
         (add-hook 'projectile-after-switch-project-hook #'auto-virtualenvwrapper-activate))
     #+END_SRC
+*** pyvenv
+    #+begin_src emacs-lisp
+      (use-package pyvenv
+        :straight t)
+    #+end_src
 * Snippets
 ** Comment/Uncomment line or region
    #+BEGIN_SRC emacs-lisp
