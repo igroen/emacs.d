@@ -634,18 +634,12 @@
                (slime-repl-mode . paredit-mode)))
     #+END_SRC
 ** Python setup
-*** auto-virtualenvwrapper
-    #+BEGIN_SRC emacs-lisp
-      (use-package auto-virtualenvwrapper
-        :straight t
-
-        :config
-        (add-hook 'projectile-after-switch-project-hook #'auto-virtualenvwrapper-activate))
-    #+END_SRC
 *** pyvenv
     #+begin_src emacs-lisp
       (use-package pyvenv
-        :straight t)
+        :straight t
+        :config
+        (pyvenv-mode t))
     #+end_src
 * Snippets
 ** Comment/Uncomment line or region
