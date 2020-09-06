@@ -563,29 +563,42 @@
        :straight t)
    #+END_SRC
 * Programming
-** lsp-mode
-   #+begin_src emacs-lisp
-     (use-package lsp-mode
-       :straight t
-       :hook ((c-mode . lsp)
-              (c++-mode . lsp)
-              (python-mode . lsp)
-              (lsp-mode . lsp-enable-which-key-integration))
-       :commands lsp
-       :init
-       (setq lsp-keymap-prefix "C-c l")
-       :config
-       ;; Use flake8 instead of pycodestyle
-       (setq lsp-pyls-plugins-pycodestyle-enabled nil)
-       (setq lsp-pyls-plugins-flake8-enabled t))
+** LSP
+*** lsp-mode
+    Enable Language Server Protocol support.
 
-     (use-package lsp-ui
-       :straight t
-       :commands lsp-ui-mode
-       :config
-       (setq lsp-ui-doc-enable nil))
-   #+end_src
-** C++ setup
+    #+begin_src emacs-lisp
+      (use-package lsp-mode
+        :straight t
+
+        :hook ((c-mode . lsp)
+               (c++-mode . lsp)
+               (python-mode . lsp)
+               (lsp-mode . lsp-enable-which-key-integration))
+
+        :commands lsp
+
+        :init
+        (setq lsp-keymap-prefix "C-c l")
+
+        :config
+        ;; Use flake8 instead of pycodestyle
+        (setq lsp-pyls-plugins-pycodestyle-enabled nil)
+        (setq lsp-pyls-plugins-flake8-enabled t))
+    #+end_src
+*** lsp-ui
+    This package contains all the higher level UI modules of lsp-mode.
+
+    #+begin_src emacs-lisp
+      (use-package lsp-ui
+        :straight t
+
+        :commands lsp-ui-mode
+
+        :config
+        (setq lsp-ui-doc-enable nil))
+    #+end_src
+** C++
 *** Indentation
     Set indentation to 4 spaces
 
@@ -606,7 +619,7 @@
         (cmake-ide-setup)
         (setq cmake-ide-build-dir "cmake_build"))
     #+END_SRC
-** Lisp setup
+** Lisp
 *** Slime
     #+BEGIN_SRC emacs-lisp
       (use-package slime
@@ -633,11 +646,12 @@
                (common-lisp-mode . paredit-mode)
                (slime-repl-mode . paredit-mode)))
     #+END_SRC
-** Python setup
+** Python
 *** pyvenv
     #+begin_src emacs-lisp
       (use-package pyvenv
         :straight t
+
         :config
         (pyvenv-mode t))
     #+end_src
