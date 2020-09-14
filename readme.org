@@ -564,39 +564,26 @@
    #+END_SRC
 * Programming
 ** LSP
-*** lsp-mode
-    Enable Language Server Protocol support.
+   Enable Language Server Protocol support.
 
-    #+begin_src emacs-lisp
-      (use-package lsp-mode
-        :straight t
+   #+begin_src emacs-lisp
+     (use-package lsp-mode
+       :straight t
 
-        :hook ((c-mode . lsp)
-               (c++-mode . lsp)
-               (python-mode . lsp)
-               (lsp-mode . lsp-enable-which-key-integration))
+       :hook ((c-mode . lsp)
+              (c++-mode . lsp)
+              (python-mode . lsp)
+              (lsp-mode . lsp-enable-which-key-integration))
 
-        :commands lsp
+       :commands lsp
 
-        :init
-        (setq lsp-keymap-prefix "C-c l")
+       :init
+       (setq lsp-keymap-prefix "C-c l")
 
-        :config
-        ;; Use flake8 instead of pycodestyle
-        (setq lsp-pyls-plugins-pycodestyle-enabled nil)
-        (setq lsp-pyls-plugins-flake8-enabled t))
-    #+end_src
-*** lsp-ui
-    This package contains all the higher level UI modules of lsp-mode.
-
-    #+begin_src emacs-lisp
-      (use-package lsp-ui
-        :straight t
-
-        :commands lsp-ui-mode
-
-        :config
-        (setq lsp-ui-doc-enable nil))
+       :config
+       ;; Use flake8 instead of pycodestyle
+       (setq lsp-pyls-plugins-pycodestyle-enabled nil)
+       (setq lsp-pyls-plugins-flake8-enabled t))
     #+end_src
 ** C++
 *** Indentation
