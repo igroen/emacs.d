@@ -23,7 +23,6 @@
    Setup package management with straight.el and use-package.
 
    #+BEGIN_SRC emacs-lisp
-     ;; Use develop branch
      (setq straight-repository-branch "develop")
 
      (defvar bootstrap-version)
@@ -48,7 +47,6 @@
      (use-package bind-key
        :straight t)
 
-     ;; :chords keyword
      (use-package use-package-chords
        :straight t
 
@@ -460,7 +458,6 @@
 
        :config
        (setq projectile-enable-caching t)
-       ;; Enable projectile globally
        (projectile-mode))
 
      (use-package counsel-projectile
@@ -703,7 +700,6 @@
        (interactive "^p")
        (setq arg (or arg 1))
 
-       ;; Move lines first
        (when (/= arg 1)
          (let ((line-move-visual nil))
            (forward-line (1- arg))))
