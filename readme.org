@@ -217,7 +217,7 @@
      (use-package company
        :straight t
 
-       :diminish company-mode
+       :diminish
 
        :hook (after-init . global-company-mode))
    #+END_SRC
@@ -229,7 +229,7 @@
       (use-package ivy :demand
         :straight t
 
-        :diminish ivy-mode
+        :diminish
 
         :bind ("<f6>" . ivy-resume)
 
@@ -314,10 +314,10 @@
 ** Diminish only
    #+BEGIN_SRC emacs-lisp
      (use-package abbrev
-       :diminish abbrev-mode)
+       :diminish)
 
      (use-package eldoc
-       :diminish eldoc-mode)
+       :diminish)
    #+END_SRC
 ** Dired
    #+BEGIN_SRC emacs-lisp
@@ -380,7 +380,7 @@
      (use-package flycheck
        :straight t
 
-       :diminish flycheck-mode
+       :diminish
 
        :hook (after-init . global-flycheck-mode))
    #+END_SRC
@@ -452,7 +452,7 @@
      (use-package projectile
        :straight t
 
-       :diminish projectile-mode
+       :diminish
 
        :bind-keymap ("C-c p" . projectile-command-map)
 
@@ -540,7 +540,7 @@
      (use-package which-key
        :straight t
 
-       :diminish which-key-mode
+       :diminish
 
        :config (which-key-mode))
    #+END_SRC
@@ -566,6 +566,8 @@
    #+begin_src emacs-lisp
      (use-package lsp-mode
        :straight t
+
+       :diminish
 
        :hook ((c-mode . lsp)
               (c++-mode . lsp)
@@ -620,7 +622,7 @@
       (use-package paredit
         :straight t
 
-        :diminish paredit-mode
+        :diminish
 
         :hook ((emacs-lisp-mode . paredit-mode)
                (eval-expression-minibuffer-setup . paredit-mode)
