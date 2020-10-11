@@ -591,20 +591,6 @@
     #+BEGIN_SRC emacs-lisp
       (setq-default c-basic-offset 4)
     #+END_SRC
-*** cmake-mode
-    #+BEGIN_SRC emacs-lisp
-      (use-package cmake-mode
-        :straight t)
-    #+END_SRC
-*** cmake-ide
-    #+BEGIN_SRC emacs-lisp
-      (use-package cmake-ide
-        :straight t
-
-        :config
-        (cmake-ide-setup)
-        (setq cmake-ide-build-dir "cmake_build"))
-    #+END_SRC
 ** Lisp
 *** Slime
     #+BEGIN_SRC emacs-lisp
