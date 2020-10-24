@@ -589,8 +589,9 @@
        (setq lsp-keymap-prefix "C-c l")
 
        :config
-       ;; Use flake8 instead of pycodestyle
+       ;; Use flake8 instead of pycodestyle/pyflakes
        (setq lsp-pyls-plugins-pycodestyle-enabled nil)
+       (setq lsp-pyls-plugins-pyflakes-enabled nil)
        (setq lsp-pyls-plugins-flake8-enabled t))
     #+end_src
 ** C++
