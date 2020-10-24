@@ -197,6 +197,14 @@
        (load custom-file))
    #+END_SRC
 * Packages
+** Abbrev
+   #+begin_src emacs-lisp
+     (use-package abbrev
+       :diminish
+
+       :config
+       (setq-default abbrev-mode t))
+   #+end_src
 ** Ace window
    #+BEGIN_SRC emacs-lisp
      (use-package ace-window
@@ -225,6 +233,130 @@
 
        :hook (after-init . global-company-mode))
    #+END_SRC
+** Deft
+   #+BEGIN_SRC emacs-lisp
+     (use-package deft
+       :straight t
+
+       :bind ("<f8>" . deft)
+
+       :commands (deft)
+
+       :config
+       (setq deft-default-extension "org"))
+   #+END_SRC
+** Dired
+   #+BEGIN_SRC emacs-lisp
+     (use-package dired
+       :config
+       ;; Use dired-x to enable C-x C-j (dired-jump) and other features
+       (use-package dired-x)
+
+       ;; Omit files starting with a dot
+       (setq dired-omit-files (concat dired-omit-files "\\|^\\..+$"))
+
+       ;; Default omit files
+       (setq-default dired-omit-mode t)
+
+       ;; Make dired open in the same window when using RET or ^
+       (define-key dired-mode-map (kbd "RET") 'dired-find-alternate-file)
+       (define-key dired-mode-map (kbd "^")
+         (lambda () (interactive) (find-alternate-file "..")))
+       (put 'dired-find-alternate-file 'disabled nil))
+   #+END_SRC
+** Drag stuff
+   #+BEGIN_SRC emacs-lisp
+     (use-package drag-stuff
+       :straight t
+
+       :bind (("M-p" . drag-stuff-up)
+              ("M-n" . drag-stuff-down))
+
+       :config (drag-stuff-global-mode 1))
+   #+END_SRC
+** Dumb jump
+   #+begin_src emacs-lisp
+     (use-package dumb-jump
+       :straight t
+
+       :config
+       (add-to-list 'xref-backend-functions #'dumb-jump-xref-activate))
+   #+end_src
+** Eldoc
+   #+begin_src emacs-lisp
+     (use-package eldoc
+       :diminish)
+   #+end_src
+** Exec path from shell
+   Make *GUI Emacs* use the proper $PATH and avoid a [[http://www.flycheck.org/en/latest/user/troubleshooting.html#flycheck-cant-find-any-programs-in-gui-emacs-on-macos][common setup issue on MacOS]].
+   Without this package packages such as flycheck and EPA are not working correctly.
+
+   #+BEGIN_SRC emacs-lisp
+     (use-package exec-path-from-shell
+       :straight t
+
+       :config
+       (when (memq window-system '(mac ns x))
+         (exec-path-from-shell-initialize)))
+   #+END_SRC
+** Expand region
+   #+BEGIN_SRC emacs-lisp
+     (use-package expand-region
+       :straight t
+
+       :bind ("C-x w" . er/expand-region))
+   #+END_SRC
+** Flycheck
+   #+BEGIN_SRC emacs-lisp
+     (use-package flycheck
+       :straight t
+
+       :diminish
+
+       :hook (after-init . global-flycheck-mode))
+   #+END_SRC
+** Git
+   #+BEGIN_SRC emacs-lisp
+     (use-package magit
+       :straight t
+
+       :bind ("C-x g" . magit-status))
+
+     (use-package git-timemachine
+       :straight t)
+
+     (use-package diff-hl
+       :straight t
+
+       :hook ((magit-post-refresh . diff-hl-magit-post-refresh)
+              (dired-mode . diff-hl-dired-mode-unless-remote))
+
+       :init
+       (global-diff-hl-mode)
+
+       :config
+       (diff-hl-margin-mode)
+       (diff-hl-flydiff-mode))
+   #+END_SRC
+** GnuPG
+   #+BEGIN_SRC emacs-lisp
+     (use-package epa
+       :config
+       ;; Prefer armored ASCII (.asc)
+       (setq epa-armor t)
+
+       ;; Open .asc files in the same way as .gpg files
+       (setq epa-file-name-regexp "\\.\\(gpg\\|asc\\)$")
+       (epa-file-name-regexp-update)
+
+       ;; Prompt for the password in the minibuffer
+       (setq epg-pinentry-mode 'loopback))
+   #+END_SRC
+** Hydra
+   #+begin_src emacs-lisp
+     (use-package hydra
+       :straight t)
+   #+end_src
 ** Ivy/Counsel/Swiper
 *** Ivy
     Completion framework.
@@ -303,133 +435,6 @@
       (use-package wgrep
         :straight t)
     #+END_SRC
-** Deft
-   #+BEGIN_SRC emacs-lisp
-     (use-package deft
-       :straight t
-
-       :bind ("<f8>" . deft)
-
-       :commands (deft)
-
-       :config
-       (setq deft-default-extension "org"))
-   #+END_SRC
-** Diminish only
-   #+BEGIN_SRC emacs-lisp
-     (use-package abbrev
-       :diminish)
-
-     (use-package eldoc
-       :diminish)
-   #+END_SRC
-** Dired
-   #+BEGIN_SRC emacs-lisp
-     (use-package dired
-       :config
-       ;; Use dired-x to enable C-x C-j (dired-jump) and other features
-       (use-package dired-x)
-
-       ;; Omit files starting with a dot
-       (setq dired-omit-files (concat dired-omit-files "\\|^\\..+$"))
-
-       ;; Default omit files
-       (setq-default dired-omit-mode t)
-
-       ;; Make dired open in the same window when using RET or ^
-       (define-key dired-mode-map (kbd "RET") 'dired-find-alternate-file)
-       (define-key dired-mode-map (kbd "^")
-         (lambda () (interactive) (find-alternate-file "..")))
-       (put 'dired-find-alternate-file 'disabled nil))
-   #+END_SRC
-** Drag stuff
-   #+BEGIN_SRC emacs-lisp
-     (use-package drag-stuff
-       :straight t
-
-       :bind (("M-p" . drag-stuff-up)
-              ("M-n" . drag-stuff-down))
-
-       :config (drag-stuff-global-mode 1))
-   #+END_SRC
-** Dumb jump
-   #+begin_src emacs-lisp
-     (use-package dumb-jump
-       :straight t
-
-       :config
-       (add-to-list 'xref-backend-functions #'dumb-jump-xref-activate))
-   #+end_src
-** Exec path from shell
-   Make *GUI Emacs* use the proper $PATH and avoid a [[http://www.flycheck.org/en/latest/user/troubleshooting.html#flycheck-cant-find-any-programs-in-gui-emacs-on-macos][common setup issue on MacOS]].
-   Without this package packages such as flycheck and EPA are not working correctly.
-
-   #+BEGIN_SRC emacs-lisp
-     (use-package exec-path-from-shell
-       :straight t
-
-       :config
-       (when (memq window-system '(mac ns x))
-         (exec-path-from-shell-initialize)))
-   #+END_SRC
-** Expand region
-   #+BEGIN_SRC emacs-lisp
-     (use-package expand-region
-       :straight t
-
-       :bind ("C-x w" . er/expand-region))
-   #+END_SRC
-** Flycheck
-   #+BEGIN_SRC emacs-lisp
-     (use-package flycheck
-       :straight t
-
-       :diminish
-
-       :hook (after-init . global-flycheck-mode))
-   #+END_SRC
-** Git
-   #+BEGIN_SRC emacs-lisp
-     (use-package magit
-       :straight t
-
-       :bind ("C-x g" . magit-status))
-
-     (use-package git-timemachine
-       :straight t)
-
-     (use-package diff-hl
-       :straight t
-
-       :hook ((magit-post-refresh . diff-hl-magit-post-refresh)
-              (dired-mode . diff-hl-dired-mode-unless-remote))
-
-       :init
-       (global-diff-hl-mode)
-
-       :config
-       (diff-hl-margin-mode)
-       (diff-hl-flydiff-mode))
-   #+END_SRC
-** GnuPG
-   #+BEGIN_SRC emacs-lisp
-     (use-package epa
-       :config
-       ;; Prefer armored ASCII (.asc)
-       (setq epa-armor t)
-
-       ;; Open .asc files in the same way as .gpg files
-       (setq epa-file-name-regexp "\\.\\(gpg\\|asc\\)$")
-       (epa-file-name-regexp-update)
-
-       ;; Prompt for the password in the minibuffer
-       (setq epg-pinentry-mode 'loopback))
-   #+END_SRC
-** Hydra
-   #+begin_src emacs-lisp
-     (use-package hydra
-       :straight t)
-   #+end_src
 ** Multiple cursors
    #+BEGIN_SRC emacs-lisp
     (use-package multiple-cursors
