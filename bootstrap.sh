@@ -33,7 +33,6 @@ setup_pyls () {
            flake8-docstrings \
            flake8-import-order \
            flake8-logging-format
-    ${PYLS}/bin/pip install --upgrade --index https://pypi.iitg.nl iitg-import-order
 
     create_symbolic_links
 }
@@ -47,7 +46,7 @@ write_flake8_config () {
     if [ -d "${CONFIG}" ]; then
         cat > ${CONFIG}/flake8 <<EOF
 [flake8]
-import-order-style = iitg-import-order
+import-order-style = smarkets
 enable-extensions = G  # Validate logging format strings
 ignore =
     # Ignore missing docstrings
