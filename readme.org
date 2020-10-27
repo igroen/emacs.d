@@ -19,6 +19,14 @@
                   (setq gc-cons-threshold (* 16 1024 1024)
                         gc-cons-percentage 0.1)))
    #+END_SRC
+
+   Increase the amount of data which Emacs reads from a sub-process
+   in one read operation.
+   The default 4096 bytes can be to low for i.e. lsp-mode.
+
+   #+begin_src emacs-lisp
+     (setq read-process-output-max (* 1024 1024))
+   #+end_src
 ** Package management
    Setup package management with straight.el and use-package.
 
