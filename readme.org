@@ -498,12 +498,19 @@
         :config
         (treemacs-git-mode 'simple)
 
-        (defun treemacs-ignore (filename absolute-path)
-          (or (seq-contains-p '("__pycache__" "build" "dist" "venv") filename)
+        (defun treemacs-python-ignore (filename absolute-path)
+          (or (seq-contains-p
+               '(".tox"
+                 "__pycache__"
+                 "build"
+                 "dist"
+                 "venv")
+               filename)
               (string-match "^.+\\.egg-info$" filename)
               (string-match "^.+\\.pyc$" filename)))
 
-        (add-to-list 'treemacs-ignored-file-predicates #'treemacs-ignore))
+        (add-to-list
+         'treemacs-ignored-file-predicates #'treemacs-python-ignore))
     #+END_SRC
 *** treemacs-projectile
     #+begin_src emacs-lisp
