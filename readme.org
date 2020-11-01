@@ -270,14 +270,6 @@
 
        :config (drag-stuff-global-mode 1))
    #+END_SRC
-** Dumb jump
-   #+begin_src emacs-lisp
-     (use-package dumb-jump
-       :straight t
-
-       :config
-       (add-to-list 'xref-backend-functions #'dumb-jump-xref-activate))
-   #+end_src
 ** Eldoc
    #+begin_src emacs-lisp
      (use-package eldoc
