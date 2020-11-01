@@ -241,18 +241,6 @@
 
        :hook (after-init . global-company-mode))
    #+END_SRC
-** Deft
-   #+BEGIN_SRC emacs-lisp
-     (use-package deft
-       :straight t
-
-       :bind ("<f8>" . deft)
-
-       :commands (deft)
-
-       :config
-       (setq deft-default-extension "org"))
-   #+END_SRC
 ** Dired
    #+BEGIN_SRC emacs-lisp
      (use-package dired
