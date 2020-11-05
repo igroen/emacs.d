@@ -526,6 +526,7 @@
 
         :config
         (setq vterm-kill-buffer-on-exit t)
+        (setq vterm-toggle-reset-window-configration-after-exit t)
         (setq vterm-clear-scrollback-when-clearing t))
     #+END_SRC
 *** vterm-toggle
