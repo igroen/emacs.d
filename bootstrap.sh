@@ -6,6 +6,7 @@ emacs --batch --load init.el
 # Python tooling
 CONFIG="${HOME}/.config"
 LOCAL_BIN="${HOME}/.local/bin"
+PYLS="$HOME/.pyls"
 
 create_symbolic_links () {
     if [ -d "${LOCAL_BIN}" ]; then
@@ -18,8 +19,6 @@ create_symbolic_links () {
 }
 
 setup_pyls () {
-    PYLS="$HOME/.pyls"
-
     python3 -m venv ${PYLS}
     ${PYLS}/bin/pip install --upgrade \
            pip \
