@@ -636,18 +636,6 @@
         (pyvenv-mode t))
     #+end_src
 * Snippets
-** Comment/Uncomment line or region
-   #+BEGIN_SRC emacs-lisp
-     (defun comment-or-uncomment-region-or-line ()
-       "Comments or uncomments the region or the current line if there's no active region."
-       (interactive)
-       (let (beg end)
-         (if (region-active-p)
-           (setq beg (region-beginning) end (region-end))
-           (setq beg (line-beginning-position) end (line-end-position)))
-         (comment-or-uncomment-region beg end)))
-     (global-set-key (kbd "C-x C-\\") 'comment-or-uncomment-region-or-line)
-   #+END_SRC
 ** Delete current file and buffer
    #+BEGIN_SRC emacs-lisp
      (defun delete-current-file-copy-to-kill-ring ()
