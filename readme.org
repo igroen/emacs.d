@@ -249,6 +249,14 @@
 
        :hook (after-init . global-company-mode))
    #+END_SRC
+** Decode JWT
+   Decode the headers and payload of a JWT token.
+
+   #+begin_src emacs-lisp
+     (use-package jwt-content
+       :straight
+       (:host github :repo "igroen/jwt-content.el"))
+   #+end_src
 ** Dired
    #+BEGIN_SRC emacs-lisp
      (use-package dired
