@@ -80,8 +80,13 @@
       (setq column-number-mode t)
     #+END_SRC
 *** Maximize Emacs on init
+    Start the initial frame maximized.
+
+    To start every frame maximized use:
+    (add-to-list 'default-frame-alist '(fullscreen . maximized))
+
     #+BEGIN_SRC emacs-lisp
-      (toggle-frame-maximized)
+      (add-to-list 'initial-frame-alist '(fullscreen . maximized))
     #+END_SRC
 *** Set theme
     #+BEGIN_SRC emacs-lisp
