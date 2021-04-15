@@ -90,7 +90,7 @@
     #+END_SRC
 *** Set theme
     #+BEGIN_SRC emacs-lisp
-      (use-package modus-operandi-theme
+      (use-package modus-themes
         :straight t
 
         :config
