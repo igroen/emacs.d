@@ -6,12 +6,12 @@ emacs --batch --load init.el
 # Python tooling
 CONFIG="${HOME}/.config"
 LOCAL_BIN="${HOME}/.local/bin"
-PYLS="$HOME/.pyls"
+PYLSP="$HOME/.pylsp"
 
 create_symbolic_links () {
     if [ -d "${LOCAL_BIN}" ]; then
-        ln -fs ${PYLS}/bin/pyls ${LOCAL_BIN}
-        ln -fs ${PYLS}/bin/flake8 ${LOCAL_BIN}
+        ln -fs ${PYLSP}/bin/pylsp ${LOCAL_BIN}
+        ln -fs ${PYLSP}/bin/flake8 ${LOCAL_BIN}
     else
         echo "Directory ${LOCAL_BIN} does not exist"
         echo "Please make sure ${LOCAL_BIN} exists and that is's available on your \$PATH"
@@ -19,13 +19,13 @@ create_symbolic_links () {
 }
 
 setup_pyls () {
-    python3 -m venv ${PYLS}
-    ${PYLS}/bin/pip install --upgrade \
+    python3 -m venv ${PYLSP}
+    ${PYLSP}/bin/pip install --upgrade \
            pip \
            setuptools \
            wheel
-    ${PYLS}/bin/pip install --upgrade \
-           python-language-server \
+    ${PYLSP}/bin/pip install --upgrade \
+           python-lsp-server \
            flake8 \
            flake8-builtins \
            flake8-commas \
@@ -36,7 +36,7 @@ setup_pyls () {
     create_symbolic_links
 }
 
-read -r -p "Do you want to install 'python-language-server' with 'flake8'? [y/N] " response
+read -r -p "Do you want to install 'python-lsp-server' with 'flake8'? [y/N] " response
 if [[ "$response" =~ ^([yY][eE][sS]|[yY])$ ]]; then
     setup_pyls
 fi

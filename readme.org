@@ -606,10 +606,11 @@
        (setq lsp-keymap-prefix "C-c l")
 
        :config
-       ;; Use flake8 instead of pycodestyle/pyflakes
-       (setq lsp-pyls-plugins-pycodestyle-enabled nil)
-       (setq lsp-pyls-plugins-pyflakes-enabled nil)
-       (setq lsp-pyls-plugins-flake8-enabled t)
+       ;; Use flake8 instead of pycodestyle/pydocstyle/pyflakes
+       (setq lsp-pylsp-plugins-pycodestyle-enabled nil)
+       (setq lsp-pylsp-plugins-pydocstyle-enabled nil)
+       (setq lsp-pylsp-plugins-pyflakes-enabled nil)
+       (setq lsp-pylsp-plugins-flake8-enabled t)
        ;; Disable YASnippet
        (setq lsp-enable-snippet nil))
     #+end_src
