@@ -621,33 +621,6 @@
     #+BEGIN_SRC emacs-lisp
       (setq-default c-basic-offset 4)
     #+END_SRC
-** Lisp
-*** Slime
-    #+BEGIN_SRC emacs-lisp
-      (use-package slime
-        :straight t
-
-        :config
-        (setq inferior-lisp-program "sbcl")
-        (setq slime-contribs '(slime-asdf
-                               slime-fancy
-                               slime-quicklisp)))
-    #+END_SRC
-*** Paredit
-    #+BEGIN_SRC emacs-lisp
-      (use-package paredit
-        :straight t
-
-        :diminish
-
-        :hook ((emacs-lisp-mode . paredit-mode)
-               (eval-expression-minibuffer-setup . paredit-mode)
-               (ielm-mode . paredit-mode)
-               (lisp-mode . paredit-mode)
-               (lisp-interaction-mode . paredit-mode)
-               (common-lisp-mode . paredit-mode)
-               (slime-repl-mode . paredit-mode)))
-    #+END_SRC
 ** Python
 *** pyvenv
     #+begin_src emacs-lisp
