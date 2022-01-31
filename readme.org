@@ -591,7 +591,11 @@
 
    #+begin_src emacs-lisp
      (use-package lsp-mode
-       :straight t
+       :straight
+       ;; Use plists for better performance.
+       ;; Must be set as an environment variable before lsp-mode is compiled.
+       ;; https://emacs-lsp.github.io/lsp-mode/page/performance/#use-plists-for-deserialization
+       `(:pre-build ,(setenv "LSP_USE_PLISTS" "true"))
 
        :diminish
 
