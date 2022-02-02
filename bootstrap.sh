@@ -31,12 +31,13 @@ setup_pyls () {
            flake8-commas \
            flake8-docstrings \
            flake8-import-order \
-           flake8-logging-format
+           flake8-logging-format \
+           yapf
 
     create_symbolic_links
 }
 
-read -r -p "Do you want to install 'python-lsp-server' with 'flake8'? [y/N] " response
+read -r -p "Do you want to install 'python-lsp-server'? [y/N] " response
 if [[ "$response" =~ ^([yY][eE][sS]|[yY])$ ]]; then
     setup_pyls
 fi

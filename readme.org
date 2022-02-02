@@ -615,6 +615,8 @@
        (setq lsp-pylsp-plugins-pydocstyle-enabled nil)
        (setq lsp-pylsp-plugins-pyflakes-enabled nil)
        (setq lsp-pylsp-plugins-flake8-enabled t)
+       ;; Enable YAPF for code formatting
+       (setq lsp-pylsp-plugins-yapf-enabled t)
        ;; Disable YASnippet
        (setq lsp-enable-snippet nil))
     #+end_src
