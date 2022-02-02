@@ -32,6 +32,7 @@ setup_pyls () {
            flake8-docstrings \
            flake8-import-order \
            flake8-logging-format \
+           pyls-isort \
            yapf
 
     create_symbolic_links
