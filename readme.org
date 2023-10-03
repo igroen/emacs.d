@@ -165,7 +165,7 @@
        (kbd "C-c s")
        (lambda ()
          (interactive)
-         (find-file-other-window (expand-file-name "readme.org" user-emacs-directory))))
+         (find-file-other-window (locate-user-emacs-file "readme.org"))))
     #+END_SRC
 *** Autorefresh buffers on file change
     #+BEGIN_SRC emacs-lisp
@@ -212,7 +212,7 @@
    Config changes made through the customize UI will be stored here.
 
    #+BEGIN_SRC emacs-lisp
-     (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
+     (setq custom-file (locate-user-emacs-file "custom.el"))
 
      (when (file-exists-p custom-file)
        (load custom-file))
