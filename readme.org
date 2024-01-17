@@ -93,11 +93,7 @@
     #+END_SRC
 *** Set theme
     #+BEGIN_SRC emacs-lisp
-      (use-package modus-themes
-        :straight t
-
-        :config
-        (load-theme 'modus-operandi t))
+      (load-theme 'modus-operandi t)
     #+END_SRC
 *** Set font
     #+BEGIN_SRC emacs-lisp
