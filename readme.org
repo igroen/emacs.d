@@ -50,8 +50,6 @@
            (eval-print-last-sexp)))
        (load bootstrap-file nil 'nomessage))
 
-     (straight-use-package 'use-package)
-
      (use-package diminish
        :straight t)
 
@@ -93,11 +91,7 @@
     #+END_SRC
 *** Set theme
     #+BEGIN_SRC emacs-lisp
-      (use-package modus-themes
-        :straight t
-
-        :config
-        (load-theme 'modus-operandi t))
+      (load-theme 'modus-operandi t)
     #+END_SRC
 *** Set font
     #+BEGIN_SRC emacs-lisp
