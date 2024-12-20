@@ -30,9 +30,8 @@ setup_pyls () {
            flake8-builtins \
            flake8-commas \
            flake8-docstrings \
-           flake8-import-order \
+           flake8-isort \
            flake8-logging-format \
-           pyls-isort \
            whatthepatch \
            yapf
 
@@ -48,7 +47,6 @@ write_flake8_config () {
     if [ -d "${CONFIG}" ]; then
         cat > ${CONFIG}/flake8 <<EOF
 [flake8]
-import-order-style = smarkets
 enable-extensions = G  # Validate logging format strings
 ignore =
     # Ignore missing docstrings
