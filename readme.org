@@ -188,6 +188,14 @@
     #+begin_src emacs-lisp
       (windmove-default-keybindings)
     #+end_src
+*** Enable which-key
+    Display the key bindings following your currently entered incomplete
+    command (a prefix) in a popup.
+
+    #+begin_src emacs-lisp
+      (which-key-mode)
+      (diminish 'which-key-mode)
+    #+end_src
 ** Backups
    Store all backup and autosave files in the 'backups' dir.
 
@@ -560,15 +568,6 @@
                ("C-c , n" . vterm-toggle-backward)
                ("C-c , ." . vterm-toggle-insert-cd)))
     #+END_SRC
-** Which key
-   #+BEGIN_SRC emacs-lisp
-     (use-package which-key
-       :straight t
-
-       :diminish
-
-       :config (which-key-mode))
-   #+END_SRC
 ** XClip
    Enable xclip-mode to use the system clipboard when killing/yanking.
    Install xclip on Linux for this to work. On OSX pbcopy/pbpaste will be used.
