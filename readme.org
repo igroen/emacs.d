@@ -488,7 +488,12 @@
      (use-package counsel-projectile
        :straight t
 
-       :hook (after-init . counsel-projectile-mode))
+       :config
+       ;; The next line can be removed once
+       ;; https://github.com/ericdanan/counsel-projectile/issues/189
+       ;; is resolved.
+       (projectile-known-projects)
+       (counsel-projectile-mode))
    #+END_SRC
 ** Treemacs
 *** treemacs
