@@ -65,7 +65,7 @@
    #+END_SRC
 * Defaults
 ** Screen setup
-*** Start with empty buffer
+*** Start with *scratch* buffer
     #+BEGIN_SRC emacs-lisp
       (setq inhibit-startup-message t)
     #+END_SRC
@@ -336,7 +336,9 @@
      (use-package magit
        :straight t
 
-       :bind ("C-x g" . magit-status))
+       :bind ("C-x g" . magit-status)
+
+       :hook (after-save-hook . magit-after-save-refresh-status))
 
      (use-package git-timemachine
        :straight t)
