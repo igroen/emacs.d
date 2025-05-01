@@ -102,7 +102,10 @@
 ** Editing
 *** Highlight the current line
     #+BEGIN_SRC emacs-lisp
-      (global-hl-line-mode t)
+      ;; Enable it for all programming major modes
+      (add-hook 'prog-mode-hook #'hl-line-mode)
+      ;; and for all modes derived from text-mode
+      (add-hook 'text-mode-hook #'hl-line-mode)
     #+END_SRC
 *** Remove trailing whitespace on save
     #+BEGIN_SRC emacs-lisp
