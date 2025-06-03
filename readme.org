@@ -52,9 +52,6 @@
 
      (straight-use-package 'use-package)
 
-     (use-package diminish
-       :straight t)
-
      (use-package bind-key
        :straight t)
 
@@ -197,7 +194,6 @@
 
     #+begin_src emacs-lisp
       (which-key-mode)
-      (diminish 'which-key-mode)
     #+end_src
 ** Backups
    Store all backup and autosave files in the 'backups' dir.
@@ -231,8 +227,6 @@
 ** Abbrev
    #+begin_src emacs-lisp
      (use-package abbrev
-       :diminish
-
        :config
        (setq-default abbrev-mode t))
    #+end_src
@@ -259,8 +253,6 @@
    #+BEGIN_SRC emacs-lisp
      (use-package company
        :straight t
-
-       :diminish
 
        :hook (after-init . global-company-mode))
    #+END_SRC
@@ -303,8 +295,7 @@
    #+END_SRC
 ** Eldoc
    #+begin_src emacs-lisp
-     (use-package eldoc
-       :diminish)
+     (use-package eldoc)
    #+end_src
 ** Exec path from shell
    Make *GUI Emacs* use the proper $PATH and avoid a [[http://www.flycheck.org/en/latest/user/troubleshooting.html#flycheck-cant-find-any-programs-in-gui-emacs-on-macos][common setup issue on MacOS]].
@@ -329,8 +320,6 @@
    #+BEGIN_SRC emacs-lisp
      (use-package flycheck
        :straight t
-
-       :diminish
 
        :hook (after-init . global-flycheck-mode))
    #+END_SRC
@@ -385,8 +374,6 @@
     #+BEGIN_SRC emacs-lisp
       (use-package ivy :demand
         :straight t
-
-        :diminish
 
         :bind ("<f6>" . ivy-resume)
 
@@ -456,6 +443,17 @@
       (use-package wgrep
         :straight t)
     #+END_SRC
+** Mood line
+   #+BEGIN_SRC emacs-lisp
+     (use-package mood-line
+       :straight t
+
+       :config
+       (mood-line-mode)
+
+       :custom
+       (mood-line-glyph-alist mood-line-glyphs-fira-code))
+   #+END_SRC
 ** Multiple cursors
    #+BEGIN_SRC emacs-lisp
     (use-package multiple-cursors
@@ -481,8 +479,6 @@
    #+BEGIN_SRC emacs-lisp
      (use-package projectile
        :straight t
-
-       :diminish
 
        :bind-keymap ("C-c p" . projectile-command-map)
 
@@ -604,8 +600,6 @@
        ;; Must be set as an environment variable before lsp-mode is compiled.
        ;; https://emacs-lsp.github.io/lsp-mode/page/performance/#use-plists-for-deserialization
        `(:pre-build ,(setenv "LSP_USE_PLISTS" "true"))
-
-       :diminish
 
        :hook ((c-mode . lsp)
               (c++-mode . lsp)
