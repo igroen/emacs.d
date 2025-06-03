@@ -1,19 +1,19 @@
 #+STARTUP: overview
 #+PROPERTY: header-args :tangle init.el
 
-* Init
+* Early init
 ** Startup tweaks
    Make startup faster by reducing the frequency of garbage collection.
 
-   #+BEGIN_SRC emacs-lisp
-     (setq gc-cons-threshold (* 512 1024 1024)
+   #+BEGIN_SRC emacs-lisp :tangle early-init.el
+     (setq gc-cons-threshold most-positive-fixnum
            gc-cons-percentage 0.6)
    #+END_SRC
 
    After Emacs startup has been completed, set `gc-cons-threshold' to
    16 MB and reset `gc-cons-percentage' to its original value.
 
-   #+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp :tangle early-init.el
      (add-hook 'emacs-startup-hook
                #'(lambda ()
                    (setq gc-cons-threshold (* 16 1024 1024)
@@ -24,10 +24,40 @@
    in one read operation.
    The default 4096 bytes can be to low for i.e. lsp-mode.
 
-   #+begin_src emacs-lisp
+   #+begin_src emacs-lisp :tangle early-init.el
      (setq read-process-output-max (* 1024 1024))
    #+end_src
-** Package management
+** Disable menubar, toolbar, scrollbars adn tooltips
+   #+BEGIN_SRC emacs-lisp :tangle early-init.el
+     (dolist (mode
+              '(menu-bar-mode
+                tool-bar-mode
+                scroll-bar-mode
+                tooltip-mode))
+       (when (fboundp mode)
+         (funcall mode -1)))
+   #+END_SRC
+** Start the initial frame maximized.
+   #+BEGIN_SRC emacs-lisp :tangle early-init.el
+     (setq default-frame-alist
+           '((fullscreen . maximized)
+             (vertical-scroll-bars . nil)
+             (horizontal-scroll-bars . nil)))
+
+   #+END_SRC
+** Start with *scratch* buffer
+   #+BEGIN_SRC emacs-lisp :tangle early-init.el
+     (setq inhibit-startup-message t)
+   #+END_SRC
+** Disable bell
+   #+BEGIN_SRC emacs-lisp :tangle early-init.el
+     (setq ring-bell-function 'ignore)
+   #+END_SRC
+** Set theme
+   #+BEGIN_SRC emacs-lisp :tangle early-init.el
+     (load-theme 'modus-operandi t)
+   #+END_SRC
+* Package management
    Setup package management with straight.el and use-package.
 
    #+BEGIN_SRC emacs-lisp
@@ -61,41 +91,10 @@
        :config (key-chord-mode 1))
    #+END_SRC
 * Defaults
-** Screen setup
-*** Start with *scratch* buffer
-    #+BEGIN_SRC emacs-lisp
-      (setq inhibit-startup-message t)
-    #+END_SRC
-*** Disable bell
-    #+BEGIN_SRC emacs-lisp
-      (setq ring-bell-function 'ignore)
-    #+END_SRC
-*** Disable menubar, toolbar and scrollbars
-    #+BEGIN_SRC emacs-lisp
-      (dolist (mode '(menu-bar-mode tool-bar-mode scroll-bar-mode))
-        (when (fboundp mode) (funcall mode -1)))
-    #+END_SRC
-*** Show the current column in the mode line
-    #+BEGIN_SRC emacs-lisp
-      (setq column-number-mode t)
-    #+END_SRC
-*** Maximize Emacs on init
-    Start the initial frame maximized.
-
-    To start every frame maximized use:
-    (add-to-list 'default-frame-alist '(fullscreen . maximized))
-
-    #+BEGIN_SRC emacs-lisp
-      (add-to-list 'initial-frame-alist '(fullscreen . maximized))
-    #+END_SRC
-*** Set theme
-    #+BEGIN_SRC emacs-lisp
-      (load-theme 'modus-operandi t)
-    #+END_SRC
-*** Set font
-    #+BEGIN_SRC emacs-lisp
-      (set-frame-font "Monaco 12" nil t)
-    #+END_SRC
+** Set font
+   #+BEGIN_SRC emacs-lisp
+     (set-frame-font "Monaco 12" nil t)
+   #+END_SRC
 ** Editing
 *** Highlight the current line
     #+BEGIN_SRC emacs-lisp
@@ -705,8 +704,9 @@
   "The local variables list in init.org contains values that may not be safe (*)".
 
   - Press 'y' to continue.
-  - Next run `org-babel-tangle` (C-c C-v t) to create an init.el file.
-  - Restart emacs or use 'C-x load-file <enter> init.el'
+  - Next run `org-babel-tangle` (C-c C-v t) to generate an early-init.el and
+    init.el file.
+  - Restart emacs or load the generated files.
   - The next time this warning is shown press '!' to prevent future warnings.
 
   #+BEGIN_SRC emacs-lisp :tangle no
