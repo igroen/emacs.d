@@ -467,6 +467,7 @@
    #+BEGIN_SRC emacs-lisp
      (use-package org
        :config
+       (setq org-babel-python-command "python3")
        ;; Add languages for `SRC` code blocks in org-mode
        (org-babel-do-load-languages
         'org-babel-load-languages
