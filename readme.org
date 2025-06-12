@@ -332,7 +332,8 @@
        :hook (after-save-hook . magit-after-save-refresh-status))
 
      (use-package git-timemachine
-       :straight t)
+       :straight t
+       :defer t)
 
      (use-package diff-hl
        :straight t
@@ -466,6 +467,7 @@
 ** Org mode
    #+BEGIN_SRC emacs-lisp
      (use-package org
+       :defer t
        :config
        (setq org-babel-python-command "python3")
        ;; Add languages for `SRC` code blocks in org-mode
@@ -634,6 +636,8 @@
     #+begin_src emacs-lisp
       (use-package pyvenv
         :straight t
+
+        :defer t
 
         :config
         (pyvenv-mode t))
