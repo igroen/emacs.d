@@ -27,7 +27,7 @@
    #+begin_src emacs-lisp :tangle early-init.el
      (setq read-process-output-max (* 1024 1024))
    #+end_src
-** Disable menubar, toolbar, scrollbars adn tooltips
+** Disable menubar, toolbar, scrollbars and tooltips
    #+BEGIN_SRC emacs-lisp :tangle early-init.el
      (dolist (mode
               '(menu-bar-mode
@@ -58,35 +58,18 @@
      (load-theme 'modus-operandi t)
    #+END_SRC
 * Package management
-   Setup package management with straight.el and use-package.
+   Add melpo to the list of package archives.
 
    #+BEGIN_SRC emacs-lisp
-     (setq straight-repository-branch "develop")
+     (require 'package)
+     (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+     (package-initialize)
+   #+END_SRC
+   Add :chords keyword to use-package.
 
-     (defvar bootstrap-version)
-
-     (let ((bootstrap-file
-            (expand-file-name
-             "straight/repos/straight.el/bootstrap.el"
-             (or (bound-and-true-p straight-base-dir)
-                 user-emacs-directory)))
-           (bootstrap-version 7))
-       (unless (file-exists-p bootstrap-file)
-         (with-current-buffer
-             (url-retrieve-synchronously
-              "https://raw.githubusercontent.com/radian-software/straight.el/develop/install.el"
-              'silent 'inhibit-cookies)
-           (goto-char (point-max))
-           (eval-print-last-sexp)))
-       (load bootstrap-file nil 'nomessage))
-
-     (straight-use-package 'use-package)
-
-     (use-package bind-key
-       :straight t)
-
+   #+BEGIN_SRC emacs-lisp
      (use-package use-package-chords
-       :straight t
+       :ensure t
 
        :config (key-chord-mode 1))
    #+END_SRC
@@ -157,7 +140,7 @@
        ".*:\0? *"))
    #+END_SRC
 ** Tweaks
-*** Add interactive command to readme.org file
+*** Add interactive command to open this file
     #+BEGIN_SRC emacs-lisp
       (global-set-key
        (kbd "C-c s")
@@ -232,7 +215,7 @@
 ** Ace window
    #+BEGIN_SRC emacs-lisp
      (use-package ace-window
-       :straight t
+       :ensure t
 
        :bind ([remap other-window] . ace-window))
    #+END_SRC
@@ -241,7 +224,7 @@
 
    #+BEGIN_SRC emacs-lisp
      (use-package avy
-       :straight t
+       :ensure t
 
        :chords
        ("jj" . avy-goto-char)
@@ -251,7 +234,7 @@
 ** Company
    #+BEGIN_SRC emacs-lisp
      (use-package company
-       :straight t
+       :ensure t
 
        :hook (after-init . global-company-mode))
    #+END_SRC
@@ -260,8 +243,8 @@
 
    #+begin_src emacs-lisp
      (use-package jwt-content
-       :straight
-       (:host github :repo "igroen/jwt-content.el"))
+       :vc (:url "https://github.com/igroen/jwt-content.el"
+            :rev :newest))
    #+end_src
 ** Dired
    #+BEGIN_SRC emacs-lisp
@@ -285,7 +268,7 @@
 ** Drag stuff
    #+BEGIN_SRC emacs-lisp
      (use-package drag-stuff
-       :straight t
+       :ensure t
 
        :bind (("M-p" . drag-stuff-up)
               ("M-n" . drag-stuff-down))
@@ -302,7 +285,7 @@
 
    #+BEGIN_SRC emacs-lisp
      (use-package exec-path-from-shell
-       :straight t
+       :ensure t
 
        :config
        (when (memq window-system '(mac ns x))
@@ -311,32 +294,32 @@
 ** Expand region
    #+BEGIN_SRC emacs-lisp
      (use-package expand-region
-       :straight t
+       :ensure t
 
        :bind ("C-x w" . er/expand-region))
    #+END_SRC
 ** Flycheck
    #+BEGIN_SRC emacs-lisp
      (use-package flycheck
-       :straight t
+       :ensure t
 
        :hook (after-init . global-flycheck-mode))
    #+END_SRC
 ** Git
    #+BEGIN_SRC emacs-lisp
      (use-package magit
-       :straight t
+       :ensure t
 
        :bind ("C-x g" . magit-status)
 
        :hook (after-save-hook . magit-after-save-refresh-status))
 
      (use-package git-timemachine
-       :straight t
+       :ensure t
        :defer t)
 
      (use-package diff-hl
-       :straight t
+       :ensure t
 
        :hook ((magit-post-refresh . diff-hl-magit-post-refresh)
               (dired-mode . diff-hl-dired-mode-unless-remote))
@@ -365,15 +348,17 @@
 ** Hydra
    #+begin_src emacs-lisp
      (use-package hydra
-       :straight t)
+       :ensure t)
    #+end_src
 ** Ivy/Counsel/Swiper
 *** Ivy
     Completion framework.
 
     #+BEGIN_SRC emacs-lisp
-      (use-package ivy :demand
-        :straight t
+      (use-package ivy
+        :ensure t
+
+        :demand t
 
         :bind ("<f6>" . ivy-resume)
 
@@ -388,7 +373,8 @@
 
     #+BEGIN_SRC emacs-lisp
       (use-package ivy-xref
-        :straight t
+        :ensure t
+
         :init
         ;; xref initialization is different in Emacs 27 - there are two different
         ;; variables which can be set rather than just one
@@ -404,7 +390,7 @@
 
     #+BEGIN_SRC emacs-lisp
       (use-package counsel
-        :straight t
+        :ensure t
 
         :bind
         ("M-x" . counsel-M-x)
@@ -416,7 +402,7 @@
 
     #+BEGIN_SRC emacs-lisp
       (use-package swiper
-        :straight t
+        :ensure t
 
         :bind
         ([remap isearch-forward]  . swiper)
@@ -427,26 +413,26 @@
 
     #+BEGIN_SRC emacs-lisp
       (use-package flx
-        :straight t)
+        :ensure t)
     #+END_SRC
 *** Smex
     Show recently and most frequently used commands.
 
     #+BEGIN_SRC emacs-lisp
       (use-package smex
-        :straight t)
+        :ensure t)
     #+END_SRC
 *** Wgrep
     Edit a grep buffer and apply those changes to the file buffer.
 
     #+BEGIN_SRC emacs-lisp
       (use-package wgrep
-        :straight t)
+        :ensure t)
     #+END_SRC
 ** Mood line
    #+BEGIN_SRC emacs-lisp
      (use-package mood-line
-       :straight t
+       :ensure t
 
        :config
        (mood-line-mode)
@@ -457,7 +443,7 @@
 ** Multiple cursors
    #+BEGIN_SRC emacs-lisp
     (use-package multiple-cursors
-      :straight t
+      :ensure t
 
       :bind (("C-x C-m C-e" . mc/edit-lines)
              ("C-x C-m C-n" . mc/mark-next-like-this)
@@ -480,7 +466,7 @@
 ** Projectile
    #+BEGIN_SRC emacs-lisp
      (use-package projectile
-       :straight t
+       :ensure t
 
        :bind-keymap ("C-c p" . projectile-command-map)
 
@@ -489,7 +475,7 @@
        (projectile-mode))
 
      (use-package counsel-projectile
-       :straight t
+       :ensure t
 
        :config
        ;; The next line can be removed once
@@ -502,7 +488,7 @@
 *** treemacs
     #+BEGIN_SRC emacs-lisp
       (use-package treemacs
-        :straight t
+        :ensure t
 
         :bind (("M-0"       . treemacs-select-window)
                ("C-x t 1"   . treemacs-delete-other-windows)
@@ -531,14 +517,14 @@
 *** treemacs-projectile
     #+begin_src emacs-lisp
       (use-package treemacs-projectile
-        :straight t
+        :ensure t
 
         :after treemacs projectile)
     #+end_src
 *** treemacs-icons-dired
     #+begin_src emacs-lisp
       (use-package treemacs-icons-dired
-        :straight t
+        :ensure t
 
         :after treemacs dired
 
@@ -547,7 +533,7 @@
 *** treemacs-magit
     #+begin_src emacs-lisp
       (use-package treemacs-magit
-        :straight t
+        :ensure t
 
         :after treemacs magit)
     #+end_src
@@ -555,7 +541,7 @@
 *** vterm
     #+BEGIN_SRC emacs-lisp
       (use-package vterm
-        :straight t
+        :ensure t
 
         :init
         (setq vterm-always-compile-module t)
@@ -568,7 +554,7 @@
 *** vterm-toggle
     #+BEGIN_SRC emacs-lisp
       (use-package vterm-toggle
-        :straight t
+        :ensure t
 
         :bind (("C-c , RET" . vterm)
                ("C-c , /" . vterm-toggle)
@@ -582,14 +568,14 @@
 
    #+BEGIN_SRC emacs-lisp
      (use-package xclip
-       :straight t
+       :ensure t
 
        :config (xclip-mode t))
    #+END_SRC
 ** YAML
    #+BEGIN_SRC emacs-lisp
      (use-package yaml-mode
-       :straight t)
+       :ensure t)
    #+END_SRC
 * Programming
 ** LSP
@@ -597,11 +583,7 @@
 
    #+begin_src emacs-lisp
      (use-package lsp-mode
-       :straight
-       ;; Use plists for better performance.
-       ;; Must be set as an environment variable before lsp-mode is compiled.
-       ;; https://emacs-lsp.github.io/lsp-mode/page/performance/#use-plists-for-deserialization
-       `(:pre-build ,(setenv "LSP_USE_PLISTS" "true"))
+       :ensure t
 
        :hook ((c-mode . lsp)
               (c++-mode . lsp)
@@ -611,6 +593,9 @@
        :commands lsp
 
        :init
+       ;; Use plists for better performance.
+       ;; https://emacs-lsp.github.io/lsp-mode/page/performance/#use-plists-for-deserialization
+       (setenv "LSP_USE_PLISTS" "true")
        (setq lsp-keymap-prefix "C-c l")
 
        :config
@@ -635,7 +620,7 @@
 *** pyvenv
     #+begin_src emacs-lisp
       (use-package pyvenv
-        :straight t
+        :ensure t
 
         :defer t
 
@@ -716,6 +701,6 @@
 
   #+BEGIN_SRC emacs-lisp :tangle no
     ;; Local Variables:
-    ;; eval: (add-hook 'after-save-hook (lambda ()(org-babel-tangle)) nil t)
+    ;; eval: (add-hook 'after-save-hook (lambda () (org-babel-tangle)) nil t)
     ;; End:
   #+END_SRC
