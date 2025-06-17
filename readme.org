@@ -206,12 +206,6 @@
        (load custom-file))
    #+END_SRC
 * Packages
-** Abbrev
-   #+begin_src emacs-lisp
-     (use-package abbrev
-       :config
-       (setq-default abbrev-mode t))
-   #+end_src
 ** Ace window
    #+BEGIN_SRC emacs-lisp
      (use-package ace-window
