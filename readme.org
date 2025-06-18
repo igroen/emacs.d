@@ -507,23 +507,23 @@
       (use-package treemacs-projectile
         :ensure t
 
-        :after treemacs projectile)
+        :after (treemacs projectile))
     #+end_src
 *** treemacs-icons-dired
     #+begin_src emacs-lisp
       (use-package treemacs-icons-dired
         :ensure t
 
-        :after treemacs dired
+        ;; :after (treemacs dired)
 
-        :config (treemacs-icons-dired-mode))
+        :hook (dired-mode . treemacs-icons-dired-enable-once))
     #+end_src
 *** treemacs-magit
     #+begin_src emacs-lisp
       (use-package treemacs-magit
         :ensure t
 
-        :after treemacs magit)
+        :after (treemacs magit))
     #+end_src
 ** VTerm
 *** vterm
