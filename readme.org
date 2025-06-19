@@ -65,14 +65,6 @@
      (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
      (package-initialize)
    #+END_SRC
-   Add :chords keyword to use-package.
-
-   #+BEGIN_SRC emacs-lisp
-     (use-package use-package-chords
-       :ensure t
-
-       :config (key-chord-mode 1))
-   #+END_SRC
 * Defaults
 ** Set font
    #+BEGIN_SRC emacs-lisp
@@ -212,18 +204,6 @@
        :ensure t
 
        :bind ([remap other-window] . ace-window))
-   #+END_SRC
-** Avy
-   Jump to things in Emacs tree-style
-
-   #+BEGIN_SRC emacs-lisp
-     (use-package avy
-       :ensure t
-
-       :chords
-       ("jj" . avy-goto-char)
-       ("jk" . avy-goto-word-1)
-       ("jl" . avy-goto-line))
    #+END_SRC
 ** Company
    #+BEGIN_SRC emacs-lisp
