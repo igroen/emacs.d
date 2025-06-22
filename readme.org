@@ -156,8 +156,15 @@
     #+BEGIN_SRC emacs-lisp
       (global-set-key (kbd "C-x C-b") 'ibuffer)
     #+END_SRC
-*** Enable windmove
-    Enable windmove default keybindings for easier switching between windows.
+*** Switching between windows
+    Bind the keyboard shortcut 'M-o' to the `other-window` function for easier
+    switching between windows.
+
+    #+begin_src emacs-lisp
+      (global-set-key (kbd "M-o") 'other-window)
+    #+end_src
+    Enable windmove default keybindings so you can use the 'M-<arrow>' keyboard
+    shortcuts to switch between windows.
 
     #+begin_src emacs-lisp
       (windmove-default-keybindings)
@@ -198,13 +205,6 @@
        (load custom-file))
    #+END_SRC
 * Packages
-** Ace window
-   #+BEGIN_SRC emacs-lisp
-     (use-package ace-window
-       :ensure t
-
-       :bind ([remap other-window] . ace-window))
-   #+END_SRC
 ** Company
    #+BEGIN_SRC emacs-lisp
      (use-package company
