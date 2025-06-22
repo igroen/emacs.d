@@ -58,13 +58,13 @@
      (load-theme 'modus-operandi t)
    #+END_SRC
 * Package management
-   Add melpo to the list of package archives.
+  Add melpo to the list of package archives.
 
-   #+BEGIN_SRC emacs-lisp
-     (require 'package)
-     (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
-     (package-initialize)
-   #+END_SRC
+  #+BEGIN_SRC emacs-lisp
+    (require 'package)
+    (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+    (package-initialize)
+  #+END_SRC
 * Defaults
 ** Set font
    #+BEGIN_SRC emacs-lisp
