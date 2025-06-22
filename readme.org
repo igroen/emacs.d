@@ -45,9 +45,9 @@
              (horizontal-scroll-bars . nil)))
 
    #+END_SRC
-** Start with *scratch* buffer
+** Don't show startup screen on Emacs start
    #+BEGIN_SRC emacs-lisp :tangle early-init.el
-     (setq inhibit-startup-message t)
+     (setq-default inhibit-startup-screen t)
    #+END_SRC
 ** Disable bell
    #+BEGIN_SRC emacs-lisp :tangle early-init.el
