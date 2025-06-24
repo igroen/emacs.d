@@ -657,6 +657,16 @@
      (global-set-key [remap move-beginning-of-line]
                      'smarter-move-beginning-of-line)
    #+END_SRC
+* Local config
+  Load local configuration from local.el or local.elc in `user-emacs-directory`.
+
+  #+begin_src emacs-lisp
+    (load
+     (expand-file-name
+      (locate-user-emacs-file
+       "local"))
+     'noerror)
+  #+end_src
 * Tangle on save
   When opening this file for the first time the following warning is shown:
   "The local variables list in init.org contains values that may not be safe (*)".
