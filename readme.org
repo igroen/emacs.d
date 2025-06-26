@@ -448,17 +448,8 @@
 
        :config
        (setq projectile-enable-caching t)
+       (setq projectile-switch-project-action 'projectile-dired)
        (projectile-mode))
-
-     (use-package counsel-projectile
-       :ensure t
-
-       :config
-       ;; The next line can be removed once
-       ;; https://github.com/ericdanan/counsel-projectile/issues/189
-       ;; is resolved.
-       (projectile-known-projects)
-       (counsel-projectile-mode))
    #+END_SRC
 ** Treemacs
 *** treemacs
