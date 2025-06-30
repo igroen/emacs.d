@@ -458,6 +458,7 @@
        ;; https://github.com/ericdanan/counsel-projectile/issues/189
        ;; is resolved.
        (projectile-known-projects)
+       (setcar counsel-projectile-switch-project-action 4)
        (counsel-projectile-mode))
    #+END_SRC
 ** Treemacs
