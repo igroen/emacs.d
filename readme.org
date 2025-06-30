@@ -57,6 +57,12 @@
    #+BEGIN_SRC emacs-lisp :tangle early-init.el
      (load-theme 'modus-operandi t)
    #+END_SRC
+** Use plists for deserialization in LSP mode
+   See [[https://emacs-lsp.github.io/lsp-mode/page/performance/#use-plists-for-deserialization][use-plists-for-deserialization]] for more information.
+
+   #+BEGIN_SRC emacs-lisp :tangle early-init.el
+     (setenv "LSP_USE_PLISTS" "true")
+   #+END_SRC
 * Package management
   Add melpo to the list of package archives.
 
@@ -570,9 +576,6 @@
        :commands lsp
 
        :init
-       ;; Use plists for better performance.
-       ;; https://emacs-lsp.github.io/lsp-mode/page/performance/#use-plists-for-deserialization
-       (setenv "LSP_USE_PLISTS" "true")
        (setq lsp-keymap-prefix "C-c l")
 
        :config
