@@ -153,9 +153,9 @@
     #+BEGIN_SRC emacs-lisp
       (global-auto-revert-mode t)
     #+END_SRC
-*** Enable y/n answers
+*** Use short (y/n) answers
     #+BEGIN_SRC emacs-lisp
-      (fset 'yes-or-no-p 'y-or-n-p)
+      (setopt use-short-answers t)
     #+END_SRC
 *** Remember cursor position
     #+BEGIN_SRC emacs-lisp
