@@ -185,6 +185,34 @@
     #+begin_src emacs-lisp
       (which-key-mode)
     #+end_src
+*** Save minibuffer history
+    #+begin_src emacs-lisp
+      (savehist-mode 1)
+    #+end_src
+*** Keep track of recently opened files
+    #+begin_src emacs-lisp
+      (recentf-mode 1)
+    #+end_src
+*** Enable indentation & completion using the TAB key.
+    `completion-at-point' is often bound to M-TAB.
+
+    #+begin_src emacs-lisp
+      (setq tab-always-indent 'complete)
+    #+end_src
+*** Disable Ispell completion function
+    TODO: Try `cape-dict' as an alternative.
+
+    #+begin_src emacs-lisp
+      (setq text-mode-ispell-word-completion nil)
+    #+end_src
+*** Hide M-x commands
+    Hide commands in M-x which do not apply to the current mode.  Corfu
+    commands are hidden, since they are not used via M-x. This setting is
+    useful beyond Corfu.
+
+    #+begin_src emacs-lisp
+      (setq read-extended-command-predicate #'command-completion-default-include-p)
+    #+end_src
 ** Backups
    Store all backup and autosave files in the 'backups' dir.
 
@@ -219,13 +247,6 @@
        (load custom-file))
    #+END_SRC
 * Packages
-** Company
-   #+BEGIN_SRC emacs-lisp
-     (use-package company
-       :ensure t
-
-       :hook (after-init . global-company-mode))
-   #+END_SRC
 ** Decode JWT
    Decode the headers and payload of a JWT token.
 
@@ -338,79 +359,115 @@
      (use-package hydra
        :ensure t)
    #+end_src
-** Ivy/Counsel/Swiper
-*** Ivy
-    Completion framework.
+** Vert&co Stack
+*** Vertico
+    VERTical Interactive COmpletion.
 
-    #+BEGIN_SRC emacs-lisp
-      (use-package ivy
+    #+begin_src emacs-lisp
+      (use-package vertico
         :ensure t
-
-        :demand t
-
-        :bind ("<f6>" . ivy-resume)
 
         :config
-        (setq ivy-count-format "%d/%d "
-              ivy-use-selectable-prompt t
-              ivy-use-virtual-buffers t)
-        (ivy-mode 1))
-    #+END_SRC
-*** Ivy-xref
-    Select from xref candidates with ivy.
+        (setq vertico-cycle t)
+        (setq vertico-resize nil)
+        (vertico-mode 1))
+    #+end_src
+*** Orderless
+    Completion style for matching regexps in any order/
 
-    #+BEGIN_SRC emacs-lisp
-      (use-package ivy-xref
+    #+begin_src emacs-lisp
+      (use-package orderless
         :ensure t
 
-        :init
-        (setq xref-show-definitions-function #'ivy-xref-show-defs)
-        (setq xref-show-xrefs-function #'ivy-xref-show-xrefs))
-   #+END_SRC
-*** Counsel
-    Provides some useful commands for ivy.
+        :custom
+        (completion-styles '(orderless basic))
+        (completion-category-defaults nil)
+        (completion-category-overrides '((file (styles partial-completion)))))
+    #+end_src
+*** Consult
 
-    #+BEGIN_SRC emacs-lisp
-      (use-package counsel
+    Consulting completing-read.
+
+    #+begin_src emacs-lisp
+      (use-package consult
         :ensure t
 
-        :bind
-        ("M-x" . counsel-M-x)
-        ("C-x C-f" . counsel-find-file)
-        ("M-y" . counsel-yank-pop))
-    #+END_SRC
-*** Swiper
-    Search through the current buffer.
+        :bind (("M-s M-g" . consult-grep)
+               ("M-s M-r" . consult-ripgrep)
+               ("M-s M-f" . consult-find)
+               ("M-s M-o" . consult-outline)
+               ([remap isearch-forward] . consult-line)
+               ([remap isearch-backward] . consult-line)
+               ([remap switch-to-buffer] . consult-buffer)))
+    #+end_src
+*** Marginalia
+    Enrich existing commands with completion annotations.
 
-    #+BEGIN_SRC emacs-lisp
-      (use-package swiper
+    #+begin_src emacs-lisp
+      (use-package marginalia
         :ensure t
 
-        :bind
-        ([remap isearch-forward]  . swiper)
-        ([remap isearch-backward] . swiper))
-    #+END_SRC
-*** Flx
-    Better fuzzy matching.
+        :config
+        (marginalia-mode 1))
+    #+end_src
+*** Embark
+    Conveniently act on minibuffer completions.
 
-    #+BEGIN_SRC emacs-lisp
-      (use-package flx
+    #+begin_src emacs-lisp
+      (use-package embark
+        :ensure t
+
+        :bind (("C-." . embark-act)
+               :map minibuffer-local-map
+               ("C-c C-c" . embark-collect)
+               ("C-c C-e" . embark-export)))
+    #+end_src
+    This package is the glue that ties together `embark' and `consult'.
+
+    #+begin_src emacs-lisp
+      (use-package embark-consult
         :ensure t)
-    #+END_SRC
-*** Smex
-    Show recently and most frequently used commands.
-
-    #+BEGIN_SRC emacs-lisp
-      (use-package smex
-        :ensure t)
-    #+END_SRC
+    #+end_src
 *** Wgrep
     Edit a grep buffer and apply those changes to the file buffer.
 
     #+BEGIN_SRC emacs-lisp
       (use-package wgrep
-        :ensure t)
+        :ensure t
+
+        :bind ( :map grep-mode-map
+                ("e" . wgrep-change-to-wgrep-mode)
+                ("C-x C-q" . wgrep-change-to-wgrep-mode)
+                ("C-c C-c" . wgrep-finish-edit)))
     #+END_SRC
+*** Corfu
+    Enhanced buffer completions.
+
+    #+begin_src emacs-lisp
+      (use-package corfu
+        :ensure t
+
+        :custom
+        (corfu-auto t)
+        (corfu-auto-prefix 2)
+        (corfu-cycle t)
+        (corfu-quit-at-boundary nil)
+        (corfu-quit-no-match t)
+        (corfu-on-exact-match 'quit)
+
+        :config
+        (global-corfu-mode))
+    #+end_src
+    Make Corfu work in the terminal.
+
+    #+begin_src emacs-lisp
+      (use-package corfu-terminal
+        :ensure t
+
+        :config
+        (unless (display-graphic-p)
+          (corfu-terminal-mode +1)))
+    #+end_src
 ** Mood line
    #+BEGIN_SRC emacs-lisp
      (use-package mood-line
@@ -455,17 +512,6 @@
        :config
        (setq projectile-enable-caching t)
        (projectile-mode))
-
-     (use-package counsel-projectile
-       :ensure t
-
-       :config
-       ;; The next line can be removed once
-       ;; https://github.com/ericdanan/counsel-projectile/issues/189
-       ;; is resolved.
-       (projectile-known-projects)
-       (setcar counsel-projectile-switch-project-action 4)
-       (counsel-projectile-mode))
    #+END_SRC
 ** Treemacs
 *** treemacs
@@ -571,23 +617,29 @@
        :hook ((c-mode . lsp)
               (c++-mode . lsp)
               (python-mode . lsp)
-              (lsp-mode . lsp-enable-which-key-integration))
+              (lsp-mode . lsp-enable-which-key-integration)
+              (lsp-completion-mode . my/lsp-mode-setup-completion))
 
        :commands lsp
 
        :init
-       (setq lsp-keymap-prefix "C-c l")
+       (defun my/lsp-mode-setup-completion ()
+         (setf (alist-get 'styles (alist-get 'lsp-capf completion-category-defaults))
+               '(orderless))) ;; Configure orderless
 
-       :config
+       :custom
+       (lsp-keymap-prefix "C-c l")
        ;; Use flake8 instead of pycodestyle/pydocstyle/pyflakes
-       (setq lsp-pylsp-plugins-pycodestyle-enabled nil)
-       (setq lsp-pylsp-plugins-pydocstyle-enabled nil)
-       (setq lsp-pylsp-plugins-pyflakes-enabled nil)
-       (setq lsp-pylsp-plugins-flake8-enabled t)
+       (lsp-pylsp-plugins-pycodestyle-enabled nil)
+       (lsp-pylsp-plugins-pydocstyle-enabled nil)
+       (lsp-pylsp-plugins-pyflakes-enabled nil)
+       (lsp-pylsp-plugins-flake8-enabled t)
        ;; Enable YAPF for code formatting
-       (setq lsp-pylsp-plugins-yapf-enabled t)
+       (lsp-pylsp-plugins-yapf-enabled t)
        ;; Disable YASnippet
-       (setq lsp-enable-snippet nil))
+       (lsp-enable-snippet nil)
+       (lsp-completion-provider :none) ;; we use Corfu!
+       )
     #+end_src
 ** C++
 *** Indentation
