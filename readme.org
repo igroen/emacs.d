@@ -502,17 +502,6 @@
           (shell . t)
           (python . t))))
    #+END_SRC
-** Projectile
-   #+BEGIN_SRC emacs-lisp
-     (use-package projectile
-       :ensure t
-
-       :bind-keymap ("C-c p" . projectile-command-map)
-
-       :config
-       (setq projectile-enable-caching t)
-       (projectile-mode))
-   #+END_SRC
 ** Treemacs
 *** treemacs
     #+BEGIN_SRC emacs-lisp
@@ -543,13 +532,6 @@
         (add-to-list
          'treemacs-ignored-file-predicates #'treemacs-python-ignore))
     #+END_SRC
-*** treemacs-projectile
-    #+begin_src emacs-lisp
-      (use-package treemacs-projectile
-        :ensure t
-
-        :after (treemacs projectile))
-    #+end_src
 *** treemacs-icons-dired
     #+begin_src emacs-lisp
       (use-package treemacs-icons-dired
