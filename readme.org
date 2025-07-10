@@ -385,7 +385,6 @@
         (completion-category-overrides '((file (styles partial-completion)))))
     #+end_src
 *** Consult
-
     Consulting completing-read.
 
     #+begin_src emacs-lisp
@@ -518,7 +517,7 @@
         :config
         (treemacs-git-mode 'simple)
 
-        (defun treemacs-python-ignore (filename absolute-path)
+        (defun my/treemacs-python-ignore (filename absolute-path)
           (or (seq-contains-p
                '(".tox"
                  "__pycache__"
@@ -530,7 +529,7 @@
               (string-match "^.+\\.pyc$" filename)))
 
         (add-to-list
-         'treemacs-ignored-file-predicates #'treemacs-python-ignore))
+         'treemacs-ignored-file-predicates #'my/treemacs-python-ignore))
     #+END_SRC
 *** treemacs-icons-dired
     #+begin_src emacs-lisp
@@ -644,7 +643,7 @@
 * Utilities
 ** Delete current file and buffer
    #+BEGIN_SRC emacs-lisp
-     (defun delete-current-file-copy-to-kill-ring ()
+     (defun my/delete-current-file-copy-to-kill-ring ()
        "Delete current buffer/file and close the buffer, push content to `kill-ring'."
        (interactive)
        (progn
@@ -659,11 +658,11 @@
            (set-buffer-modified-p nil)
            (kill-buffer (current-buffer)))))
 
-     (global-set-key (kbd "C-c k")  'delete-current-file-copy-to-kill-ring)
+     (global-set-key (kbd "C-c k")  'my/delete-current-file-copy-to-kill-ring)
    #+END_SRC
 ** Duplicate current line
    #+begin_src emacs-lisp
-     (defun duplicate-line ()
+     (defun my/duplicate-line ()
         (interactive)
         (let ((col (current-column)))
           (move-beginning-of-line 1)
@@ -673,10 +672,10 @@
           (yank)
           (move-to-column col)))
 
-      (global-set-key (kbd "C-c d") 'duplicate-line)
+      (global-set-key (kbd "C-c d") 'my/duplicate-line)
    #+end_src
-** Smarter move to beginning of line
-   Move point back to indentation of beginning of line.
+** Smarter move to the beginning of a line
+   Move point back to indentation or beginning of line.
 
    Move point to the first non-whitespace character on this line.
    If point is already there, move to the beginning of the line.
@@ -686,7 +685,7 @@
    If ARG is not nil or 1, move forward ARG - 1 lines first.  If
    point reaches the beginning or end of the buffer, stop there.
    #+BEGIN_SRC emacs-lisp
-     (defun smarter-move-beginning-of-line (arg)
+     (defun my/move-beginning-of-line (arg)
        (interactive "^p")
        (setq arg (or arg 1))
 
@@ -699,9 +698,9 @@
          (when (= orig-point (point))
            (move-beginning-of-line 1))))
 
-     ;; remap C-a to `smarter-move-beginning-of-line'
+     ;; remap C-a to `my/move-beginning-of-line'
      (global-set-key [remap move-beginning-of-line]
-                     'smarter-move-beginning-of-line)
+                     'my/move-beginning-of-line)
    #+END_SRC
 * Local config
   Load local configuration from local.el or local.elc in `user-emacs-directory`.
