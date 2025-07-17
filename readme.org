@@ -478,16 +478,6 @@
        :custom
        (mood-line-glyph-alist mood-line-glyphs-fira-code))
    #+END_SRC
-** Multiple cursors
-   #+BEGIN_SRC emacs-lisp
-    (use-package multiple-cursors
-      :ensure t
-
-      :bind (("C-x C-m C-e" . mc/edit-lines)
-             ("C-x C-m C-n" . mc/mark-next-like-this)
-             ("C-x C-m C-p" . mc/mark-previous-like-this)
-             ("C-x C-m C-a" . mc/mark-all-like-this)))
-   #+END_SRC
 ** Org mode
    #+BEGIN_SRC emacs-lisp
      (use-package org
