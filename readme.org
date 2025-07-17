@@ -350,11 +350,6 @@
        ;; Prompt for the password in the minibuffer
        (setq epg-pinentry-mode 'loopback))
    #+END_SRC
-** Hydra
-   #+begin_src emacs-lisp
-     (use-package hydra
-       :ensure t)
-   #+end_src
 ** Vert&co Stack
 *** Vertico
     VERTical Interactive COmpletion.
