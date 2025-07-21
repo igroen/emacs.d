@@ -598,7 +598,7 @@
        (lsp-completion-provider :none) ;; we use Corfu!
        )
     #+end_src
-** C++
+** C/C++
 *** Indentation
     Set indentation to 4 spaces
 
