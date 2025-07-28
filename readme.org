@@ -143,8 +143,9 @@
       (global-set-key
        (kbd "C-c s")
        (lambda ()
+         "Open Emacs configuration"
          (interactive)
-         (find-file-other-window
+         (find-file
           (expand-file-name
            "readme.org"
            user-emacs-directory))))
@@ -482,6 +483,13 @@
           (shell . t)
           (python . t))))
    #+END_SRC
+
+*** Org-bullets mode
+    #+begin_src emacs-lisp
+      (use-package org-bullets
+        :ensure t
+        :hook (org-mode . org-bullets-mode))
+    #+end_src
 ** Treemacs
 *** treemacs
     #+BEGIN_SRC emacs-lisp
