@@ -1,721 +1,717 @@
-#+STARTUP: overview
+#+STARTUP: overview indent
 #+PROPERTY: header-args :tangle init.el
 
 * Early init
 ** Startup tweaks
-   Make startup faster by reducing the frequency of garbage collection.
+Make startup faster by reducing the frequency of garbage collection.
 
-   #+BEGIN_SRC emacs-lisp :tangle early-init.el
-     (setq gc-cons-threshold most-positive-fixnum
-           gc-cons-percentage 0.6)
-   #+END_SRC
+#+BEGIN_SRC emacs-lisp :tangle early-init.el
+  (setq gc-cons-threshold most-positive-fixnum
+        gc-cons-percentage 0.6)
+#+END_SRC
 
-   After Emacs startup has been completed, set `gc-cons-threshold' to
-   16 MB and reset `gc-cons-percentage' to its original value.
+After Emacs startup has been completed, set `gc-cons-threshold' to
+16 MB and reset `gc-cons-percentage' to its original value.
 
-   #+BEGIN_SRC emacs-lisp :tangle early-init.el
-     (add-hook 'emacs-startup-hook
-               #'(lambda ()
-                   (setq gc-cons-threshold (* 16 1024 1024)
-                         gc-cons-percentage 0.1)))
-   #+END_SRC
+#+BEGIN_SRC emacs-lisp :tangle early-init.el
+  (add-hook 'emacs-startup-hook
+            #'(lambda ()
+                (setq gc-cons-threshold (* 16 1024 1024)
+                      gc-cons-percentage 0.1)))
+#+END_SRC
 
-   Increase the amount of data which Emacs reads from a sub-process
-   in one read operation.
-   The default 4096 bytes can be to low for i.e. lsp-mode.
+Increase the amount of data which Emacs reads from a sub-process
+in one read operation.
+The default 4096 bytes can be to low for i.e. lsp-mode.
 
-   #+begin_src emacs-lisp :tangle early-init.el
-     (setq read-process-output-max (* 1024 1024))
-   #+end_src
+#+begin_src emacs-lisp :tangle early-init.el
+  (setq read-process-output-max (* 1024 1024))
+#+end_src
 ** Disable menubar, toolbar, scrollbars and tooltips
-   #+BEGIN_SRC emacs-lisp :tangle early-init.el
-     (dolist (mode
-              '(menu-bar-mode
-                tool-bar-mode
-                scroll-bar-mode
-                tooltip-mode))
-       (when (fboundp mode)
-         (funcall mode -1)))
-   #+END_SRC
+#+BEGIN_SRC emacs-lisp :tangle early-init.el
+  (dolist (mode
+           '(menu-bar-mode
+             tool-bar-mode
+             scroll-bar-mode
+             tooltip-mode))
+    (when (fboundp mode)
+      (funcall mode -1)))
+#+END_SRC
 ** Start the initial frame maximized.
-   #+BEGIN_SRC emacs-lisp :tangle early-init.el
-     (setq default-frame-alist
-           '((fullscreen . maximized)
-             (vertical-scroll-bars . nil)
-             (horizontal-scroll-bars . nil)))
-
-   #+END_SRC
+#+BEGIN_SRC emacs-lisp :tangle early-init.el
+  (setq default-frame-alist
+        '((fullscreen . maximized)
+          (vertical-scroll-bars . nil)
+          (horizontal-scroll-bars . nil)))
+#+END_SRC
 ** Don't show startup screen on Emacs start
-   #+BEGIN_SRC emacs-lisp :tangle early-init.el
-     (setq-default inhibit-startup-screen t)
-   #+END_SRC
+#+BEGIN_SRC emacs-lisp :tangle early-init.el
+  (setq-default inhibit-startup-screen t)
+#+END_SRC
 ** Disable bell
-   #+BEGIN_SRC emacs-lisp :tangle early-init.el
-     (setq ring-bell-function 'ignore)
-   #+END_SRC
+#+BEGIN_SRC emacs-lisp :tangle early-init.el
+  (setq ring-bell-function 'ignore)
+#+END_SRC
 ** Set theme
-   #+BEGIN_SRC emacs-lisp :tangle early-init.el
-     (load-theme 'modus-operandi t)
-   #+END_SRC
+#+BEGIN_SRC emacs-lisp :tangle early-init.el
+  (load-theme 'modus-operandi t)
+#+END_SRC
 ** Use plists for deserialization in LSP mode
-   See [[https://emacs-lsp.github.io/lsp-mode/page/performance/#use-plists-for-deserialization][use-plists-for-deserialization]] for more information.
+See [[https://emacs-lsp.github.io/lsp-mode/page/performance/#use-plists-for-deserialization][use-plists-for-deserialization]] for more information.
 
-   #+BEGIN_SRC emacs-lisp :tangle early-init.el
-     (setenv "LSP_USE_PLISTS" "true")
-   #+END_SRC
+#+BEGIN_SRC emacs-lisp :tangle early-init.el
+  (setenv "LSP_USE_PLISTS" "true")
+#+END_SRC
 * Package management
-  Add melpo to the list of package archives.
+Add melpo to the list of package archives.
 
-  #+BEGIN_SRC emacs-lisp
-    (require 'package)
-    (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
-    (package-initialize)
-  #+END_SRC
+#+BEGIN_SRC emacs-lisp
+  (require 'package)
+  (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+  (package-initialize)
+#+END_SRC
 * Defaults
 ** Set font
-   #+BEGIN_SRC emacs-lisp
-     (set-frame-font "Monaco 12" nil t)
-   #+END_SRC
+#+BEGIN_SRC emacs-lisp
+  (set-frame-font "Monaco 12" nil t)
+#+END_SRC
 ** Editing
 *** Highlight the current line
-    #+BEGIN_SRC emacs-lisp
-      ;; Enable it for all programming major modes
-      (add-hook 'prog-mode-hook #'hl-line-mode)
-      ;; and for all modes derived from text-mode
-      (add-hook 'text-mode-hook #'hl-line-mode)
-    #+END_SRC
+#+BEGIN_SRC emacs-lisp
+  ;; Enable it for all programming major modes
+  (add-hook 'prog-mode-hook #'hl-line-mode)
+  ;; and for all modes derived from text-mode
+  (add-hook 'text-mode-hook #'hl-line-mode)
+#+END_SRC
 *** Remove trailing whitespace on save
-    #+BEGIN_SRC emacs-lisp
-      (add-hook 'before-save-hook 'delete-trailing-whitespace)
-    #+END_SRC
+#+BEGIN_SRC emacs-lisp
+  (add-hook 'before-save-hook 'delete-trailing-whitespace)
+#+END_SRC
 *** Auto close bracket insertion
-    #+BEGIN_SRC emacs-lisp
-      (electric-pair-mode 1)
-    #+END_SRC
+#+BEGIN_SRC emacs-lisp
+  (electric-pair-mode 1)
+#+END_SRC
 *** Show corresponding paren
-    #+BEGIN_SRC emacs-lisp
-      (show-paren-mode 1)
-    #+END_SRC
+#+BEGIN_SRC emacs-lisp
+  (show-paren-mode 1)
+#+END_SRC
 *** Require a newline at the end of the file
-    #+BEGIN_SRC emacs-lisp
-      (defvar require-final-newline t)
-    #+END_SRC
+#+BEGIN_SRC emacs-lisp
+  (defvar require-final-newline t)
+#+END_SRC
 *** Set indentation to always use spaces
-   #+BEGIN_SRC emacs-lisp
-     (setq-default indent-tabs-mode nil)
-   #+END_SRC
+#+BEGIN_SRC emacs-lisp
+  (setq-default indent-tabs-mode nil)
+#+END_SRC
 *** Comments
-    Remap 'comment-line key to 'C-x C-\' because the
-    default 'C-;' is not recognized by some terminals.
+Remap 'comment-line key to 'C-x C-\' because the
+default 'C-;' is not recognized by some terminals.
 
-    #+BEGIN_SRC emacs-lisp
-      (global-unset-key (kbd "C-x C-;"))
-      (global-set-key (kbd "C-x C-\\") 'comment-line)
-    #+END_SRC
+#+BEGIN_SRC emacs-lisp
+  (global-unset-key (kbd "C-x C-;"))
+  (global-set-key (kbd "C-x C-\\") 'comment-line)
+#+END_SRC
 ** Scrolling
-   #+BEGIN_SRC emacs-lisp
-     (setq scroll-margin                   0  ;; Default
-           scroll-step                     1
-           scroll-conservatively           10000
-           scroll-preserve-screen-position 1)
-   #+END_SRC
+#+BEGIN_SRC emacs-lisp
+  (setq scroll-margin                   0  ;; Default
+        scroll-step                     1
+        scroll-conservatively           10000
+        scroll-preserve-screen-position 1)
+#+END_SRC
 ** Tramp
-   Set remote password prompts.
+Set remote password prompts.
 
-   #+BEGIN_SRC emacs-lisp
-     (customize-set-variable
-      'tramp-password-prompt-regexp
-      (concat
-       "^.*"
-       (regexp-opt
-        '("passphrase"
-          "Passphrase"
-          "password"
-          "Password"
-          ;; Google Authenticator
-          "Verification code")
-        t)
-       ".*:\0? *"))
-   #+END_SRC
+#+BEGIN_SRC emacs-lisp
+  (customize-set-variable
+   'tramp-password-prompt-regexp
+   (concat
+    "^.*"
+    (regexp-opt
+     '("passphrase"
+       "Passphrase"
+       "password"
+       "Password"
+       ;; Google Authenticator
+       "Verification code")
+     t)
+    ".*:\0? *"))
+#+END_SRC
 ** Tweaks
 *** Add interactive command to open this file
-    #+BEGIN_SRC emacs-lisp
-      (global-set-key
-       (kbd "C-c s")
-       (lambda ()
-         "Open Emacs configuration"
-         (interactive)
-         (find-file
-          (expand-file-name
-           "readme.org"
-           user-emacs-directory))))
-    #+END_SRC
+#+BEGIN_SRC emacs-lisp
+  (global-set-key
+   (kbd "C-c s")
+   (lambda ()
+     "Open Emacs configuration"
+     (interactive)
+     (find-file
+      (expand-file-name
+       "readme.org"
+       user-emacs-directory))))
+#+END_SRC
 *** Autorefresh buffers on file change
-    #+BEGIN_SRC emacs-lisp
-      (global-auto-revert-mode t)
-    #+END_SRC
+#+BEGIN_SRC emacs-lisp
+  (global-auto-revert-mode t)
+#+END_SRC
 *** Use short (y/n) answers
-    #+BEGIN_SRC emacs-lisp
-      (setopt use-short-answers t)
-    #+END_SRC
+#+BEGIN_SRC emacs-lisp
+  (setopt use-short-answers t)
+#+END_SRC
 *** Remember cursor position
-    #+BEGIN_SRC emacs-lisp
-      (save-place-mode 1)
-    #+END_SRC
+#+BEGIN_SRC emacs-lisp
+  (save-place-mode 1)
+#+END_SRC
 *** Replace *Buffer List* with *Ibuffer*
-    #+BEGIN_SRC emacs-lisp
-      (global-set-key (kbd "C-x C-b") 'ibuffer)
-    #+END_SRC
+#+BEGIN_SRC emacs-lisp
+  (global-set-key (kbd "C-x C-b") 'ibuffer)
+#+END_SRC
 *** Switching between windows
-    Bind the keyboard shortcut 'M-o' to the `other-window` function for easier
-    switching between windows.
+Bind the keyboard shortcut 'M-o' to the `other-window` function for easier
+switching between windows.
 
-    #+begin_src emacs-lisp
-      (global-set-key (kbd "M-o") 'other-window)
-    #+end_src
-    Enable windmove default keybindings so you can use the 'M-<arrow>' keyboard
-    shortcuts to switch between windows.
+#+begin_src emacs-lisp
+  (global-set-key (kbd "M-o") 'other-window)
+#+end_src
+Enable windmove default keybindings so you can use the 'M-<arrow>' keyboard
+shortcuts to switch between windows.
 
-    #+begin_src emacs-lisp
-      (windmove-default-keybindings)
-    #+end_src
+#+begin_src emacs-lisp
+  (windmove-default-keybindings)
+#+end_src
 *** Enable which-key
-    Display the key bindings following your currently entered incomplete
-    command (a prefix) in a popup.
+Display the key bindings following your currently entered incomplete
+command (a prefix) in a popup.
 
-    #+begin_src emacs-lisp
-      (which-key-mode)
-    #+end_src
+#+begin_src emacs-lisp
+  (which-key-mode)
+#+end_src
 *** Save minibuffer history
-    #+begin_src emacs-lisp
-      (savehist-mode 1)
-    #+end_src
+#+begin_src emacs-lisp
+  (savehist-mode 1)
+#+end_src
 *** Keep track of recently opened files
-    #+begin_src emacs-lisp
-      (recentf-mode 1)
-    #+end_src
+#+begin_src emacs-lisp
+  (recentf-mode 1)
+#+end_src
 *** Enable indentation & completion using the TAB key.
-    `completion-at-point' is often bound to M-TAB.
+`completion-at-point' is often bound to M-TAB.
 
-    #+begin_src emacs-lisp
-      (setq tab-always-indent 'complete)
-    #+end_src
+#+begin_src emacs-lisp
+  (setq tab-always-indent 'complete)
+#+end_src
 *** Disable Ispell completion function
-    TODO: Try `cape-dict' as an alternative.
+TODO: Try `cape-dict' as an alternative.
 
-    #+begin_src emacs-lisp
-      (setq text-mode-ispell-word-completion nil)
-    #+end_src
+#+begin_src emacs-lisp
+  (setq text-mode-ispell-word-completion nil)
+#+end_src
 *** Hide M-x commands
-    Hide commands in M-x which do not apply to the current mode.  Corfu
-    commands are hidden, since they are not used via M-x. This setting is
-    useful beyond Corfu.
+Hide commands in M-x which do not apply to the current mode.  Corfu
+commands are hidden, since they are not used via M-x. This setting is
+useful beyond Corfu.
 
-    #+begin_src emacs-lisp
-      (setq read-extended-command-predicate #'command-completion-default-include-p)
-    #+end_src
+#+begin_src emacs-lisp
+  (setq read-extended-command-predicate #'command-completion-default-include-p)
+#+end_src
 ** Backups
-   Store all backup and autosave files in the 'backups' dir.
+Store all backup and autosave files in the 'backups' dir.
 
-   #+BEGIN_SRC emacs-lisp
-     (setq auto-save-list-file-prefix nil)
-     (setq backup-directory-alist
-           `(("." . ,(expand-file-name
-                      "backups"
-                      user-emacs-directory))))
-   #+END_SRC
-   Use version contral and keep multiple backup files.
+#+BEGIN_SRC emacs-lisp
+  (setq auto-save-list-file-prefix nil)
+  (setq backup-directory-alist
+        `(("." . ,(expand-file-name
+                   "backups"
+                   user-emacs-directory))))
+#+END_SRC
+Use version contral and keep multiple backup files.
 
-   #+BEGIN_SRC emacs-lisp
-     (setq backup-by-copying t
-           delete-old-versions t
-           kept-new-versions 10
-           kept-old-versions 0
-           version-control t
-           vc-make-backup-files t)
-   #+END_SRC
+#+BEGIN_SRC emacs-lisp
+  (setq backup-by-copying t
+        delete-old-versions t
+        kept-new-versions 10
+        kept-old-versions 0
+        version-control t
+        vc-make-backup-files t)
+#+END_SRC
 ** Customize
-   Move lines added by the customize system to a seperate file.
-   Config changes made through the customize UI will be stored here.
+Move lines added by the customize system to a seperate file.
+Config changes made through the customize UI will be stored here.
 
-   #+BEGIN_SRC emacs-lisp
-     (setq custom-file
-           (expand-file-name
-            "custom.el"
-            user-emacs-directory))
+#+BEGIN_SRC emacs-lisp
+  (setq custom-file
+        (expand-file-name
+         "custom.el"
+         user-emacs-directory))
 
-     (when (file-exists-p custom-file)
-       (load custom-file))
-   #+END_SRC
+  (when (file-exists-p custom-file)
+    (load custom-file))
+#+END_SRC
 * Packages
 ** Decode JWT
-   Decode the headers and payload of a JWT token.
+Decode the headers and payload of a JWT token.
 
-   #+begin_src emacs-lisp
-     (use-package jwt-content
-       :vc (:url "https://github.com/igroen/jwt-content.el"
-            :rev :newest))
-   #+end_src
+#+begin_src emacs-lisp
+  (use-package jwt-content
+    :vc (:url "https://github.com/igroen/jwt-content.el"
+         :rev :newest))
+#+end_src
 ** Dired
-   #+BEGIN_SRC emacs-lisp
-     (use-package dired
-       :config
-       ;; Use dired-x to enable C-x C-j (dired-jump) and other features
-       (use-package dired-x)
+#+BEGIN_SRC emacs-lisp
+  (use-package dired
+    :config
+    ;; Use dired-x to enable C-x C-j (dired-jump) and other features
+    (use-package dired-x)
 
-       ;; Omit files starting with a dot
-       (setq dired-omit-files (concat dired-omit-files "\\|^\\..+$"))
+    ;; Omit files starting with a dot
+    (setq dired-omit-files (concat dired-omit-files "\\|^\\..+$"))
 
-       ;; Default omit files
-       (setq-default dired-omit-mode t)
+    ;; Default omit files
+    (setq-default dired-omit-mode t)
 
-       ;; Make dired open in the same window when using RET or ^
-       (define-key dired-mode-map (kbd "RET") 'dired-find-alternate-file)
-       (define-key dired-mode-map (kbd "^")
-         (lambda () (interactive) (find-alternate-file "..")))
-       (put 'dired-find-alternate-file 'disabled nil))
-   #+END_SRC
+    ;; Make dired open in the same window when using RET or ^
+    (define-key dired-mode-map (kbd "RET") 'dired-find-alternate-file)
+    (define-key dired-mode-map (kbd "^")
+      (lambda () (interactive) (find-alternate-file "..")))
+    (put 'dired-find-alternate-file 'disabled nil))
+#+END_SRC
 ** Drag stuff
-   #+BEGIN_SRC emacs-lisp
-     (use-package drag-stuff
-       :ensure t
+#+BEGIN_SRC emacs-lisp
+  (use-package drag-stuff
+    :ensure t
 
-       :bind (("M-p" . drag-stuff-up)
-              ("M-n" . drag-stuff-down))
+    :bind (("M-p" . drag-stuff-up)
+           ("M-n" . drag-stuff-down))
 
-       :config (drag-stuff-global-mode 1))
-   #+END_SRC
+    :config (drag-stuff-global-mode 1))
+#+END_SRC
 ** Exec path from shell
-   Make *GUI Emacs* use the proper $PATH and avoid a [[http://www.flycheck.org/en/latest/user/troubleshooting.html#flycheck-cant-find-any-programs-in-gui-emacs-on-macos][common setup issue on MacOS]].
-   Without this package packages such as flycheck and EPA are not working correctly.
+Make *GUI Emacs* use the proper $PATH and avoid a [[http://www.flycheck.org/en/latest/user/troubleshooting.html#flycheck-cant-find-any-programs-in-gui-emacs-on-macos][common setup issue on MacOS]].
+Without this package packages such as flycheck and EPA are not working correctly.
 
-   #+BEGIN_SRC emacs-lisp
-     (use-package exec-path-from-shell
-       :ensure t
+#+BEGIN_SRC emacs-lisp
+  (use-package exec-path-from-shell
+    :ensure t
 
-       :config
-       (when (memq window-system '(mac ns x))
-         (exec-path-from-shell-initialize)))
-   #+END_SRC
+    :config
+    (when (memq window-system '(mac ns x))
+      (exec-path-from-shell-initialize)))
+#+END_SRC
 ** Expand region
-   #+BEGIN_SRC emacs-lisp
-     (use-package expand-region
-       :ensure t
+#+BEGIN_SRC emacs-lisp
+  (use-package expand-region
+    :ensure t
 
-       :bind ("C-x w" . er/expand-region))
-   #+END_SRC
+    :bind ("C-x w" . er/expand-region))
+#+END_SRC
 ** Flycheck
-   #+BEGIN_SRC emacs-lisp
-     (use-package flycheck
-       :ensure t
+#+BEGIN_SRC emacs-lisp
+  (use-package flycheck
+    :ensure t
 
-       :hook (after-init . global-flycheck-mode))
-   #+END_SRC
+    :hook (after-init . global-flycheck-mode))
+#+END_SRC
 ** Git
-   #+BEGIN_SRC emacs-lisp
-     (use-package magit
-       :ensure t
+#+BEGIN_SRC emacs-lisp
+  (use-package magit
+    :ensure t
 
-       :bind ("C-x g" . magit-status)
+    :bind ("C-x g" . magit-status)
 
-       :hook (after-save-hook . magit-after-save-refresh-status))
+    :hook (after-save-hook . magit-after-save-refresh-status))
 
-     (use-package git-timemachine
-       :ensure t
-       :defer t)
+  (use-package git-timemachine
+    :ensure t
+    :defer t)
 
-     (use-package diff-hl
-       :ensure t
+  (use-package diff-hl
+    :ensure t
 
-       :hook ((magit-post-refresh . diff-hl-magit-post-refresh)
-              (dired-mode . diff-hl-dired-mode-unless-remote))
+    :hook ((magit-post-refresh . diff-hl-magit-post-refresh)
+           (dired-mode . diff-hl-dired-mode-unless-remote))
 
-       :init
-       (global-diff-hl-mode)
+    :init
+    (global-diff-hl-mode)
 
-       :config
-       (diff-hl-margin-mode)
-       (diff-hl-flydiff-mode))
-   #+END_SRC
+    :config
+    (diff-hl-margin-mode)
+    (diff-hl-flydiff-mode))
+#+END_SRC
 ** GnuPG
-   #+BEGIN_SRC emacs-lisp
-     (use-package epa
-       :config
-       ;; Prefer armored ASCII (.asc)
-       (setq epa-armor t)
+#+BEGIN_SRC emacs-lisp
+  (use-package epa
+    :config
+    ;; Prefer armored ASCII (.asc)
+    (setq epa-armor t)
 
-       ;; Open .asc files in the same way as .gpg files
-       (setq epa-file-name-regexp "\\.\\(gpg\\|asc\\)$")
-       (epa-file-name-regexp-update)
+    ;; Open .asc files in the same way as .gpg files
+    (setq epa-file-name-regexp "\\.\\(gpg\\|asc\\)$")
+    (epa-file-name-regexp-update)
 
-       ;; Prompt for the password in the minibuffer
-       (setq epg-pinentry-mode 'loopback))
-   #+END_SRC
+    ;; Prompt for the password in the minibuffer
+    (setq epg-pinentry-mode 'loopback))
+#+END_SRC
 ** Vert&co Stack
 *** Vertico
-    VERTical Interactive COmpletion.
+VERTical Interactive COmpletion.
 
-    #+begin_src emacs-lisp
-      (use-package vertico
-        :ensure t
+#+begin_src emacs-lisp
+  (use-package vertico
+    :ensure t
 
-        :config
-        (setq vertico-cycle t)
-        (setq vertico-resize nil)
-        (vertico-mode 1))
-    #+end_src
+    :config
+    (setq vertico-cycle t)
+    (setq vertico-resize nil)
+    (vertico-mode 1))
+#+end_src
 *** Orderless
-    Completion style for matching regexps in any order/
+Completion style for matching regexps in any order.
 
-    #+begin_src emacs-lisp
-      (use-package orderless
-        :ensure t
+#+begin_src emacs-lisp
+  (use-package orderless
+    :ensure t
 
-        :custom
-        (completion-styles '(orderless basic))
-        (completion-category-defaults nil)
-        (completion-category-overrides '((file (styles partial-completion)))))
-    #+end_src
+    :custom
+    (completion-styles '(orderless basic))
+    (completion-category-defaults nil)
+    (completion-category-overrides '((file (styles partial-completion)))))
+#+end_src
 *** Consult
-    Consulting completing-read.
+Consulting completing-read.
 
-    #+begin_src emacs-lisp
-      (use-package consult
-        :ensure t
+#+begin_src emacs-lisp
+  (use-package consult
+    :ensure t
 
-        :bind (("M-s M-g" . consult-grep)
-               ("M-s M-r" . consult-ripgrep)
-               ("M-s M-f" . consult-find)
-               ("M-s M-o" . consult-outline)
-               ([remap isearch-forward] . consult-line)
-               ([remap isearch-backward] . consult-line)
-               ([remap switch-to-buffer] . consult-buffer)))
-    #+end_src
+    :bind (("M-s M-g" . consult-grep)
+           ("M-s M-r" . consult-ripgrep)
+           ("M-s M-f" . consult-find)
+           ("M-s M-o" . consult-outline)
+           ([remap isearch-forward] . consult-line)
+           ([remap isearch-backward] . consult-line)
+           ([remap switch-to-buffer] . consult-buffer)))
+#+end_src
 *** Marginalia
-    Enrich existing commands with completion annotations.
+Enrich existing commands with completion annotations.
 
-    #+begin_src emacs-lisp
-      (use-package marginalia
-        :ensure t
+#+begin_src emacs-lisp
+  (use-package marginalia
+    :ensure t
 
-        :config
-        (marginalia-mode 1))
-    #+end_src
+    :config
+    (marginalia-mode 1))
+#+end_src
 *** Embark
-    Conveniently act on minibuffer completions.
+Conveniently act on minibuffer completions.
 
-    #+begin_src emacs-lisp
-      (use-package embark
-        :ensure t
+#+begin_src emacs-lisp
+  (use-package embark
+    :ensure t
 
-        :bind (("C-." . embark-act)
-               :map minibuffer-local-map
-               ("C-c C-c" . embark-collect)
-               ("C-c C-e" . embark-export)))
-    #+end_src
-    This package is the glue that ties together `embark' and `consult'.
+    :bind (("C-." . embark-act)
+           :map minibuffer-local-map
+           ("C-c C-c" . embark-collect)
+           ("C-c C-e" . embark-export)))
+#+end_src
+This package is the glue that ties together `embark' and `consult'.
 
-    #+begin_src emacs-lisp
-      (use-package embark-consult
-        :ensure t)
-    #+end_src
+#+begin_src emacs-lisp
+  (use-package embark-consult
+    :ensure t)
+#+end_src
 *** Wgrep
-    Edit a grep buffer and apply those changes to the file buffer.
+Edit a grep buffer and apply those changes to the file buffer.
 
-    #+BEGIN_SRC emacs-lisp
-      (use-package wgrep
-        :ensure t
-
-        :bind ( :map grep-mode-map
+#+BEGIN_SRC emacs-lisp
+  (use-package wgrep
+    :ensure t
+    :bind (:map grep-mode-map
                 ("e" . wgrep-change-to-wgrep-mode)
                 ("C-x C-q" . wgrep-change-to-wgrep-mode)
                 ("C-c C-c" . wgrep-finish-edit)))
-    #+END_SRC
+#+END_SRC
 *** Corfu
-    Enhanced buffer completions.
+Enhanced buffer completions.
 
-    #+begin_src emacs-lisp
-      (use-package corfu
-        :ensure t
+#+begin_src emacs-lisp
+  (use-package corfu
+    :ensure t
 
-        :custom
-        (corfu-auto t)
-        (corfu-auto-prefix 2)
-        (corfu-cycle t)
-        (corfu-quit-at-boundary nil)
-        (corfu-quit-no-match t)
-        (corfu-on-exact-match 'quit)
+    :custom
+    (corfu-auto t)
+    (corfu-auto-prefix 2)
+    (corfu-cycle t)
+    (corfu-quit-at-boundary nil)
+    (corfu-quit-no-match t)
+    (corfu-on-exact-match 'quit)
 
-        :config
-        (global-corfu-mode))
-    #+end_src
-    Make Corfu work in the terminal.
+    :config
+    (global-corfu-mode))
+#+end_src
+Make Corfu work in the terminal.
 
-    #+begin_src emacs-lisp
-      (use-package corfu-terminal
-        :ensure t
+#+begin_src emacs-lisp
+  (use-package corfu-terminal
+    :ensure t
 
-        :config
-        (unless (display-graphic-p)
-          (corfu-terminal-mode +1)))
-    #+end_src
+    :config
+    (unless (display-graphic-p)
+      (corfu-terminal-mode +1)))
+#+end_src
 ** Mood line
-   #+BEGIN_SRC emacs-lisp
-     (use-package mood-line
-       :ensure t
+#+BEGIN_SRC emacs-lisp
+  (use-package mood-line
+    :ensure t
 
-       :config
-       (mood-line-mode)
+    :config
+    (mood-line-mode)
 
-       :custom
-       (mood-line-glyph-alist mood-line-glyphs-fira-code))
-   #+END_SRC
+    :custom
+    (mood-line-glyph-alist mood-line-glyphs-fira-code))
+#+END_SRC
 ** Org mode
-   #+BEGIN_SRC emacs-lisp
-     (use-package org
-       :defer t
-       :config
-       (setq org-babel-python-command "python3")
-       ;; Add languages for `SRC` code blocks in org-mode
-       (org-babel-do-load-languages
-        'org-babel-load-languages
-        '((emacs-lisp . t)
-          (shell . t)
-          (python . t))))
-   #+END_SRC
+#+BEGIN_SRC emacs-lisp
+  (use-package org
+    :defer t
+    :config
+    (setq org-babel-python-command "python3")
+    ;; Add languages for `SRC` code blocks in org-mode
+    (org-babel-do-load-languages
+     'org-babel-load-languages
+     '((emacs-lisp . t)
+       (shell . t)
+       (python . t))))
+#+END_SRC
 
 *** Org-bullets mode
-    #+begin_src emacs-lisp
-      (use-package org-bullets
-        :ensure t
-        :hook (org-mode . org-bullets-mode))
-    #+end_src
+#+begin_src emacs-lisp
+  (use-package org-bullets
+    :ensure t
+    :hook (org-mode . org-bullets-mode))
+#+end_src
 ** Treemacs
 *** treemacs
-    #+BEGIN_SRC emacs-lisp
-      (use-package treemacs
-        :ensure t
+#+BEGIN_SRC emacs-lisp
+  (use-package treemacs
+    :ensure t
 
-        :bind (("M-0"       . treemacs-select-window)
-               ("C-x t 1"   . treemacs-delete-other-windows)
-               ("C-x t t"   . treemacs)
-               ("C-x t B"   . treemacs-bookmark)
-               ("C-x t C-t" . treemacs-find-file)
-               ("C-x t M-t" . treemacs-find-tag))
+    :bind (("M-0"       . treemacs-select-window)
+           ("C-x t 1"   . treemacs-delete-other-windows)
+           ("C-x t t"   . treemacs)
+           ("C-x t B"   . treemacs-bookmark)
+           ("C-x t C-t" . treemacs-find-file)
+           ("C-x t M-t" . treemacs-find-tag))
 
-        :config
-        (treemacs-git-mode 'simple)
+    :config
+    (treemacs-git-mode 'simple)
 
-        (defun my/treemacs-python-ignore (filename absolute-path)
-          (or (seq-contains-p
-               '(".tox"
-                 "__pycache__"
-                 "build"
-                 "dist"
-                 "venv")
-               filename)
-              (string-match "^.+\\.egg-info$" filename)
-              (string-match "^.+\\.pyc$" filename)))
+    (defun my/treemacs-python-ignore (filename absolute-path)
+      (or (seq-contains-p
+           '(".tox"
+             "__pycache__"
+             "build"
+             "dist"
+             "venv")
+           filename)
+          (string-match "^.+\\.egg-info$" filename)
+          (string-match "^.+\\.pyc$" filename)))
 
-        (add-to-list
-         'treemacs-ignored-file-predicates #'my/treemacs-python-ignore))
-    #+END_SRC
+    (add-to-list
+     'treemacs-ignored-file-predicates #'my/treemacs-python-ignore))
+#+END_SRC
 *** treemacs-icons-dired
-    #+begin_src emacs-lisp
-      (use-package treemacs-icons-dired
-        :ensure t
+#+begin_src emacs-lisp
+  (use-package treemacs-icons-dired
+    :ensure t
 
-        ;; :after (treemacs dired)
-
-        :hook (dired-mode . treemacs-icons-dired-enable-once))
-    #+end_src
+    :hook (dired-mode . treemacs-icons-dired-enable-once))
+#+end_src
 *** treemacs-magit
-    #+begin_src emacs-lisp
-      (use-package treemacs-magit
-        :ensure t
+#+begin_src emacs-lisp
+  (use-package treemacs-magit
+    :ensure t
 
-        :after (treemacs magit))
-    #+end_src
+    :after (treemacs magit))
+#+end_src
 ** VTerm
 *** vterm
-    #+BEGIN_SRC emacs-lisp
-      (use-package vterm
-        :ensure t
+#+BEGIN_SRC emacs-lisp
+  (use-package vterm
+    :ensure t
 
-        :init
-        (setq vterm-always-compile-module t)
+    :init
+    (setq vterm-always-compile-module t)
 
-        :config
-        (setq vterm-kill-buffer-on-exit t)
-        (setq vterm-toggle-reset-window-configration-after-exit t)
-        (setq vterm-clear-scrollback-when-clearing t))
-    #+END_SRC
+    :config
+    (setq vterm-kill-buffer-on-exit t)
+    (setq vterm-toggle-reset-window-configration-after-exit t)
+    (setq vterm-clear-scrollback-when-clearing t))
+#+END_SRC
 *** vterm-toggle
-    #+BEGIN_SRC emacs-lisp
-      (use-package vterm-toggle
-        :ensure t
+#+BEGIN_SRC emacs-lisp
+  (use-package vterm-toggle
+    :ensure t
 
-        :bind (("C-c , RET" . vterm)
-               ("C-c , /" . vterm-toggle)
-               ("C-c , p" . vterm-toggle-forward)
-               ("C-c , n" . vterm-toggle-backward)
-               ("C-c , ." . vterm-toggle-insert-cd)))
-    #+END_SRC
+    :bind (("C-c , RET" . vterm)
+           ("C-c , /" . vterm-toggle)
+           ("C-c , p" . vterm-toggle-forward)
+           ("C-c , n" . vterm-toggle-backward)
+           ("C-c , ." . vterm-toggle-insert-cd)))
+#+END_SRC
 ** XClip
-   Enable xclip-mode to use the system clipboard when killing/yanking.
-   Install xclip on Linux for this to work. On OSX pbcopy/pbpaste will be used.
+Enable xclip-mode to use the system clipboard when killing/yanking.
+Install xclip on Linux for this to work. On OSX pbcopy/pbpaste will be used.
 
-   #+BEGIN_SRC emacs-lisp
-     (use-package xclip
-       :ensure t
+#+BEGIN_SRC emacs-lisp
+  (use-package xclip
+    :ensure t
 
-       :config (xclip-mode t))
-   #+END_SRC
+    :config (xclip-mode t))
+#+END_SRC
 * Programming
 ** LSP
-   Enable Language Server Protocol support.
+Enable Language Server Protocol support.
 
-   #+begin_src emacs-lisp
-     (use-package lsp-mode
-       :ensure t
+#+begin_src emacs-lisp
+  (use-package lsp-mode
+    :ensure t
 
-       :hook ((c-mode . lsp)
-              (c++-mode . lsp)
-              (python-mode . lsp)
-              (lsp-mode . lsp-enable-which-key-integration)
-              (lsp-completion-mode . my/lsp-mode-setup-completion))
+    :hook ((c-mode . lsp)
+           (c++-mode . lsp)
+           (python-mode . lsp)
+           (lsp-mode . lsp-enable-which-key-integration)
+           (lsp-completion-mode . my/lsp-mode-setup-completion))
 
-       :commands lsp
+    :commands lsp
 
-       :init
-       (defun my/lsp-mode-setup-completion ()
-         (setf (alist-get 'styles (alist-get 'lsp-capf completion-category-defaults))
-               '(orderless))) ;; Configure orderless
+    :init
+    (defun my/lsp-mode-setup-completion ()
+      (setf (alist-get 'styles (alist-get 'lsp-capf completion-category-defaults))
+            '(orderless))) ;; Configure orderless
 
-       :custom
-       (lsp-keymap-prefix "C-c l")
-       ;; Use flake8 instead of pycodestyle/pydocstyle/pyflakes
-       (lsp-pylsp-plugins-pycodestyle-enabled nil)
-       (lsp-pylsp-plugins-pydocstyle-enabled nil)
-       (lsp-pylsp-plugins-pyflakes-enabled nil)
-       (lsp-pylsp-plugins-flake8-enabled t)
-       ;; Enable YAPF for code formatting
-       (lsp-pylsp-plugins-yapf-enabled t)
-       ;; Disable YASnippet
-       (lsp-enable-snippet nil)
-       (lsp-completion-provider :none) ;; we use Corfu!
-       )
-    #+end_src
+    :custom
+    (lsp-keymap-prefix "C-c l")
+    ;; Use flake8 instead of pycodestyle/pydocstyle/pyflakes
+    (lsp-pylsp-plugins-pycodestyle-enabled nil)
+    (lsp-pylsp-plugins-pydocstyle-enabled nil)
+    (lsp-pylsp-plugins-pyflakes-enabled nil)
+    (lsp-pylsp-plugins-flake8-enabled t)
+    ;; Enable YAPF for code formatting
+    (lsp-pylsp-plugins-yapf-enabled t)
+    ;; Disable YASnippet
+    (lsp-enable-snippet nil)
+    (lsp-completion-provider :none) ;; we use Corfu!
+    )
+#+end_src
 ** C/C++
 *** Indentation
-    Set indentation to 4 spaces
+Set indentation to 4 spaces
 
-    #+BEGIN_SRC emacs-lisp
-      (setq-default c-basic-offset 4)
-    #+END_SRC
+#+BEGIN_SRC emacs-lisp
+  (setq-default c-basic-offset 4)
+#+END_SRC
 ** Python
 *** pyvenv
-    #+begin_src emacs-lisp
-      (use-package pyvenv
-        :ensure t
+#+begin_src emacs-lisp
+  (use-package pyvenv
+    :ensure t
 
-        :defer t
+    :defer t
 
-        :config
-        (pyvenv-mode t))
-    #+end_src
+    :config
+    (pyvenv-mode t))
+#+end_src
 ** YAML
-   The treesitter YAML language grammar can be installed from
-   https://github.com/ikatyang/tree-sitter-yaml by doing
-   "M-x treesit-install-language-grammar".
+The treesitter YAML language grammar can be installed from
+https://github.com/ikatyang/tree-sitter-yaml by doing
+"M-x treesit-install-language-grammar".
 
-   #+BEGIN_SRC emacs-lisp
-     (add-to-list 'auto-mode-alist '("\\.ya?ml\\'" . yaml-ts-mode))
-   #+END_SRC
+#+BEGIN_SRC emacs-lisp
+  (add-to-list 'auto-mode-alist '("\\.ya?ml\\'" . yaml-ts-mode))
+#+END_SRC
 * Utilities
 ** Delete current file and buffer
-   #+BEGIN_SRC emacs-lisp
-     (defun my/delete-current-file-copy-to-kill-ring ()
-       "Delete current buffer/file and close the buffer, push content to `kill-ring'."
-       (interactive)
-       (progn
-         (kill-new (buffer-string))
-         (message "Buffer content copied to kill-ring.")
-         (when (buffer-file-name)
-           (when (file-exists-p (buffer-file-name))
-             (progn
-               (delete-file (buffer-file-name))
-               (message "Deleted file: 「%s」." (buffer-file-name)))))
-         (let ((buffer-offer-save nil))
-           (set-buffer-modified-p nil)
-           (kill-buffer (current-buffer)))))
+#+BEGIN_SRC emacs-lisp
+  (defun my/delete-current-file-copy-to-kill-ring ()
+    "Delete current buffer/file and close the buffer, push content to `kill-ring'."
+    (interactive)
+    (progn
+      (kill-new (buffer-string))
+      (message "Buffer content copied to kill-ring.")
+      (when (buffer-file-name)
+        (when (file-exists-p (buffer-file-name))
+          (progn
+            (delete-file (buffer-file-name))
+            (message "Deleted file: 「%s」." (buffer-file-name)))))
+      (let ((buffer-offer-save nil))
+        (set-buffer-modified-p nil)
+        (kill-buffer (current-buffer)))))
 
-     (global-set-key (kbd "C-c k")  'my/delete-current-file-copy-to-kill-ring)
-   #+END_SRC
+  (global-set-key (kbd "C-c k")  'my/delete-current-file-copy-to-kill-ring)
+#+END_SRC
 ** Duplicate current line
-   #+begin_src emacs-lisp
-     (defun my/duplicate-line ()
-        (interactive)
-        (let ((col (current-column)))
-          (move-beginning-of-line 1)
-          (kill-line)
-          (yank)
-          (newline)
-          (yank)
-          (move-to-column col)))
+#+begin_src emacs-lisp
+  (defun my/duplicate-line ()
+     (interactive)
+     (let ((col (current-column)))
+       (move-beginning-of-line 1)
+       (kill-line)
+       (yank)
+       (newline)
+       (yank)
+       (move-to-column col)))
 
-      (global-set-key (kbd "C-c d") 'my/duplicate-line)
-   #+end_src
+   (global-set-key (kbd "C-c d") 'my/duplicate-line)
+#+end_src
 ** Smarter move to the beginning of a line
-   Move point back to indentation or beginning of line.
+Move point back to indentation or beginning of line.
 
-   Move point to the first non-whitespace character on this line.
-   If point is already there, move to the beginning of the line.
-   Effectively toggle between the first non-whitespace character and
-   the beginning of the line.
+Move point to the first non-whitespace character on this line.
+If point is already there, move to the beginning of the line.
+Effectively toggle between the first non-whitespace character and
+the beginning of the line.
 
-   If ARG is not nil or 1, move forward ARG - 1 lines first.  If
-   point reaches the beginning or end of the buffer, stop there.
-   #+BEGIN_SRC emacs-lisp
-     (defun my/move-beginning-of-line (arg)
-       (interactive "^p")
-       (setq arg (or arg 1))
+If ARG is not nil or 1, move forward ARG - 1 lines first.  If
+point reaches the beginning or end of the buffer, stop there.
+#+BEGIN_SRC emacs-lisp
+  (defun my/move-beginning-of-line (arg)
+    (interactive "^p")
+    (setq arg (or arg 1))
 
-       (when (/= arg 1)
-         (let ((line-move-visual nil))
-           (forward-line (1- arg))))
+    (when (/= arg 1)
+      (let ((line-move-visual nil))
+        (forward-line (1- arg))))
 
-       (let ((orig-point (point)))
-         (back-to-indentation)
-         (when (= orig-point (point))
-           (move-beginning-of-line 1))))
+    (let ((orig-point (point)))
+      (back-to-indentation)
+      (when (= orig-point (point))
+        (move-beginning-of-line 1))))
 
-     ;; remap C-a to `my/move-beginning-of-line'
-     (global-set-key [remap move-beginning-of-line]
-                     'my/move-beginning-of-line)
-   #+END_SRC
+  ;; remap C-a to `my/move-beginning-of-line'
+  (global-set-key [remap move-beginning-of-line]
+                  'my/move-beginning-of-line)
+#+END_SRC
 * Local config
-  Load local configuration from local.el or local.elc in `user-emacs-directory`.
+Load local configuration from local.el or local.elc in `user-emacs-directory`.
 
-  #+begin_src emacs-lisp
-    (load
-     (expand-file-name
-      "local"
-      user-emacs-directory)
-     'noerror)
-  #+end_src
+#+begin_src emacs-lisp
+  (load
+   (expand-file-name
+    "local"
+    user-emacs-directory)
+   'noerror)
+#+end_src
 * Tangle on save
-  When opening this file for the first time the following warning is shown:
-  "The local variables list in init.org contains values that may not be safe (*)".
+When opening this file for the first time the following warning is shown:
+"The local variables list in init.org contains values that may not be safe (*)".
 
-  - Press 'y' to continue.
-  - Next run `org-babel-tangle` (C-c C-v t) to generate an early-init.el and
+- Press 'y' to continue.
+- Next run `org-babel-tangle` (C-c C-v t) to generate an early-init.el and
     init.el file.
-  - Restart emacs or load the generated files.
-  - The next time this warning is shown press '!' to prevent future warnings.
+- Restart emacs or load the generated files.
+- The next time this warning is shown press '!' to prevent future warnings.
 
-  #+BEGIN_SRC emacs-lisp :tangle no
-    ;; Local Variables:
-    ;; eval: (add-hook 'after-save-hook (lambda () (org-babel-tangle)) nil t)
-    ;; End:
-  #+END_SRC
+#+BEGIN_SRC emacs-lisp :tangle no
+  ;; Local Variables:
+  ;; eval: (add-hook 'after-save-hook (lambda () (org-babel-tangle)) nil t)
+  ;; End:
+#+END_SRC
