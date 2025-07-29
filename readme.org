@@ -472,6 +472,10 @@ Make Corfu work in the terminal.
 #+BEGIN_SRC emacs-lisp
   (use-package org
     :defer t
+
+    :hook ((org-mode . visual-line-mode)
+           (org-mode . org-indent-mode))
+
     :config
     (setq org-babel-python-command "python3")
     ;; Add languages for `SRC` code blocks in org-mode
@@ -481,13 +485,6 @@ Make Corfu work in the terminal.
        (shell . t)
        (python . t))))
 #+END_SRC
-
-*** Org-bullets mode
-#+begin_src emacs-lisp
-  (use-package org-bullets
-    :ensure t
-    :hook (org-mode . org-bullets-mode))
-#+end_src
 ** Treemacs
 *** treemacs
 #+BEGIN_SRC emacs-lisp
