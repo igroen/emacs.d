@@ -572,8 +572,7 @@ https://github.com/python-lsp/python-lsp-server#configuration
      '(:pylsp (:plugins (:mccabe (:enabled :json-false)
                          :pycodestyle (:enabled :json-false)
                          :pyflakes (:enabled :json-false)
-                         :flake8 (:enabled t)
-                         :yapf (:enabled t))
+                         :flake8 (:enabled t))
                :configurationSources ["flake8"]))))
 #+end_src
 ** C/C++
