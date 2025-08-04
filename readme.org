@@ -573,7 +573,7 @@ https://github.com/python-lsp/python-lsp-server#configuration
                          :pycodestyle (:enabled :json-false)
                          :pyflakes (:enabled :json-false)
                          :flake8 (:enabled t)
-    		       :yapf (:enabled t))
+                         :yapf (:enabled t))
                :configurationSources ["flake8"]))))
 #+end_src
 ** C/C++
