@@ -403,7 +403,8 @@ This package is the glue that ties together `embark' and `consult'.
 
 #+begin_src emacs-lisp
   (use-package embark-consult
-    :ensure t)
+    :ensure t
+    :defer t)
 #+end_src
 *** Wgrep
 Edit a grep buffer and apply those changes to the file buffer.
