@@ -346,6 +346,9 @@ VERTical Interactive COmpletion.
     :ensure t
 
     :config
+    (setq file-name-shadow-properties
+          '(invisible t intangible t))
+    (file-name-shadow-mode 1)
     (setq vertico-cycle t)
     (setq vertico-resize nil)
     (vertico-mode 1))
