@@ -56,12 +56,6 @@ The default 4096 bytes can be to low for i.e. lsp-mode.
 #+BEGIN_SRC emacs-lisp :tangle early-init.el
   (load-theme 'modus-operandi t)
 #+END_SRC
-** Use plists for deserialization in LSP mode
-See [[https://emacs-lsp.github.io/lsp-mode/page/performance/#use-plists-for-deserialization][use-plists-for-deserialization]] for more information.
-
-#+BEGIN_SRC emacs-lisp :tangle early-init.el
-  (setenv "LSP_USE_PLISTS" "true")
-#+END_SRC
 * Package management
 Add melpo to the list of package archives.
 
@@ -302,13 +296,6 @@ Without this package packages such as flycheck and EPA are not working correctly
     :ensure t
 
     :bind ("C-x w" . er/expand-region))
-#+END_SRC
-** Flycheck
-#+BEGIN_SRC emacs-lisp
-  (use-package flycheck
-    :ensure t
-
-    :hook (after-init . global-flycheck-mode))
 #+END_SRC
 ** Git
 #+BEGIN_SRC emacs-lisp
@@ -565,39 +552,28 @@ Install xclip on Linux for this to work. On OSX pbcopy/pbpaste will be used.
     :config (xclip-mode t))
 #+END_SRC
 * Programming
-** LSP
-Enable Language Server Protocol support.
+** Eglot
+Enable Eglot Language Server Protocol support.
 
+The eglot configuration format can be found here:
+https://joaotavora.github.io/eglot/#User_002dspecific-configuration-1
+
+The pylsp configuration to setup flake8 here:
+https://github.com/python-lsp/python-lsp-server#configuration
 #+begin_src emacs-lisp
-  (use-package lsp-mode
-    :ensure t
+  (use-package eglot
+    :hook ((python-mode . eglot-ensure)
+  	 (c++-mode . eglot-ensure))
 
-    :hook ((c-mode . lsp)
-           (c++-mode . lsp)
-           (python-mode . lsp)
-           (lsp-mode . lsp-enable-which-key-integration)
-           (lsp-completion-mode . my/lsp-mode-setup-completion))
-
-    :commands lsp
-
-    :init
-    (defun my/lsp-mode-setup-completion ()
-      (setf (alist-get 'styles (alist-get 'lsp-capf completion-category-defaults))
-            '(orderless))) ;; Configure orderless
-
-    :custom
-    (lsp-keymap-prefix "C-c l")
-    ;; Use flake8 instead of pycodestyle/pydocstyle/pyflakes
-    (lsp-pylsp-plugins-pycodestyle-enabled nil)
-    (lsp-pylsp-plugins-pydocstyle-enabled nil)
-    (lsp-pylsp-plugins-pyflakes-enabled nil)
-    (lsp-pylsp-plugins-flake8-enabled t)
-    ;; Enable YAPF for code formatting
-    (lsp-pylsp-plugins-yapf-enabled t)
-    ;; Disable YASnippet
-    (lsp-enable-snippet nil)
-    (lsp-completion-provider :none) ;; we use Corfu!
-    )
+    :config
+    (setq-default
+     eglot-workspace-configuration
+     '(:pylsp (:plugins (:mccabe (:enabled :json-false)
+                         :pycodestyle (:enabled :json-false)
+                         :pyflakes (:enabled :json-false)
+                         :flake8 (:enabled t)
+    		       :yapf (:enabled t))
+               :configurationSources ["flake8"]))))
 #+end_src
 ** C/C++
 *** Indentation
