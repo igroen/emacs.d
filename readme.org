@@ -565,7 +565,8 @@ https://github.com/python-lsp/python-lsp-server#configuration
 #+begin_src emacs-lisp
   (use-package eglot
     :hook ((python-mode . eglot-ensure)
-  	 (c++-mode . eglot-ensure))
+           (c-mode . eglot-ensure)
+           (c++-mode . eglot-ensure))
 
     :config
     (setq-default
