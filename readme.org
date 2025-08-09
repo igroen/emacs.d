@@ -56,6 +56,12 @@ The default 4096 bytes can be to low for i.e. lsp-mode.
 #+BEGIN_SRC emacs-lisp :tangle early-init.el
   (load-theme 'modus-operandi t)
 #+END_SRC
+** Set font
+#+BEGIN_SRC emacs-lisp :tangle early-init.el
+  (add-to-list
+   'default-frame-alist
+   '(font . "Monaco 12"))
+#+END_SRC
 * Package management
 Add melpo to the list of package archives.
 
@@ -65,10 +71,6 @@ Add melpo to the list of package archives.
   (package-initialize)
 #+END_SRC
 * Defaults
-** Set font
-#+BEGIN_SRC emacs-lisp
-  (set-frame-font "Monaco 12" nil t)
-#+END_SRC
 ** Editing
 *** Highlight the current line
 #+BEGIN_SRC emacs-lisp
