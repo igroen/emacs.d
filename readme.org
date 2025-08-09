@@ -306,7 +306,7 @@ Without this package packages such as flycheck and EPA are not working correctly
 
   (use-package git-timemachine
     :ensure t
-    :defer t)
+    :commands git-timemachine)
 
   (use-package diff-hl
     :ensure t
@@ -405,7 +405,9 @@ This package is the glue that ties together `embark' and `consult'.
 #+begin_src emacs-lisp
   (use-package embark-consult
     :ensure t
-    :defer t)
+
+    :hook
+    (embark-collect-mode . consult-preview-at-point-mode))
 #+end_src
 *** Wgrep
 Edit a grep buffer and apply those changes to the file buffer.
@@ -524,6 +526,8 @@ Make Corfu work in the terminal.
   (use-package vterm
     :ensure t
 
+    :commands (vterm vterm-other-window)
+
     :init
     (setq vterm-always-compile-module t)
 
@@ -599,7 +603,7 @@ Set indentation to 4 spaces
   (use-package pyvenv
     :ensure t
 
-    :defer t
+    :commands pyvenv-activate
 
     :config
     (pyvenv-mode t))
