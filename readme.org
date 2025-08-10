@@ -1,6 +1,18 @@
 #+STARTUP: overview indent
 #+PROPERTY: header-args :tangle init.el
 
+* Add lexical-binding cookies
+Add lexical-binding cookie to early-init.el
+
+#+begin_src emacs-lisp :tangle early-init.el
+  ;; -*- lexical-binding: t; -*-
+#+end_src
+
+Add lexical-binding cookie to init.el
+
+#+begin_src emacs-lisp :tangle init.el
+  ;; -*- lexical-binding: t; -*-
+#+end_src
 * Early init
 ** Startup tweaks
 Make startup faster by reducing the frequency of garbage collection.
