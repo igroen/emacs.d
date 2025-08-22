@@ -258,7 +258,7 @@ Decode the headers and payload of a JWT token.
 
 #+begin_src emacs-lisp
   (use-package jwt-content
-    :vc (:url "https://github.com/igroen/jwt-content.el"
+    :vc (:url "https://github.com/igroen/jwt-content"
          :rev :newest))
 #+end_src
 ** Dired
