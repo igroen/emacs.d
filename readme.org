@@ -265,7 +265,7 @@ Decode the headers and payload of a JWT token.
 #+BEGIN_SRC emacs-lisp
   (use-package dired
     :config
-    ;; Use dired-x to enable C-x C-j (dired-jump) and other features
+    ;; Require dired-x for `dired-omit-mode'
     (use-package dired-x)
 
     ;; Omit files starting with a dot
