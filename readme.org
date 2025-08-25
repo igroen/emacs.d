@@ -387,6 +387,7 @@ Consulting completing-read.
     :bind (("M-s M-g" . consult-grep)
            ("M-s M-r" . consult-ripgrep)
            ("M-s M-f" . consult-find)
+           ("M-s M-d" . consult-fd)
            ("M-s M-o" . consult-outline)
            ([remap isearch-forward] . consult-line)
            ([remap isearch-backward] . consult-line)
