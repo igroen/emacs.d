@@ -587,14 +587,17 @@ https://github.com/python-lsp/python-lsp-server#configuration
            (c-mode . eglot-ensure)
            (c++-mode . eglot-ensure))
 
-    :config
-    (setq-default
-     eglot-workspace-configuration
-     '(:pylsp (:plugins (:mccabe (:enabled :json-false)
-                         :pycodestyle (:enabled :json-false)
-                         :pyflakes (:enabled :json-false)
-                         :flake8 (:enabled t))
-               :configurationSources ["flake8"]))))
+    :config (setq-default
+             eglot-workspace-configuration
+             '(:pylsp (:plugins (:mccabe (:enabled :json-false)
+                                 :pycodestyle (:enabled :json-false)
+                                 :pyflakes (:enabled :json-false)
+                                 :flake8 (:enabled t))
+                       :configurationSources ["flake8"])))
+
+    :bind (:map eglot-mode-map
+                ("C-c l f" . eglot-format)
+                ("C-c l r" . eglot-reconnect)))
 #+end_src
 ** C/C++
 *** Indentation
