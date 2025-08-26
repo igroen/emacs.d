@@ -26,6 +26,7 @@ setup_pyls () {
            wheel
     ${PYLSP}/bin/pip install --upgrade \
            python-lsp-server \
+           python-lsp-isort \
            flake8 \
            flake8-builtins \
            flake8-commas \
