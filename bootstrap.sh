@@ -27,6 +27,7 @@ setup_pyls () {
     ${PYLSP}/bin/pip install --upgrade \
            python-lsp-server \
            python-lsp-isort \
+           pylsp-mypy \
            flake8 \
            flake8-builtins \
            flake8-commas \
@@ -66,7 +67,29 @@ EOF
     fi
 }
 
-read -r -p "Do you want to create a default flake8 config file in '${CONFIG}'? [y/N] " response
+read -r -p \
+     "Do you want to create a default flake8 config file in '${CONFIG}/'? [y/N] " \
+     response
 if [[ "$response" =~ ^([yY][eE][sS]|[yY])$ ]]; then
     write_flake8_config
+fi
+
+write_mypy_config () {
+    if [ -d "${CONFIG}" ]; then
+        mkdir -p ${CONFIG}/mypy
+        cat > ${CONFIG}/mypy/config <<EOF
+[mypy]
+ignore_missing_imports = True
+EOF
+    else
+        echo "Directory ${CONFIG} does not exist"
+        echo "Please make sure ${CONFIG} exists"
+    fi
+}
+
+read -r -p \
+     "Do you want to create a default mypy config file in '${CONFIG}/mypy/'? [y/N] " \
+     response
+if [[ "$response" =~ ^([yY][eE][sS]|[yY])$ ]]; then
+    write_mypy_config
 fi
