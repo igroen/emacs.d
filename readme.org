@@ -219,6 +219,22 @@ useful beyond Corfu.
 #+begin_src emacs-lisp
   (setq read-extended-command-predicate #'command-completion-default-include-p)
 #+end_src
+*** Configure compilation-mode
+When running in compilation-mode:
+- Scroll the output
+- Jump to the first error
+- Don't hide output of long lines
+- Display ANSI colors
+
+#+begin_src emacs-lisp
+  (use-package compile
+    :custom
+    (compilation-scroll-output t)
+    (compilation-auto-jump-to-first-error t)
+    (compilation-max-output-line-length nil)
+    :hook
+    (compilation-filter . ansi-color-compilation-filter))
+#+end_src
 ** Backups
 Store all backup and autosave files in the 'backups' dir.
 
