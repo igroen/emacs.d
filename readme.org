@@ -479,6 +479,20 @@ Make Corfu work in the terminal.
     (unless (display-graphic-p)
       (corfu-terminal-mode +1)))
 #+end_src
+*** Cape
+Cape completion at point extensions
+
+#+begin_src emacs-lisp
+  (use-package cape
+    :ensure t
+
+    :bind ("C-c p" . cape-prefix-map)
+
+    :init
+    (add-hook 'completion-at-point-functions #'cape-dabbrev)
+    (add-hook 'completion-at-point-functions #'cape-file)
+    (add-hook 'completion-at-point-functions #'cape-elisp-block))
+#+end_src
 ** Mood line
 #+BEGIN_SRC emacs-lisp
   (use-package mood-line
