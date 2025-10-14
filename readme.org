@@ -407,7 +407,8 @@ Consulting completing-read.
            ("M-s M-o" . consult-outline)
            ([remap isearch-forward] . consult-line)
            ([remap isearch-backward] . consult-line)
-           ([remap switch-to-buffer] . consult-buffer)))
+           ([remap switch-to-buffer] . consult-buffer)
+           ([remap yank-pop] . consult-yank-pop)))
 #+end_src
 *** Marginalia
 Enrich existing commands with completion annotations.
