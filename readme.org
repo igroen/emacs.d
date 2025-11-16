@@ -365,9 +365,9 @@ Without this package packages such as flycheck and EPA are not working correctly
     ;; Prompt for the password in the minibuffer
     (setq epg-pinentry-mode 'loopback))
 #+END_SRC
-** Vert&co Stack
+** Search/completion stack
 *** Vertico
-VERTical Interactive COmpletion.
+Vertico is a fast and extensible minibuffer completion UI.
 
 #+begin_src emacs-lisp
   (use-package vertico
@@ -394,7 +394,7 @@ Completion style for matching regexps in any order.
     (completion-category-overrides '((file (styles partial-completion)))))
 #+end_src
 *** Consult
-Consulting completing-read.
+Consult provides search and navigation commands centered around completion.
 
 #+begin_src emacs-lisp
   (use-package consult
@@ -411,7 +411,8 @@ Consulting completing-read.
            ([remap yank-pop] . consult-yank-pop)))
 #+end_src
 *** Marginalia
-Enrich existing commands with completion annotations.
+Marginalia provides annotations for completion candidates,
+which can be seen in the minibuffer or the completions buffer.
 
 #+begin_src emacs-lisp
   (use-package marginalia
@@ -453,7 +454,7 @@ Edit a grep buffer and apply those changes to the file buffer.
                 ("C-c C-c" . wgrep-finish-edit)))
 #+END_SRC
 *** Corfu
-Enhanced buffer completions.
+Corfu is an in-buffer completion popup UI built on child frames.
 
 #+begin_src emacs-lisp
   (use-package corfu
@@ -481,7 +482,8 @@ Make Corfu work in the terminal.
       (corfu-terminal-mode +1)))
 #+end_src
 *** Cape
-Cape completion at point extensions
+Cape is a collection of completion-at-point functions (Capfs), which serve
+as completion sources for Corfu or the Emacs in-buffer completion system.
 
 #+begin_src emacs-lisp
   (use-package cape
