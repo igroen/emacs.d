@@ -18,23 +18,28 @@ Add lexical-binding cookie to init.el
 Make startup faster by reducing the frequency of garbage collection.
 
 #+BEGIN_SRC emacs-lisp :tangle early-init.el
+  (setq gc-cons-threshold-original gc-cons-threshold
+        gc-cons-percentage-original gc-cons-percentage)
+
   (setq gc-cons-threshold most-positive-fixnum
-        gc-cons-percentage 0.6)
+        gc-cons-percentage 1.0)
 #+END_SRC
 
-After Emacs startup has been completed, set `gc-cons-threshold' to
-16 MB and reset `gc-cons-percentage' to its original value.
+After Emacs startup has been completed, set `gc-cons-threshold' and
+`gc-cons-percentage' to their original values.
 
 #+BEGIN_SRC emacs-lisp :tangle early-init.el
-  (add-hook 'emacs-startup-hook
-            #'(lambda ()
-                (setq gc-cons-threshold (* 16 1024 1024)
-                      gc-cons-percentage 0.1)))
+  (add-hook
+   'emacs-startup-hook
+   #'(lambda ()
+       (setq gc-cons-threshold gc-cons-threshold-original
+             gc-cons-percentage gc-cons-percentage-original)
+       (makunbound 'gc-cons-threshold-original)
+       (makunbound 'gc-cons-percentage-original)))
 #+END_SRC
 
 Increase the amount of data which Emacs reads from a sub-process
 in one read operation.
-The default 4096 bytes can be to low for i.e. lsp-mode.
 
 #+begin_src emacs-lisp :tangle early-init.el
   (setq read-process-output-max (* 1024 1024))
