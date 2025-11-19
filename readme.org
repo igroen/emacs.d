@@ -522,50 +522,6 @@ as completion sources for Corfu or the Emacs in-buffer completion system.
        (shell . t)
        (python . t))))
 #+END_SRC
-** Treemacs
-*** treemacs
-#+BEGIN_SRC emacs-lisp
-  (use-package treemacs
-    :ensure t
-
-    :bind (("M-0"       . treemacs-select-window)
-           ("C-x t 1"   . treemacs-delete-other-windows)
-           ("C-x t t"   . treemacs)
-           ("C-x t B"   . treemacs-bookmark)
-           ("C-x t C-t" . treemacs-find-file)
-           ("C-x t M-t" . treemacs-find-tag))
-
-    :config
-    (treemacs-git-mode 'simple)
-
-    (defun my/treemacs-python-ignore (filename absolute-path)
-      (or (seq-contains-p
-           '(".tox"
-             "__pycache__"
-             "build"
-             "dist"
-             "venv")
-           filename)
-          (string-match "^.+\\.egg-info$" filename)
-          (string-match "^.+\\.pyc$" filename)))
-
-    (add-to-list
-     'treemacs-ignored-file-predicates #'my/treemacs-python-ignore))
-#+END_SRC
-*** treemacs-icons-dired
-#+begin_src emacs-lisp
-  (use-package treemacs-icons-dired
-    :ensure t
-
-    :hook (dired-mode . treemacs-icons-dired-enable-once))
-#+end_src
-*** treemacs-magit
-#+begin_src emacs-lisp
-  (use-package treemacs-magit
-    :ensure t
-
-    :after (treemacs magit))
-#+end_src
 ** VTerm
 *** vterm
 #+BEGIN_SRC emacs-lisp
