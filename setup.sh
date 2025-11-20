@@ -1,9 +1,10 @@
 #!/usr/bin/env bash
 
+# Bootstrap Emacs configuration
 emacs --batch --load org readme.org -f org-babel-tangle
 emacs --batch --load init.el
 
-# Python tooling
+# Install Python LSP Server
 CONFIG="${HOME}/.config"
 LOCAL_BIN="${HOME}/.local/bin"
 PYLSP="$HOME/.pylsp"
@@ -18,7 +19,7 @@ create_symbolic_links () {
     fi
 }
 
-setup_pyls () {
+setup_pylsp () {
     python3 -m venv ${PYLSP}
     ${PYLSP}/bin/pip install --upgrade \
            pip \
@@ -42,7 +43,7 @@ setup_pyls () {
 
 read -r -p "Do you want to install 'python-lsp-server'? [y/N] " response
 if [[ "$response" =~ ^([yY][eE][sS]|[yY])$ ]]; then
-    setup_pyls
+    setup_pylsp
 fi
 
 write_flake8_config () {
