@@ -405,6 +405,10 @@ Consult provides search and navigation commands centered around completion.
   (use-package consult
     :ensure t
 
+    :custom
+    (xref-show-xrefs-function #'consult-xref)
+    (xref-show-definitions-function #'consult-xref)
+
     :bind (("M-s M-g" . consult-grep)
            ("M-s M-r" . consult-ripgrep)
            ("M-s M-f" . consult-find)
