@@ -116,6 +116,14 @@ Add melpo to the list of package archives.
 #+BEGIN_SRC emacs-lisp
   (setq-default indent-tabs-mode nil)
 #+END_SRC
+*** Comments
+Remap 'comment-line key to 'C-x C-\' because the
+default 'C-;' is not recognized by some terminals.
+
+#+BEGIN_SRC emacs-lisp
+  (global-unset-key (kbd "C-x C-;"))
+  (global-set-key (kbd "C-x C-\\") 'comment-line)
+#+END_SRC
 ** Scrolling
 #+BEGIN_SRC emacs-lisp
   (setq scroll-margin                   0  ;; Default
