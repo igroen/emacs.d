@@ -381,6 +381,8 @@ Vertico is a fast and extensible minibuffer completion UI.
     :custom
     (file-name-shadow-properties
      '(invisible t intangible t))
+    (file-name-shadow-tty-properties
+     '(invisible t intangible t))
     (vertico-cycle t)
     (vertico-resize nil)
 
