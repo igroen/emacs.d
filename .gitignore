@@ -1,3 +1,4 @@
 *
 !readme.org
-!setup.sh
+!bootstrap.sh
+!setup-python-lsp-server.sh
