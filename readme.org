@@ -1,5 +1,5 @@
 #+STARTUP: overview indent
-#+PROPERTY: header-args :tangle init.el
+#+PROPERTY: header-args :tangle init.el :results silent
 
 * Add lexical-binding cookies
 Add lexical-binding cookie to early-init.el
