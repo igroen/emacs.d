@@ -370,6 +370,15 @@ Without this package packages such as flycheck and EPA are not working correctly
     ;; Prompt for the password in the minibuffer
     (setq epg-pinentry-mode 'loopback))
 #+END_SRC
+** Iedit
+Edit multiple occurrences of some text simultaneously.
+
+#+begin_src emacs-lisp
+  (use-package iedit
+    :ensure t
+    :bind
+    ("C-;" . iedit-mode))
+#+end_src
 ** Search/completion stack
 *** Vertico
 Vertico is a fast and extensible minibuffer completion UI.
@@ -442,7 +451,7 @@ Conveniently act on minibuffer completions.
     :ensure t
 
     :bind (("C-." . embark-act)
-           ("C-;" . embark-dwim)
+           ("M-." . embark-dwim)
            :map minibuffer-local-map
            ("C-c C-c" . embark-collect)
            ("C-c C-e" . embark-export)))
