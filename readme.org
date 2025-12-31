@@ -451,7 +451,6 @@ Conveniently act on minibuffer completions.
     :ensure t
 
     :bind (("C-." . embark-act)
-           ("M-." . embark-dwim)
            :map minibuffer-local-map
            ("C-c C-c" . embark-collect)
            ("C-c C-e" . embark-export)))
