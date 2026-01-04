@@ -104,6 +104,10 @@ Add melpo to the list of package archives.
 #+BEGIN_SRC emacs-lisp
   (electric-pair-mode 1)
 #+END_SRC
+*** Duplicate current line or region
+#+begin_src emacs-lisp
+  (global-set-key (kbd "C-c d") 'duplicate-dwim)
+#+end_src
 *** Show corresponding paren
 #+BEGIN_SRC emacs-lisp
   (show-paren-mode 1)
@@ -217,7 +221,7 @@ command (a prefix) in a popup.
   (setopt text-mode-ispell-word-completion nil)
 #+end_src
 *** Hide M-x commands
-Hide commands in M-x which do not apply to the current mode.  Corfu
+Hide commands in M-x which do not apply to the current mode. Corfu
 commands are hidden, since they are not used via M-x. This setting is
 useful beyond Corfu.
 
@@ -663,20 +667,6 @@ https://github.com/ikatyang/tree-sitter-yaml by doing
 
   (global-set-key (kbd "C-c k")  'my/delete-current-file-copy-to-kill-ring)
 #+END_SRC
-** Duplicate current line
-#+begin_src emacs-lisp
-  (defun my/duplicate-line ()
-     (interactive)
-     (let ((col (current-column)))
-       (move-beginning-of-line 1)
-       (kill-line)
-       (yank)
-       (newline)
-       (yank)
-       (move-to-column col)))
-
-   (global-set-key (kbd "C-c d") 'my/duplicate-line)
-#+end_src
 ** Smarter move to the beginning of a line
 Move point back to indentation or beginning of line.
 
