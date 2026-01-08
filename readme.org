@@ -178,7 +178,7 @@ Set remote password prompts.
 #+BEGIN_SRC emacs-lisp
   (save-place-mode 1)
 #+END_SRC
-*** Replace *Buffer List* with *Ibuffer*
+*** Replace 'buffer-list' with 'ibuffer'
 #+BEGIN_SRC emacs-lisp
   (global-set-key (kbd "C-x C-b") 'ibuffer)
 #+END_SRC
