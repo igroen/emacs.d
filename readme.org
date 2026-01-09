@@ -612,24 +612,7 @@ https://github.com/python-lsp/python-lsp-server#configuration
                 ("C-c l f" . eglot-format)
                 ("C-c l r" . eglot-reconnect)))
 #+end_src
-** C/C++
-*** Indentation
-Set indentation to 4 spaces
-
-#+BEGIN_SRC emacs-lisp
-  (setq-default c-basic-offset 4)
-#+END_SRC
-** Python
-*** Set tab width to 4 spaces in python-mode
-#+begin_src emacs-lisp
-  (add-hook
-   'python-mode-hook
-   (lambda ()
-     (setq indent-tabs-mode nil)
-     (setq tab-width 4)
-     (setq python-indent-offset 4)))
-#+end_src
-*** pyvenv
+** Pyvenv
 #+begin_src emacs-lisp
   (use-package pyvenv
     :ensure t
