@@ -1,4 +1,5 @@
 *
-!readme.org
+!.dir-locals.el
 !bootstrap.sh
+!readme.org
 !setup-python-lsp-server.sh

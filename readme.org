@@ -590,7 +590,7 @@ Install xclip on Linux for this to work. On OSX pbcopy/pbpaste will be used.
 Enable Eglot Language Server Protocol support.
 
 The eglot configuration format can be found here:
-https://joaotavora.github.io/eglot/#User_002dspecific-configuration-1
+https://joaotavora.github.io/eglot/#Project_002dspecific-configuration-1
 
 The pylsp configuration to setup flake8 here:
 https://github.com/python-lsp/python-lsp-server#configuration
@@ -599,14 +599,6 @@ https://github.com/python-lsp/python-lsp-server#configuration
     :hook ((python-mode . eglot-ensure)
            (c-mode . eglot-ensure)
            (c++-mode . eglot-ensure))
-
-    :config (setq-default
-             eglot-workspace-configuration
-             '(:pylsp (:plugins (:mccabe (:enabled :json-false)
-                                 :pycodestyle (:enabled :json-false)
-                                 :pyflakes (:enabled :json-false)
-                                 :flake8 (:enabled t))
-                       :configurationSources ["flake8"])))
 
     :bind (:map eglot-mode-map
                 ("C-c l f" . eglot-format)
