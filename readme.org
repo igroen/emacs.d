@@ -189,7 +189,7 @@ switching between windows.
 #+begin_src emacs-lisp
   (global-set-key (kbd "M-o") 'other-window)
 #+end_src
-Enable windmove default keybindings so you can use the 'M-<arrow>' keyboard
+Enable windmove default keybindings so you can use the 'S-<arrow>' keyboard
 shortcuts to switch between windows.
 
 #+begin_src emacs-lisp
