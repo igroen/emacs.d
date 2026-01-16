@@ -685,13 +685,11 @@ When opening this file for the first time the following warning is shown:
 "The local variables list in init.org contains values that may not be safe (*)".
 
 - Press 'y' to continue.
-- Next run `org-babel-tangle` (C-c C-v t) to generate an early-init.el and
-    init.el file.
+- Run `org-babel-tangle' (C-c C-v t) to generate an early-init.el and
+  init.el file.
 - Restart emacs or load the generated files.
 - The next time this warning is shown press '!' to prevent future warnings.
 
-#+BEGIN_SRC emacs-lisp :tangle no
-  ;; Local Variables:
-  ;; eval: (add-hook 'after-save-hook (lambda () (org-babel-tangle)) nil t)
-  ;; End:
-#+END_SRC
+# Local Variables:
+# eval: (add-hook 'after-save-hook (lambda () (org-babel-tangle)) nil t)
+# End:
