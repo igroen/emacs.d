@@ -54,7 +54,7 @@ in one read operation.
     (when (fboundp mode)
       (funcall mode -1)))
 #+END_SRC
-** Start the initial frame maximized.
+** Start the initial frame maximized and disable scroll-bars
 #+BEGIN_SRC emacs-lisp :tangle early-init.el
   (setq default-frame-alist
         '((fullscreen . maximized)
