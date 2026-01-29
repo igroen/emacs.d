@@ -332,7 +332,7 @@ Without this package packages such as flycheck and EPA are not working correctly
   (use-package expand-region
     :ensure t
 
-    :bind ("C-x w" . er/expand-region))
+    :bind ("C-=" . er/expand-region))
 #+END_SRC
 ** Git
 #+BEGIN_SRC emacs-lisp
