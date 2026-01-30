@@ -612,7 +612,7 @@ https://github.com/python-lsp/python-lsp-server#configuration
 #+end_src
 ** YAML
 The treesitter YAML language grammar can be installed from
-https://github.com/ikatyang/tree-sitter-yaml by doing
+https://github.com/tree-sitter-grammars/tree-sitter-yaml by doing
 "M-x treesit-install-language-grammar".
 
 #+BEGIN_SRC emacs-lisp
