@@ -116,10 +116,6 @@ Add melpo to the list of package archives.
 #+BEGIN_SRC emacs-lisp
   (setq-default require-final-newline t)
 #+END_SRC
-*** Set indentation to always use spaces
-#+BEGIN_SRC emacs-lisp
-  (setq-default indent-tabs-mode nil)
-#+END_SRC
 *** Comments
 Remap 'comment-line key to 'C-x C-\' because the
 default 'C-;' is not recognized by some terminals.
