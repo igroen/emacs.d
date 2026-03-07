@@ -311,6 +311,17 @@ Decode the headers and payload of a JWT token.
 
     :config (drag-stuff-global-mode 1))
 #+END_SRC
+** Eat
+#+BEGIN_SRC emacs-lisp
+  (use-package eat
+    :ensure t
+
+    :hook
+    (eshell-load . eat-eshell-mode)
+
+    :custom
+    (eat-kill-buffer-on-exit t))
+#+END_SRC
 ** Exec path from shell
 Make *GUI Emacs* use the proper $PATH and avoid a [[http://www.flycheck.org/en/latest/user/troubleshooting.html#flycheck-cant-find-any-programs-in-gui-emacs-on-macos][common setup issue on MacOS]].
 Without this package packages such as flycheck and EPA are not working correctly.
@@ -543,33 +554,6 @@ as completion sources for Corfu or the Emacs in-buffer completion system.
      '((emacs-lisp . t)
        (shell . t)
        (python . t))))
-#+END_SRC
-** VTerm
-*** vterm
-#+BEGIN_SRC emacs-lisp
-  (use-package vterm
-    :ensure t
-
-    :commands (vterm vterm-other-window)
-
-    :init
-    (setq vterm-always-compile-module t)
-
-    :config
-    (setq vterm-kill-buffer-on-exit t)
-    (setq vterm-toggle-reset-window-configration-after-exit t)
-    (setq vterm-clear-scrollback-when-clearing t))
-#+END_SRC
-*** vterm-toggle
-#+BEGIN_SRC emacs-lisp
-  (use-package vterm-toggle
-    :ensure t
-
-    :bind (("C-c , RET" . vterm)
-           ("C-c , /" . vterm-toggle)
-           ("C-c , p" . vterm-toggle-forward)
-           ("C-c , n" . vterm-toggle-backward)
-           ("C-c , ." . vterm-toggle-insert-cd)))
 #+END_SRC
 ** XClip
 Enable xclip-mode to use the system clipboard when killing/yanking.
