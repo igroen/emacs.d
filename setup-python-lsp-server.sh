@@ -30,7 +30,7 @@ setup_pylsp () {
            flake8-commas \
            flake8-docstrings \
            flake8-isort \
-           flake8-logging-format \
+           flake8-logging \
            whatthepatch \
            yapf
 
