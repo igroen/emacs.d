@@ -131,24 +131,6 @@ default 'C-;' is not recognized by some terminals.
         scroll-conservatively           10000
         scroll-preserve-screen-position 1)
 #+END_SRC
-** Tramp
-Set remote password prompts.
-
-#+BEGIN_SRC emacs-lisp
-  (customize-set-variable
-   'tramp-password-prompt-regexp
-   (concat
-    "^.*"
-    (regexp-opt
-     '("passphrase"
-       "Passphrase"
-       "password"
-       "Password"
-       ;; Google Authenticator
-       "Verification code")
-     t)
-    ".*:\0? *"))
-#+END_SRC
 ** Tweaks
 *** Add interactive command to open this file
 #+BEGIN_SRC emacs-lisp
