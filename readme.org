@@ -391,7 +391,7 @@ Edit multiple occurrences of some text simultaneously.
 #+end_src
 ** Search/completion stack
 *** Vertico
-Vertico is a fast and extensible minibuffer completion UI.
+Minibuffer completion UI.
 
 #+begin_src emacs-lisp
   (use-package vertico
