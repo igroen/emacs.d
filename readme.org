@@ -235,7 +235,6 @@ When running in compilation-mode:
   (use-package compile
     :custom
     (compilation-scroll-output t)
-    (compilation-auto-jump-to-first-error t)
     (compilation-max-output-line-length nil)
     :hook
     (compilation-filter . ansi-color-compilation-filter))
