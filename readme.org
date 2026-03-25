@@ -44,7 +44,7 @@ in one read operation.
 #+begin_src emacs-lisp :tangle early-init.el
   (setq read-process-output-max (* 1024 1024))
 #+end_src
-** Disable menubar, toolbar, scrollbars and tooltips
+** Disable menu-bar-mode, tool-bar-mode, scroll-bar-mode and tooltip-mode
 #+BEGIN_SRC emacs-lisp :tangle early-init.el
   (dolist (mode
            '(menu-bar-mode
@@ -54,12 +54,13 @@ in one read operation.
     (when (fboundp mode)
       (funcall mode -1)))
 #+END_SRC
-** Start the initial frame maximized and disable scroll-bars
+** Start the initial frame maximized, set font and disable scroll-bars
 #+BEGIN_SRC emacs-lisp :tangle early-init.el
   (setq default-frame-alist
         '((fullscreen . maximized)
           (vertical-scroll-bars . nil)
-          (horizontal-scroll-bars . nil)))
+          (horizontal-scroll-bars . nil)
+  	(font . "Monaco-12")))
 #+END_SRC
 ** Don't show startup screen on Emacs start
 #+BEGIN_SRC emacs-lisp :tangle early-init.el
@@ -72,12 +73,6 @@ in one read operation.
 ** Set theme
 #+BEGIN_SRC emacs-lisp :tangle early-init.el
   (load-theme 'modus-operandi t)
-#+END_SRC
-** Set font
-#+BEGIN_SRC emacs-lisp :tangle early-init.el
-  (add-to-list
-   'default-frame-alist
-   '(font . "Monaco 12"))
 #+END_SRC
 * Package management
 Add melpo to the list of package archives.
