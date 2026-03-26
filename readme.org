@@ -21,8 +21,8 @@ Make startup faster by reducing the frequency of garbage collection.
   (setq gc-cons-threshold-original gc-cons-threshold
         gc-cons-percentage-original gc-cons-percentage)
 
-  (setq gc-cons-threshold most-positive-fixnum
-        gc-cons-percentage 1.0)
+  (setopt gc-cons-threshold most-positive-fixnum
+  	gc-cons-percentage 1.0)
 #+END_SRC
 
 After Emacs startup has been completed, set `gc-cons-threshold' and
@@ -32,8 +32,8 @@ After Emacs startup has been completed, set `gc-cons-threshold' and
   (add-hook
    'emacs-startup-hook
    #'(lambda ()
-       (setq gc-cons-threshold gc-cons-threshold-original
-             gc-cons-percentage gc-cons-percentage-original)
+       (setopt gc-cons-threshold gc-cons-threshold-original
+               gc-cons-percentage gc-cons-percentage-original)
        (makunbound 'gc-cons-threshold-original)
        (makunbound 'gc-cons-percentage-original)))
 #+END_SRC
@@ -56,19 +56,19 @@ in one read operation.
 #+END_SRC
 ** Start the initial frame maximized, set font and disable scroll-bars
 #+BEGIN_SRC emacs-lisp :tangle early-init.el
-  (setq default-frame-alist
-        '((fullscreen . maximized)
-          (vertical-scroll-bars . nil)
-          (horizontal-scroll-bars . nil)
-  	(font . "Monaco-12")))
+  (setopt default-frame-alist
+  	'((fullscreen . maximized)
+            (vertical-scroll-bars . nil)
+            (horizontal-scroll-bars . nil)
+  	  (font . "Monaco-12")))
 #+END_SRC
 ** Don't show startup screen on Emacs start
 #+BEGIN_SRC emacs-lisp :tangle early-init.el
-  (setq-default inhibit-startup-screen t)
+  (setopt inhibit-startup-screen t)
 #+END_SRC
 ** Disable bell
 #+BEGIN_SRC emacs-lisp :tangle early-init.el
-  (setq ring-bell-function 'ignore)
+  (setopt ring-bell-function 'ignore)
 #+END_SRC
 ** Set theme
 #+BEGIN_SRC emacs-lisp :tangle early-init.el
@@ -109,7 +109,7 @@ Add melpo to the list of package archives.
 #+END_SRC
 *** Require a newline at the end of the file
 #+BEGIN_SRC emacs-lisp
-  (setq-default require-final-newline t)
+  (setopt require-final-newline t)
 #+END_SRC
 *** Comments
 Remap 'comment-line key to 'C-x C-\' because the
@@ -121,10 +121,10 @@ default 'C-;' is not recognized by some terminals.
 #+END_SRC
 ** Scrolling
 #+BEGIN_SRC emacs-lisp
-  (setq scroll-margin                   0  ;; Default
-        scroll-step                     1
-        scroll-conservatively           10000
-        scroll-preserve-screen-position 1)
+  (setopt scroll-margin                   0  ;; Default
+  	scroll-step                     1
+  	scroll-conservatively           10000
+  	scroll-preserve-screen-position 1)
 #+END_SRC
 ** Tweaks
 *** Add interactive command to open this file
@@ -187,7 +187,7 @@ command (a prefix) in a popup.
 `completion-at-point' is often bound to M-TAB.
 
 #+begin_src emacs-lisp
-  (setq tab-always-indent 'complete)
+  (setopt tab-always-indent 'complete)
 #+end_src
 *** Disable Ispell text-mode word completion
 #+begin_src emacs-lisp
@@ -199,7 +199,7 @@ commands are hidden, since they are not used via M-x. This setting is
 useful beyond Corfu.
 
 #+begin_src emacs-lisp
-  (setq read-extended-command-predicate #'command-completion-default-include-p)
+  (setopt read-extended-command-predicate #'command-completion-default-include-p)
 #+end_src
 *** Configure compilation-mode
 When running in compilation-mode:
@@ -220,31 +220,31 @@ When running in compilation-mode:
 Store all backup and autosave files in the 'backups' dir.
 
 #+BEGIN_SRC emacs-lisp
-  (setq auto-save-list-file-prefix nil)
-  (setq backup-directory-alist
-        `(("." . ,(expand-file-name
-                   "backups"
-                   user-emacs-directory))))
+  (setopt auto-save-list-file-prefix nil)
+  (setopt backup-directory-alist
+  	`(("." . ,(expand-file-name
+                     "backups"
+                     user-emacs-directory))))
 #+END_SRC
 Use version contral and keep multiple backup files.
 
 #+BEGIN_SRC emacs-lisp
-  (setq backup-by-copying t
-        delete-old-versions t
-        kept-new-versions 10
-        kept-old-versions 0
-        version-control t
-        vc-make-backup-files t)
+  (setopt backup-by-copying t
+  	delete-old-versions t
+  	kept-new-versions 10
+  	kept-old-versions 0
+  	version-control t
+  	vc-make-backup-files t)
 #+END_SRC
 ** Customize
 Move lines added by the customize system to a seperate file.
 Config changes made through the customize UI will be stored here.
 
 #+BEGIN_SRC emacs-lisp
-  (setq custom-file
-        (expand-file-name
-         "custom.el"
-         user-emacs-directory))
+  (setopt custom-file
+  	(expand-file-name
+  	 "custom.el"
+  	 user-emacs-directory))
 
   (when (file-exists-p custom-file)
     (load custom-file))
@@ -266,7 +266,7 @@ Decode the headers and payload of a JWT token.
     (use-package dired-x)
 
     ;; Omit files starting with a dot
-    (setq dired-omit-files (concat dired-omit-files "\\|^\\..+$"))
+    (setopt dired-omit-files (concat dired-omit-files "\\|^\\..+$"))
 
     ;; Default omit files
     (setq-default dired-omit-mode t)
@@ -351,11 +351,11 @@ Without this package packages such as flycheck and EPA are not working correctly
     (setq epa-armor t)
 
     ;; Open .asc files in the same way as .gpg files
-    (setq epa-file-name-regexp "\\.\\(gpg\\|asc\\)$")
+    (setopt epa-file-name-regexp "\\.\\(gpg\\|asc\\)$")
     (epa-file-name-regexp-update)
 
     ;; Prompt for the password in the minibuffer
-    (setq epg-pinentry-mode 'loopback))
+    (setopt epg-pinentry-mode 'loopback))
 #+END_SRC
 ** Iedit
 Edit multiple occurrences of some text simultaneously.
@@ -520,7 +520,7 @@ as completion sources for Corfu or the Emacs in-buffer completion system.
            (org-mode . org-indent-mode))
 
     :config
-    (setq org-babel-python-command "python3")
+    (setopt org-babel-python-command "python3")
     ;; Add languages for `SRC` code blocks in org-mode
     (org-babel-do-load-languages
      'org-babel-load-languages
