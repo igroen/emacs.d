@@ -78,9 +78,9 @@ in one read operation.
 Add melpo to the list of package archives.
 
 #+BEGIN_SRC emacs-lisp
-  (require 'package)
-  (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
-  (package-initialize)
+  (use-package package
+    :config
+    (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t))
 #+END_SRC
 * Defaults
 ** Editing
