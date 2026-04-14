@@ -204,7 +204,6 @@ useful beyond Corfu.
 *** Configure compilation-mode
 When running in compilation-mode:
 - Scroll the output
-- Jump to the first error
 - Don't hide output of long lines
 - Display ANSI colors
 
