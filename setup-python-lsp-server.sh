@@ -31,6 +31,7 @@ setup_pylsp () {
            flake8-docstrings \
            flake8-isort \
            flake8-logging \
+	   "mypy<1.20" \
            whatthepatch \
            yapf
 
