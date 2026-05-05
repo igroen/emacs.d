@@ -480,12 +480,13 @@ Corfu is an in-buffer completion popup UI built on child frames.
 Make Corfu work in the terminal.
 
 #+begin_src emacs-lisp
-  (use-package corfu-terminal
-    :ensure t
+  (when (< emacs-major-version 31)
+    (use-package corfu-terminal
+      :ensure t
 
-    :config
-    (unless (display-graphic-p)
-      (corfu-terminal-mode +1)))
+      :config
+      (unless (display-graphic-p)
+        (corfu-terminal-mode +1))))
 #+end_src
 *** Cape
 Cape is a collection of completion-at-point functions (Capfs), which serve
