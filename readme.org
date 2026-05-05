@@ -550,15 +550,22 @@ The pylsp configuration to setup flake8 here:
 https://github.com/python-lsp/python-lsp-server#configuration
 #+begin_src emacs-lisp
   (use-package eglot
-    :hook ((python-mode . eglot-ensure)
-           (c-mode . eglot-ensure)
-           (c++-mode . eglot-ensure))
+    :hook ((c-mode
+            c++-mode
+            python-ts-mode). eglot-ensure)
 
     :bind (:map eglot-mode-map
                 ("C-c l f" . eglot-format)
                 ("C-c l r" . eglot-reconnect)))
 #+end_src
-** Pyvenv
+** Python
+*** Use Tree-sitter mode
+#+begin_src emacs-lisp
+  (add-to-list
+   'major-mode-remap-alist
+   '(python-mode . python-ts-mode))
+#+end_src
+*** Pyvenv
 #+begin_src emacs-lisp
   (use-package pyvenv
     :ensure t
