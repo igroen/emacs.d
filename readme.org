@@ -261,6 +261,8 @@ Decode the headers and payload of a JWT token.
 ** Dired
 #+BEGIN_SRC emacs-lisp
   (use-package dired
+    :defer t
+
     :config
     ;; Require dired-x for `dired-omit-mode'
     (use-package dired-x)
@@ -345,6 +347,8 @@ Without this package packages such as flycheck and EPA are not working correctly
 ** GnuPG
 #+BEGIN_SRC emacs-lisp
   (use-package epa
+    :defer t
+
     :config
     ;; Prefer armored ASCII (.asc)
     (setq epa-armor t)
