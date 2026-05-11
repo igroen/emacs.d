@@ -333,14 +333,13 @@ Without this package packages such as flycheck and EPA are not working correctly
   (use-package diff-hl
     :ensure t
 
-    :hook ((magit-post-refresh . diff-hl-magit-post-refresh)
-           (dired-mode . diff-hl-dired-mode-unless-remote))
-
-    :init
-    (global-diff-hl-mode)
+    :hook (((prog-mode text-mode) . diff-hl-mode)
+           (dired-mode . diff-hl-dired-mode-unless-remote)
+  	 (magit-post-refresh . diff-hl-magit-post-refresh))
 
     :config
-    (diff-hl-margin-mode)
+    (unless (display-graphic-p)
+      (diff-hl-margin-mode))
     (diff-hl-flydiff-mode))
 #+END_SRC
 ** GnuPG
@@ -446,7 +445,9 @@ This package is the glue that ties together `embark' and `consult'.
 
 #+begin_src emacs-lisp
   (use-package embark-consult
-    :ensure t)
+    :ensure t
+
+    :after (embark consult))
 #+end_src
 *** Wgrep
 Edit a grep buffer and apply those changes to the file buffer.
@@ -552,7 +553,7 @@ https://github.com/python-lsp/python-lsp-server#configuration
   (use-package eglot
     :hook ((c-mode
             c++-mode
-            python-ts-mode). eglot-ensure)
+            python-ts-mode) . eglot-ensure)
 
     :bind (:map eglot-mode-map
                 ("C-c l f" . eglot-format)
