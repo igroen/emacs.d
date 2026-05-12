@@ -279,16 +279,6 @@ Decode the headers and payload of a JWT token.
       (lambda () (interactive) (find-alternate-file "..")))
     (put 'dired-find-alternate-file 'disabled nil))
 #+END_SRC
-** Drag stuff
-#+BEGIN_SRC emacs-lisp
-  (use-package drag-stuff
-    :ensure t
-
-    :bind (("M-p" . drag-stuff-up)
-           ("M-n" . drag-stuff-down))
-
-    :config (drag-stuff-global-mode 1))
-#+END_SRC
 ** Eat
 #+BEGIN_SRC emacs-lisp
   (use-package eat
@@ -369,6 +359,14 @@ Edit multiple occurrences of some text simultaneously.
     :bind
     ("C-;" . iedit-mode))
 #+end_src
+** Move text up/down
+#+BEGIN_SRC emacs-lisp
+  (use-package move-text
+    :ensure t
+
+    :bind (("M-p" . move-text-up)
+           ("M-n" . move-text-down)))
+#+END_SRC
 ** Search/completion stack
 *** Vertico
 Minibuffer completion UI.
