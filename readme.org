@@ -216,6 +216,12 @@ When running in compilation-mode:
     :hook
     (compilation-filter . ansi-color-compilation-filter))
 #+end_src
+*** Enable view-mode for read-only buffers
+Buffers visiting files read-only do so in view mode.
+
+#+begin_src emacs-lisp
+  (setopt view-read-only t)
+#+end_src
 ** Backups
 Store all backup and autosave files in the 'backups' dir.
 
