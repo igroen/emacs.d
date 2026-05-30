@@ -526,8 +526,7 @@ as completion sources for Corfu or the Emacs in-buffer completion system.
 ** Org mode
 #+BEGIN_SRC emacs-lisp
   (use-package org
-    :hook ((org-mode . visual-line-mode)
-           (org-mode . org-indent-mode))
+    :hook (org-mode . visual-line-mode)
 
     :config
     (setopt org-babel-python-command "python3")
