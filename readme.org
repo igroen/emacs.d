@@ -132,8 +132,8 @@ default 'C-;' is not recognized by some terminals.
 #+BEGIN_SRC emacs-lisp
   (global-set-key
    (kbd "C-c s")
-   (lambda ()
-     "Open Emacs configuration"
+   (defun my/emacs-config ()
+     "Open Emacs configuration file."
      (interactive)
      (find-file
       (expand-file-name
@@ -661,5 +661,6 @@ When opening this file for the first time the following warning is shown:
 - The next time this warning is shown press '!' to prevent future warnings.
 
 # Local Variables:
+# eval: (view-mode 1)
 # eval: (add-hook 'after-save-hook (lambda () (org-babel-tangle)) nil t)
 # End:
