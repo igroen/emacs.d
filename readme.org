@@ -23,7 +23,7 @@ Make startup faster by reducing the frequency of garbage collection.
         gc-cons-percentage-original gc-cons-percentage)
 
   (setopt gc-cons-threshold most-positive-fixnum
-  	gc-cons-percentage 1.0)
+          gc-cons-percentage 1.0)
 #+END_SRC
 
 After Emacs startup has been completed, set `gc-cons-threshold' and
