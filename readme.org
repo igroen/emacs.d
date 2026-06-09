@@ -660,6 +660,6 @@ When opening this file for the first time the following warning is shown:
 - The next time this warning is shown press '!' to prevent future warnings.
 
 # Local Variables:
-# eval: (view-mode 1)
+# eval: (when buffer-file-name (setq-local view-no-disable-on-exit t) (view-mode-enter))
 # eval: (add-hook 'after-save-hook (lambda () (org-babel-tangle)) nil t)
 # End:
