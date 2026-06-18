@@ -566,14 +566,14 @@ https://github.com/python-lsp/python-lsp-server#configuration
                 ("C-c l f" . eglot-format)
                 ("C-c l r" . eglot-reconnect)))
 #+end_src
-** Python
-*** Use Tree-sitter mode
+** Treesitter
 #+begin_src emacs-lisp
-  (add-to-list
-   'major-mode-remap-alist
-   '(python-mode . python-ts-mode))
+  ;; Automatically install tree-sitter language grammar libraries when needed
+  (setopt treesit-auto-install-grammar 'always)
+  ;; Enable all ts-modes
+  (setopt treesit-enabled-modes t)
 #+end_src
-*** Pyvenv
+** Pyvenv
 #+begin_src emacs-lisp
   (use-package pyvenv
     :ensure t
