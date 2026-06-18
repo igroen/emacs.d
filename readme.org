@@ -583,14 +583,6 @@ https://github.com/python-lsp/python-lsp-server#configuration
     :config
     (pyvenv-mode t))
 #+end_src
-** YAML
-The treesitter YAML language grammar can be installed from
-https://github.com/tree-sitter-grammars/tree-sitter-yaml by doing
-"M-x treesit-install-language-grammar".
-
-#+BEGIN_SRC emacs-lisp
-  (add-to-list 'auto-mode-alist '("\\.ya?ml\\'" . yaml-ts-mode))
-#+END_SRC
 * Utilities
 ** Delete current file and buffer
 #+BEGIN_SRC emacs-lisp
