@@ -558,8 +558,8 @@ The pylsp configuration to setup flake8 here:
 https://github.com/python-lsp/python-lsp-server#configuration
 #+begin_src emacs-lisp
   (use-package eglot
-    :hook ((c-mode
-            c++-mode
+    :hook ((c-ts-mode
+            c++-ts-mode
             python-ts-mode) . eglot-ensure)
 
     :bind (:map eglot-mode-map
