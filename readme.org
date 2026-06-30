@@ -213,6 +213,7 @@ When running in compilation-mode:
     :custom
     (compilation-scroll-output t)
     (compilation-max-output-line-length nil)
+    (project-compilation-buffer-name-function 'project-prefixed-buffer-name)
     :hook
     (compilation-filter . ansi-color-compilation-filter))
 #+end_src
