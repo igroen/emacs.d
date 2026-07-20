@@ -55,13 +55,12 @@ in one read operation.
     (when (fboundp mode)
       (funcall mode -1)))
 #+END_SRC
-** Start the initial frame maximized, set font and disable scroll-bars
+** Start the initial frame maximized and disable scroll-bars
 #+BEGIN_SRC emacs-lisp :tangle early-init.el
   (setopt default-frame-alist
   	'((fullscreen . maximized)
             (vertical-scroll-bars . nil)
-            (horizontal-scroll-bars . nil)
-  	  (font . "Monaco-12")))
+            (horizontal-scroll-bars . nil)))
 #+END_SRC
 ** Don't show startup screen on Emacs start
 #+BEGIN_SRC emacs-lisp :tangle early-init.el
@@ -84,6 +83,14 @@ Add melpo to the list of package archives.
     (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t))
 #+END_SRC
 * Defaults
+** Font
+#+begin_src emacs-lisp
+  (set-frame-font
+   (font-spec :family "Ubuntu Sans Mono"
+              :weight 'medium
+              :size 13)
+   nil t)
+#+end_src
 ** Editing
 *** Highlight the current line
 #+BEGIN_SRC emacs-lisp
