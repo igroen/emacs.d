@@ -279,7 +279,7 @@ Decode the headers and payload of a JWT token.
 
     :config
     ;; Require dired-x for `dired-omit-mode'
-    (use-package dired-x)
+    (require 'dired-x)
 
     ;; Omit files starting with a dot
     (setopt dired-omit-files (concat dired-omit-files "\\|^\\..+$"))
