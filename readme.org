@@ -86,9 +86,8 @@ Add melpo to the list of package archives.
 ** Font
 #+begin_src emacs-lisp
   (set-frame-font
-   (font-spec :family "Ubuntu Sans Mono"
-              :weight 'medium
-              :size 13)
+   (font-spec :family "Iosevka"
+              :size 15)
    nil t)
 #+end_src
 ** Editing
