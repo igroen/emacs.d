@@ -100,7 +100,7 @@ Add melpo to the list of package archives.
 #+END_SRC
 *** Remove trailing whitespace on save
 #+BEGIN_SRC emacs-lisp
-  (add-hook 'before-save-hook 'delete-trailing-whitespace)
+  (add-hook 'before-save-hook #'delete-trailing-whitespace)
 #+END_SRC
 *** Auto close bracket insertion
 #+BEGIN_SRC emacs-lisp
@@ -108,7 +108,7 @@ Add melpo to the list of package archives.
 #+END_SRC
 *** Duplicate current line or region
 #+begin_src emacs-lisp
-  (global-set-key (kbd "C-c d") 'duplicate-dwim)
+  (keymap-global-set "C-c d" #'duplicate-dwim)
 #+end_src
 *** Show corresponding paren
 #+BEGIN_SRC emacs-lisp
@@ -123,8 +123,8 @@ Remap 'comment-line key to 'C-x C-\' because the
 default 'C-;' is not recognized by some terminals.
 
 #+BEGIN_SRC emacs-lisp
-  (global-unset-key (kbd "C-x C-;"))
-  (global-set-key (kbd "C-x C-\\") 'comment-line)
+  (keymap-global-unset "C-x C-;" t)
+  (keymap-global-set "C-x C-\\" #'comment-line)
 #+END_SRC
 ** Scrolling
 #+BEGIN_SRC emacs-lisp
@@ -136,8 +136,8 @@ default 'C-;' is not recognized by some terminals.
 ** Tweaks
 *** Add interactive command to open this file
 #+BEGIN_SRC emacs-lisp
-  (global-set-key
-   (kbd "C-c s")
+  (keymap-global-set
+   "C-c s"
    (defun my/emacs-config ()
      "Open Emacs configuration file."
      (interactive)
@@ -160,14 +160,14 @@ default 'C-;' is not recognized by some terminals.
 #+END_SRC
 *** Replace 'buffer-list' with 'ibuffer'
 #+BEGIN_SRC emacs-lisp
-  (global-set-key (kbd "C-x C-b") 'ibuffer)
+  (keymap-global-set "C-x C-b" #'ibuffer)
 #+END_SRC
 *** Switching between windows
 Bind the keyboard shortcut 'M-o' to the `other-window` function for easier
 switching between windows.
 
 #+begin_src emacs-lisp
-  (global-set-key (kbd "M-o") 'other-window)
+  (keymap-global-set "M-o" #'other-window)
 #+end_src
 Enable windmove default keybindings so you can use the 'S-<arrow>' keyboard
 shortcuts to switch between windows.
@@ -606,7 +606,7 @@ https://github.com/python-lsp/python-lsp-server#configuration
         (set-buffer-modified-p nil)
         (kill-buffer (current-buffer)))))
 
-  (global-set-key (kbd "C-c k")  'my/delete-current-file-copy-to-kill-ring)
+  (keymap-global-set "C-c k"  #'my/delete-current-file-copy-to-kill-ring)
 #+END_SRC
 ** Smarter move to the beginning of a line
 Move point back to indentation or beginning of line.
@@ -633,8 +633,9 @@ point reaches the beginning or end of the buffer, stop there.
         (move-beginning-of-line 1))))
 
   ;; remap C-a to `my/move-beginning-of-line'
-  (global-set-key [remap move-beginning-of-line]
-                  'my/move-beginning-of-line)
+  (keymap-global-set
+   "<remap> <move-beginning-of-line>"
+   #'my/move-beginning-of-line)
 #+END_SRC
 * Local config
 Load local configuration from local.el or local.elc in `user-emacs-directory`.
