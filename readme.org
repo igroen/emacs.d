@@ -263,6 +263,18 @@ Config changes made through the customize UI will be stored here.
     (load custom-file))
 #+END_SRC
 * Packages
+** Doom modeline
+#+BEGIN_SRC emacs-lisp
+  (use-package doom-modeline
+    :ensure t
+
+    :custom
+    (doom-modeline-icon (display-graphic-p))
+
+    :init
+    (column-number-mode 1)
+    (doom-modeline-mode 1))
+#+END_SRC
 ** Decode JWT
 Decode the headers and payload of a JWT token.
 
@@ -517,17 +529,6 @@ as completion sources for Corfu or the Emacs in-buffer completion system.
     (add-hook 'completion-at-point-functions #'cape-file)
     (add-hook 'completion-at-point-functions #'cape-elisp-block))
 #+end_src
-** Mood line
-#+BEGIN_SRC emacs-lisp
-  (use-package mood-line
-    :ensure t
-
-    :config
-    (mood-line-mode)
-
-    :custom
-    (mood-line-glyph-alist mood-line-glyphs-fira-code))
-#+END_SRC
 ** Org mode
 #+BEGIN_SRC emacs-lisp
   (use-package org
