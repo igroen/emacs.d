@@ -17,6 +17,6 @@
           "venv"
           (project-root (project-current t)))))))
  (c-mode
-  . ((c-basic-offset . 4)))
+  . ((c-ts-indent-offset . 4)))
  (c++-mode
-  . ((c-basic-offset . 4))))
+  . ((c-ts-indent-offset . 4))))
