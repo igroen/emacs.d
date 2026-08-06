@@ -263,17 +263,16 @@ Config changes made through the customize UI will be stored here.
     (load custom-file))
 #+END_SRC
 * Packages
-** Doom modeline
+** Mood line
 #+BEGIN_SRC emacs-lisp
-  (use-package doom-modeline
+  (use-package mood-line
     :ensure t
 
-    :custom
-    (doom-modeline-icon nil)
+    :config
+    (mood-line-mode)
 
-    :init
-    (column-number-mode 1)
-    (doom-modeline-mode 1))
+    :custom
+    (mood-line-glyph-alist mood-line-glyphs-fira-code))
 #+END_SRC
 ** Decode JWT
 Decode the headers and payload of a JWT token.
