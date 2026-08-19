@@ -38,13 +38,6 @@ After Emacs startup has been completed, set `gc-cons-threshold' and
        (makunbound 'gc-cons-threshold-original)
        (makunbound 'gc-cons-percentage-original)))
 #+END_SRC
-
-Increase the amount of data which Emacs reads from a sub-process
-in one read operation.
-
-#+begin_src emacs-lisp :tangle early-init.el
-  (setq read-process-output-max (* 1024 1024))
-#+end_src
 ** Disable menu-bar-mode, tool-bar-mode, scroll-bar-mode and tooltip-mode
 #+BEGIN_SRC emacs-lisp :tangle early-init.el
   (dolist (mode
