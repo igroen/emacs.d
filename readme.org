@@ -11,7 +11,7 @@ Add lexical-binding cookie to early-init.el
 
 Add lexical-binding cookie to init.el
 
-#+begin_src emacs-lisp :tangle init.el
+#+begin_src emacs-lisp
   ;; -*- lexical-binding: t; -*-
 #+end_src
 * Early init
