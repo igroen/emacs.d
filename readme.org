@@ -300,17 +300,6 @@ Decode the headers and payload of a JWT token.
     ;; Guess target directory when copying or moving files
     (dired-dwim-target t))
 #+END_SRC
-** Exec path from shell
-Make GUI Emacs use the proper $PATH.
-
-#+BEGIN_SRC emacs-lisp
-  (use-package exec-path-from-shell
-    :ensure t
-
-    :config
-    (when (memq window-system '(mac ns pgtk x))
-      (exec-path-from-shell-initialize)))
-#+END_SRC
 ** Expand region
 #+BEGIN_SRC emacs-lisp
   (use-package expand-region
