@@ -287,9 +287,6 @@ Decode the headers and payload of a JWT token.
     ;; Omit files starting with a dot
     (setopt dired-omit-files (concat dired-omit-files "\\|^\\..+$"))
 
-    ;; Default omit files
-    (setq-default dired-omit-mode t)
-
     :custom
     ;; Make dired open in the same window when using RET or ^
     (dired-kill-when-opening-new-dired-buffer t)
