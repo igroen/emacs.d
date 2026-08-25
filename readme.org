@@ -518,8 +518,11 @@ as completion sources for Corfu or the Emacs in-buffer completion system.
        (python . t))))
 #+END_SRC
 ** XClip
-Enable xclip-mode to use the system clipboard when killing/yanking.
-Install xclip on Linux for this to work. On OSX pbcopy/pbpaste will be used.
+Enable xclip-mode to use the system clipboard when killing/yanking text from
+the terminal.
+
+Install the appropriate command-line tool for your window system, for example
+'wl-clipboard' when using Wayland.
 
 #+BEGIN_SRC emacs-lisp
   (use-package xclip
