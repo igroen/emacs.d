@@ -387,7 +387,8 @@ Completion style for matching regexps in any order.
     :custom
     (completion-styles '(orderless basic))
     (completion-category-defaults nil)
-    (completion-category-overrides '((file (styles partial-completion)))))
+    (completion-category-overrides '((file (styles partial-completion))))
+    (completion-pcm-leading-wildcard t))
 #+end_src
 *** Consult
 Consult provides search and navigation commands centered around completion.
