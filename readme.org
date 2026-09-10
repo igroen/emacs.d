@@ -406,10 +406,19 @@ Consult provides search and navigation commands centered around completion.
            ("M-s M-f" . consult-find)
            ("M-s M-d" . consult-fd)
            ("M-s M-o" . consult-outline)
-           ([remap isearch-forward] . consult-line)
-           ([remap isearch-backward] . consult-line)
+           ("M-s l" . consult-line)
+           ("M-s L" . consult-line-multi)
            ([remap switch-to-buffer] . consult-buffer)
-           ([remap yank-pop] . consult-yank-pop)))
+           ([remap yank-pop] . consult-yank-pop)
+           ("M-s e" . consult-isearch-history)
+           :map isearch-mode-map
+           ("M-e" . consult-isearch-history)
+           ("M-s e" . consult-isearch-history)
+           ("M-s l" . consult-line)
+           ("M-s L" . consult-line-multi)
+           :map minibuffer-local-map
+           ("M-s" . consult-history)
+           ("M-r" . consult-history)))
 #+end_src
 *** Marginalia
 Marginalia provides annotations for completion candidates,
